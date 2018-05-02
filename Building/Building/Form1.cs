@@ -11,17 +11,22 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data.Common;
 using System.Data.SQLite;
+using AForge.Video;
+using AForge.Video.DirectShow;
 
 namespace Building
 {
     public partial class Form1 : Form
-    { 
+    {
+        public FilterInfoCollection videoDevices;
+        public VideoCaptureDevice videoSource;
+
         public Form1()
         {
             InitializeComponent();
 
         }
-
+        public Boolean start = false;
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -148,12 +153,6 @@ namespace Building
             breachesDataGridView.Columns[3].ReadOnly = true;
             breachesDataGridView.Columns[4].ReadOnly = true;
             breachesDataGridView.Columns[5].ReadOnly = true;
-
-            breachesDataGridView.Columns[6].
-
-
-            database.CloseConnection();
-
         }
 
 
@@ -214,7 +213,15 @@ namespace Building
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buildingNewDataSet.Breaches". При необходимости она может быть перемещена или удалена.
-
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            if (videoDevices.Count > 0)
+            {
+                foreach (FilterInfo device in videoDevices)
+                {
+                    listBox1.Items.Add(device.Name);
+                }
+                listBox1.SelectedIndex = 0;
+            }
 
         }
 
@@ -343,13 +350,15 @@ namespace Building
         string currentFloor;
         private void button3_Click_1(object sender, EventArgs e)
         {
+ 
             if (textBox2.Text.Equals("") || pictureBox1.Tag == null)
             {
                 MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                label19.Text = textBox2.Text;           //добавляем номер этажа в графу "офис находится на этаже".
+                label21.Text = "Офис находится на этаже";       
+                label19.Text = textBox2.Text;                   //добавляем номер этажа в графу "офис находится на этаже".
 
                 // Таблица "Этажи"
                 string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
@@ -499,6 +508,78 @@ namespace Building
 
         }
 
+        private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
+            pictureBox8.Image = bitmap;
+            pictureBox9.Visible = true;
+            pictureBox9.Image = bitmap;
 
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_start_web_Click(object sender, EventArgs e)
+        {
+            videoSource = new VideoCaptureDevice(videoDevices[listBox1.SelectedIndex].MonikerString);
+            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+            videoSource.Start();
+            //ОПАСНО написать строку проверки. Если ListBox1 пустой, то вписать текст о несущесвтующих подключениях.
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (videoSource != null)
+            {
+                videoSource.SignalToStop();
+                videoSource.WaitForStop();
+            }
+        }
+
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+
+            if (start == false) 
+            {
+                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[0].Height = 99;
+                tableLayoutPanel1.ColumnStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.ColumnStyles[0].Width = 99;
+
+                tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[1].Height = 0;
+                tableLayoutPanel1.ColumnStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.ColumnStyles[1].Width = 0;
+
+                tableLayoutPanel1.RowStyles[2].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[2].Height = 0;
+                tableLayoutPanel1.ColumnStyles[2].SizeType = SizeType.Percent;
+                tableLayoutPanel1.ColumnStyles[2].Width = 0;
+                start = true;
+            }
+            else
+            {
+                tableLayoutPanel1.RowStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[0].Height = 45;
+                tableLayoutPanel1.ColumnStyles[0].SizeType = SizeType.Percent;
+                tableLayoutPanel1.ColumnStyles[0].Width = 33;
+
+                tableLayoutPanel1.RowStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.RowStyles[1].Height = 45;
+                tableLayoutPanel1.ColumnStyles[1].SizeType = SizeType.Percent;
+                tableLayoutPanel1.ColumnStyles[1].Width = 33;
+
+                tableLayoutPanel1.RowStyles[2].SizeType = SizeType.Absolute;
+                tableLayoutPanel1.RowStyles[2].Height = 33;
+                tableLayoutPanel1.ColumnStyles[2].SizeType = SizeType.Percent;
+                tableLayoutPanel1.ColumnStyles[2].Width = 33;
+                start = false;
+            }
+        }
     }
+
 }
+

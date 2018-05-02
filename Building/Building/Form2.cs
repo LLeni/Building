@@ -64,5 +64,10 @@ namespace Building
         {
 
         }
+
+        private void lOCATION_BREACHTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
