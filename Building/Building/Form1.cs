@@ -524,15 +524,27 @@ namespace Building
 
         private void button_start_web_Click(object sender, EventArgs e)
         {
-            videoSource = new VideoCaptureDevice(videoDevices[listBox1.SelectedIndex].MonikerString);
-            videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-            videoSource.Start();
+            try
+            {
+                if (listBox1.Items.Count != 0)
+                {
+                    videoSource = new VideoCaptureDevice(videoDevices[listBox1.SelectedIndex].MonikerString);
+                    videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                    videoSource.Start();
+                } else
+                {
+                    MessageBox.Show("К вашему компьютеру не подключена ни одна вебкамера");
+                }
+            } catch (Exception exp)
+            {
+                MessageBox.Show("Во время попытки подключится к вебкамере произошла ошибка!");
+            }
             //ОПАСНО написать строку проверки. Если ListBox1 пустой, то вписать текст о несущесвтующих подключениях.
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (videoSource != null)
+            if (videoSource != null && videoSource.IsRunning)
             {
                 videoSource.SignalToStop();
                 videoSource.WaitForStop();
