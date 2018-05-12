@@ -167,6 +167,7 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(85, 20);
             this.toolStripMenuItem1.Text = "Управление";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // добавитьЭтажToolStripMenuItem
             // 
@@ -369,7 +370,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(889, 371);
-            this.splitContainer2.SplitterDistance = 690;
+            this.splitContainer2.SplitterDistance = 693;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -409,7 +410,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.label22);
             this.splitContainer3.Panel2.Controls.Add(this.label7);
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel2_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(690, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(693, 371);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -428,7 +429,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(610, 0);
+            this.button1.Location = new System.Drawing.Point(613, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
@@ -457,7 +458,7 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(167, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(440, 26);
+            this.textBox1.Size = new System.Drawing.Size(443, 26);
             this.textBox1.TabIndex = 0;
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -1141,10 +1142,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 567);
-            this.Controls.Add(this.camera);
             this.Controls.Add(this.add);
-            this.Controls.Add(this.main_panel);
             this.Controls.Add(this.error);
+            this.Controls.Add(this.camera);
+            this.Controls.Add(this.main_panel);
             this.Controls.Add(this.menuStrip1);
             this.MinimumSize = new System.Drawing.Size(905, 589);
             this.Name = "Form1";

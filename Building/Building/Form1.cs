@@ -512,7 +512,7 @@ namespace Building
         {
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             pictureBox8.Image = bitmap;
-            pictureBox9.Visible = true;
+            pictureBox9.Visible = true;         //ОШИБКА несколько потоков воспроизведения видео. ИСПРАВИТЬ
             pictureBox9.Image = bitmap;
 
         }
@@ -590,6 +590,11 @@ namespace Building
                 tableLayoutPanel1.ColumnStyles[2].Width = 33;
                 start = false;
             }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
