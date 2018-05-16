@@ -370,7 +370,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(889, 371);
-            this.splitContainer2.SplitterDistance = 693;
+            this.splitContainer2.SplitterDistance = 696;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -410,7 +410,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.label22);
             this.splitContainer3.Panel2.Controls.Add(this.label7);
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel2_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(693, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(696, 371);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -429,7 +429,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(613, 0);
+            this.button1.Location = new System.Drawing.Point(616, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
@@ -458,7 +458,7 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(167, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(443, 26);
+            this.textBox1.Size = new System.Drawing.Size(446, 26);
             this.textBox1.TabIndex = 0;
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -671,6 +671,7 @@
             this.splitContainer5.Panel1.Controls.Add(this.textBox2);
             this.splitContainer5.Panel1.Controls.Add(this.label6);
             this.splitContainer5.Panel1.Controls.Add(this.button3);
+            this.splitContainer5.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer5_Panel1_Paint);
             // 
             // splitContainer5.Panel2
             // 

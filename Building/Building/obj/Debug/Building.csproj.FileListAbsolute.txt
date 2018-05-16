@@ -68,7 +68,6 @@ C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\EntityFrame
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\System.Data.SQLite.xml
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\System.Data.SQLite.dll.config
-C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.csprojResolveAssemblyReference.cache
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form1.resources
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form2.resources
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form3.resources
@@ -100,3 +99,8 @@ C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.csproj
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.csproj.CopyComplete
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.exe
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.pdb
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\Devart.Data.dll
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\Devart.Data.SQLite.dll
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\Devart.Data.xml
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\Devart.Data.SQLite.xml
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.csprojAssemblyReference.cache
