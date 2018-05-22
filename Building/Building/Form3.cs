@@ -36,19 +36,34 @@ namespace Building
             this.Hide();
         }
 
+        //Кнопка "Изменить"
         private void button1_Click(object sender, EventArgs e)
         {
+            database.OpenConnection();
 
+            //Получение наибольшего значения идентификатора в таблице "Компании"
+            string queryUpdateFloor = "UPDATE Floors SET CATEGORY_FLOOR = @CATEGORY_FLOOR, PATH = @PATH WHERE ID_FLOOR = @ID_FLOOR";
+            SQLiteCommand myCommandUpdateFloor = database.myConnection.CreateCommand();
+            myCommandUpdateFloor.CommandText = queryUpdateFloor;
+            myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", textBox1.Text);
+            myCommandUpdateFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
+            myCommandUpdateFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
+            myCommandUpdateFloor.ExecuteNonQuery();
+            database.CloseConnection();
         }
 
+        //Кнопка "Выход"
         private void button7_Click(object sender, EventArgs e)
         {
 
         }
 
         Image image;
+        string numberFloorStr;
         private void button3_Click(object sender, EventArgs e)
         {
+            pictureBox1.Tag = "";
+
             database.OpenConnection();
 
             //Получение наибольшего значения идентификатора в таблице "Компании"
@@ -66,12 +81,17 @@ namespace Building
             try
             {
                 image = Image.FromFile(Convert.ToString(pictureBox1.Tag));
+                label14.Text = "";
             } catch
             {
                 MessageBox.Show("Проблема с путем плана этажа!");
             }
             pictureBox1.Image = (Image) image;
+            numberFloorStr = textBox1.Text;
 
+            database.CloseConnection();
+
+            button1.Enabled = true;
         }
     }
 }

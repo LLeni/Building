@@ -34,32 +34,33 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new Building.DataSet1();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.dataSet1 = new Building.DataSet1();
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.breachesTableAdapter = new Building.DataSet1TableAdapters.BreachesTableAdapter();
-            this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.floorsTableAdapter = new Building.DataSet1TableAdapters.FloorsTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(197, 424);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(109, 32);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Выбрать";
+            this.button1.Text = "Изменить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -103,6 +104,16 @@
             this.comboBox1.Size = new System.Drawing.Size(46, 21);
             this.comboBox1.TabIndex = 4;
             // 
+            // floorsBindingSource
+            // 
+            this.floorsBindingSource.DataMember = "Floors";
+            this.floorsBindingSource.DataSource = this.dataSet1;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -123,6 +134,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(237, 111);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 20);
@@ -173,11 +185,6 @@
             this.pictureBox1.TabIndex = 13;
             this.pictureBox1.TabStop = false;
             // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // breachesBindingSource
             // 
             this.breachesBindingSource.DataMember = "Breaches";
@@ -186,11 +193,6 @@
             // breachesTableAdapter
             // 
             this.breachesTableAdapter.ClearBeforeFill = true;
-            // 
-            // floorsBindingSource
-            // 
-            this.floorsBindingSource.DataMember = "Floors";
-            this.floorsBindingSource.DataSource = this.dataSet1;
             // 
             // floorsTableAdapter
             // 
@@ -223,12 +225,12 @@
             this.Controls.Add(this.button1);
             this.Name = "Form3";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form3";
+            this.Text = "Building - Изменение информации об этаже";
             this.Load += new System.EventHandler(this.Form3_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
