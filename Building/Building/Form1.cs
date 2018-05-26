@@ -134,7 +134,7 @@ namespace Building
                     }
                 
             }
-            catch (Exception err)
+            catch
             {
             }
 
@@ -424,12 +424,10 @@ namespace Building
 
         private void офисыToolStripMenuItem_Click(object sender, EventArgs e)       //Вызов формы "Редактировать офис"
         {
-            Form3 thirdForm = new Form3();
-            thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
-            thirdForm.Show();
-            thirdForm.Text = "Редактировать информацию об офисе";
-            // thirdForm.button1.Text = "2";   //ошибку с уровнем защиты. Разобраться и переименовать кнопку на 3-ей форме на "Выбрать"
-            //нужно создать глобальную переменную и в этой строчке присвоить ей 1.
+            Form4 fourForm = new Form4("Редактирование");
+            fourForm.Text = "Редактирование информацию об офисе";
+            fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Редактирование информации об офисах"   
+            fourForm.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -489,7 +487,7 @@ namespace Building
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar <= 48 || e.KeyChar >= 59) && e.KeyChar != 8)
+            if ((e.KeyChar <= 48 || e.KeyChar >= 59) && e.KeyChar != 8 && e.KeyChar != 16 && e.KeyChar != 45 )
                 e.Handled = true;
         }
 
@@ -535,7 +533,7 @@ namespace Building
                 {
                     MessageBox.Show("К вашему компьютеру не подключена ни одна вебкамера");
                 }
-            } catch (Exception exp)
+            } catch
             {
                 MessageBox.Show("Во время попытки подключится к вебкамере произошла ошибка!");
             }
@@ -600,6 +598,38 @@ namespace Building
         private void splitContainer5_Panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void добавитьИнформациюОбОфисеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 fourForm = new Form4("Добавление");
+            fourForm.Text = "Добавление информацию об офисе";
+            fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Добавление информации об офисах"   
+            fourForm.ShowDialog();
+        }
+
+        private void этажToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form5 fiveForm = new Form5("Этаж");
+            fiveForm.Text = "Удаление информации об этаже";
+            fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление этажа"   
+            fiveForm.ShowDialog();
+        }
+
+        private void офисToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form5 fiveForm = new Form5("Офис");
+            fiveForm.Text = "Удаление информации об офисе";
+            fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление офиса"   
+            fiveForm.ShowDialog();
+        }
+
+        private void камераToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form5 fiveForm = new Form5("Камера");
+            fiveForm.Text = "Удаление информации о камере";
+            fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление камеры"   
+            fiveForm.ShowDialog();
         }
     }
 

@@ -19,17 +19,6 @@ namespace Building
         }
 
         Database database;
-        private void Form3_Load(object sender, EventArgs e)
-        {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet1.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter.Fill(this.dataSet1.Floors);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dataSet1.Breaches". При необходимости она может быть перемещена или удалена.
-            this.breachesTableAdapter.Fill(this.dataSet1.Breaches);
-
-            database = new Database();
-            comboBox1.DisplayMember = "ID_FLOOR";
-            comboBox1.ValueMember = "ID_FLOOR";
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -45,7 +34,7 @@ namespace Building
             string queryUpdateFloor = "UPDATE Floors SET CATEGORY_FLOOR = @CATEGORY_FLOOR, PATH = @PATH WHERE ID_FLOOR = @ID_FLOOR";
             SQLiteCommand myCommandUpdateFloor = database.myConnection.CreateCommand();
             myCommandUpdateFloor.CommandText = queryUpdateFloor;
-            myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", textBox1.Text);
+            myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", "");//FIXME
             myCommandUpdateFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
             myCommandUpdateFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
             myCommandUpdateFloor.ExecuteNonQuery();
@@ -55,7 +44,10 @@ namespace Building
         //Кнопка "Выход"
         private void button7_Click(object sender, EventArgs e)
         {
-
+            pictureBox1.Image = null;
+            pictureBox1.Invalidate();
+            label14.Visible = true;
+            button7.Visible = false;
         }
 
         Image image;
@@ -74,7 +66,6 @@ namespace Building
             SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
             while (reader.Read())
             {
-                textBox1.Text = Convert.ToString(reader["ID_FLOOR"]);
                 comboBox2.Text = Convert.ToString(reader["CATEGORY_FLOOR"]);
                 pictureBox1.Tag = Convert.ToString(reader["PATH"]);
             }
@@ -87,11 +78,72 @@ namespace Building
                 MessageBox.Show("Проблема с путем плана этажа!");
             }
             pictureBox1.Image = (Image) image;
-            numberFloorStr = textBox1.Text;
+            //numberFloorStr = textBox1.Text; FIXME
 
             database.CloseConnection();
+        }
 
-            button1.Enabled = true;
+        private void Form3_Load(object sender, EventArgs e)
+        {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buildingDataSet.Floors". При необходимости она может быть перемещена или удалена.
+            this.floorsTableAdapter1.Fill(this.buildingDataSet.Floors);
+
+            database = new Database();
+            comboBox1.DisplayMember = "ID_FLOOR";
+            comboBox1.ValueMember = "ID_FLOOR";
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+            openDialog();
+        }
+
+        private void openDialog()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    pictureBox1.Image = new Bitmap(ofd.FileName);
+                    label14.Visible = false;
+                    button7.Visible = true;
+
+                    //Сохранение пути изображения в свойстве компонента PictureBox
+                    pictureBox1.Tag = ofd.FileName;
+                }
+                catch
+                {
+                    MessageBox.Show("Невозможно открыть файл", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    label14.Visible = true;
+                }
+            }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            openDialog();
         }
     }
 }

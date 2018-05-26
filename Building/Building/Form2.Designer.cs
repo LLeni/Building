@@ -135,7 +135,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(98, 329);
+            this.button1.Location = new System.Drawing.Point(78, 338);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(175, 29);
             this.button1.TabIndex = 6;
@@ -146,7 +146,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(299, 328);
+            this.button2.Location = new System.Drawing.Point(319, 337);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(191, 30);
             this.button2.TabIndex = 7;
@@ -167,7 +167,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(120, 9);
+            this.label1.Location = new System.Drawing.Point(120, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(359, 23);
             this.label1.TabIndex = 12;
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 370);
+            this.ClientSize = new System.Drawing.Size(576, 385);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button2);
@@ -191,6 +191,9 @@
             this.Controls.Add(dESCRIPTION_BREACHLabel);
             this.Controls.Add(dATE_BREACHLabel);
             this.Controls.Add(this.dATE_BREACHDateTimePicker);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Building. Добавление информации о нарушениях";
