@@ -30,14 +30,14 @@ namespace Building
         {
             database.OpenConnection();
 
-            //Получение наибольшего значения идентификатора в таблице "Компании"
             string queryUpdateFloor = "UPDATE Floors SET CATEGORY_FLOOR = @CATEGORY_FLOOR, PATH = @PATH WHERE ID_FLOOR = @ID_FLOOR";
             SQLiteCommand myCommandUpdateFloor = database.myConnection.CreateCommand();
             myCommandUpdateFloor.CommandText = queryUpdateFloor;
-            myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", "");//FIXME
+            myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
             myCommandUpdateFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
             myCommandUpdateFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
             myCommandUpdateFloor.ExecuteNonQuery();
+
             database.CloseConnection();
         }
 
@@ -54,63 +54,15 @@ namespace Building
         string numberFloorStr;
         private void button3_Click(object sender, EventArgs e)
         {
-            pictureBox1.Tag = "";
-
-            database.OpenConnection();
-
-            //Получение наибольшего значения идентификатора в таблице "Компании"
-            string queryDataFloor = "SELECT * FROM Floors WHERE ID_FLOOR = " + comboBox1.Text;
-            SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
-            myCommandDataFloor.CommandText = queryDataFloor;
-            myCommandDataFloor.CommandType = CommandType.Text;
-            SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
-            while (reader.Read())
-            {
-                comboBox2.Text = Convert.ToString(reader["CATEGORY_FLOOR"]);
-                pictureBox1.Tag = Convert.ToString(reader["PATH"]);
-            }
-            try
-            {
-                image = Image.FromFile(Convert.ToString(pictureBox1.Tag));
-                label14.Text = "";
-            } catch
-            {
-                MessageBox.Show("Проблема с путем плана этажа!");
-            }
-            pictureBox1.Image = (Image) image;
-            //numberFloorStr = textBox1.Text; FIXME
-
-            database.CloseConnection();
-        }
+           }
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buildingDataSet.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter1.Fill(this.buildingDataSet.Floors);
-
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
+            this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
             database = new Database();
             comboBox1.DisplayMember = "ID_FLOOR";
             comboBox1.ValueMember = "ID_FLOOR";
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void label14_Click(object sender, EventArgs e)
@@ -144,6 +96,39 @@ namespace Building
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             openDialog();
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            pictureBox1.Tag = "";
+
+            database.OpenConnection();
+
+            //Получение наибольшего значения идентификатора в таблице "Компании"
+            string queryDataFloor = "SELECT * FROM Floors WHERE ID_FLOOR = " + comboBox1.Text;
+            SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
+            myCommandDataFloor.CommandText = queryDataFloor;
+            myCommandDataFloor.CommandType = CommandType.Text;
+            SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
+            while (reader.Read())
+            {
+                comboBox2.Text = Convert.ToString(reader["CATEGORY_FLOOR"]);
+                pictureBox1.Tag = Convert.ToString(reader["PATH"]);
+            }
+            try
+            {
+                image = Image.FromFile(Convert.ToString(pictureBox1.Tag));
+                label14.Text = "";
+            }
+            catch
+            {
+                MessageBox.Show("Проблема с путем плана этажа!");
+            }
+
+            pictureBox1.Image = (Image)image;
+
+            database.CloseConnection();
+
         }
     }
 }

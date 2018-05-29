@@ -41,13 +41,18 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.buildingDataSet = new Building.BuildingDataSet();
             this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buildingDataSet = new Building.BuildingDataSet();
+            this.label2 = new System.Windows.Forms.Label();
             this.floorsTableAdapter = new Building.BuildingDataSetTableAdapters.FloorsTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
+            this.buldingDataSet2 = new Building.BuldingDataSet2();
+            this.floorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.floorsTableAdapter1 = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -59,6 +64,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -135,7 +141,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(101, 147);
+            this.textBox3.Location = new System.Drawing.Point(101, 143);
             this.textBox3.MaxLength = 4;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(256, 26);
@@ -164,7 +170,7 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.DataSource = this.floorsBindingSource;
+            this.comboBox1.DataSource = this.floorsBindingSource1;
             this.comboBox1.DisplayMember = "ID_FLOOR";
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -175,18 +181,17 @@
             this.comboBox1.Size = new System.Drawing.Size(256, 27);
             this.comboBox1.TabIndex = 24;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
-            // comboBox2
+            // floorsBindingSource
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(101, 137);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(256, 27);
-            this.comboBox2.TabIndex = 25;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.floorsBindingSource.DataMember = "Floors";
+            this.floorsBindingSource.DataSource = this.buildingDataSet;
+            // 
+            // buildingDataSet
+            // 
+            this.buildingDataSet.DataSetName = "BuildingDataSet";
+            this.buildingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
@@ -199,28 +204,45 @@
             this.label2.Text = "Номер этажа:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // buildingDataSet
-            // 
-            this.buildingDataSet.DataSetName = "BuildingDataSet";
-            this.buildingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // floorsBindingSource
-            // 
-            this.floorsBindingSource.DataMember = "Floors";
-            this.floorsBindingSource.DataSource = this.buildingDataSet;
-            // 
             // floorsTableAdapter
             // 
             this.floorsTableAdapter.ClearBeforeFill = true;
+            // 
+            // buldingDataSet2
+            // 
+            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
+            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // floorsBindingSource1
+            // 
+            this.floorsBindingSource1.DataMember = "Floors";
+            this.floorsBindingSource1.DataSource = this.buldingDataSet2;
+            // 
+            // floorsTableAdapter1
+            // 
+            this.floorsTableAdapter1.ClearBeforeFill = true;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(101, 142);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(256, 27);
+            this.comboBox2.TabIndex = 24;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 472);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox4);
@@ -239,8 +261,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,10 +284,13 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label2;
         private BuildingDataSet buildingDataSet;
         private System.Windows.Forms.BindingSource floorsBindingSource;
         private BuildingDataSetTableAdapters.FloorsTableAdapter floorsTableAdapter;
+        private BuldingDataSet2 buldingDataSet2;
+        private System.Windows.Forms.BindingSource floorsBindingSource1;
+        private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

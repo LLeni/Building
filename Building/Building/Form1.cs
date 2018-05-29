@@ -223,6 +223,11 @@ namespace Building
                 listBox1.SelectedIndex = 0;
             }
 
+            //Необходимо для относительного пути к базе данных
+            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = (System.IO.Path.GetDirectoryName(executable));
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
+            
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -455,7 +460,6 @@ namespace Building
                 while (reader.Read())
                 {
                     IDCompany = Convert.ToInt16(Convert.ToString(reader["ID_COMPANY"])) + 1;
-                    MessageBox.Show(Convert.ToString(reader["ID_COMPANY"]));
                 }
 
                 // Таблица "Компании"

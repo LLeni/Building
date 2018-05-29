@@ -108,3 +108,5 @@ C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Devart.Data.xml
 C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Devart.Data.SQLite.xml
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form4.resources
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form5.resources
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form4.resources
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form5.resources

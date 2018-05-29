@@ -66,5 +66,16 @@ namespace Building.Properties {
                 return ((string)(this["ConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=C:\\Users\\LLeni\\Documents\\Projects\\Diplom\\Building\\Building\\bin\\Debug\\" +
+            "Building.sqlite3")]
+        public string ConnectionString2 {
+            get {
+                return ((string)(this["ConnectionString2"]));
+            }
+        }
     }
 }
