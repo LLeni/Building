@@ -41,18 +41,18 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.floorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buildingDataSet = new Building.BuildingDataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.floorsTableAdapter = new Building.BuildingDataSetTableAdapters.FloorsTableAdapter();
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
-            this.floorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.floorsTableAdapter1 = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -81,7 +81,7 @@
             // 
             this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(101, 361);
+            this.textBox6.Location = new System.Drawing.Point(101, 367);
             this.textBox6.MaxLength = 12;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(256, 26);
@@ -91,11 +91,11 @@
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.textBox4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(101, 247);
+            this.textBox4.Location = new System.Drawing.Point(101, 240);
             this.textBox4.MaxLength = 240;
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(256, 84);
+            this.textBox4.Size = new System.Drawing.Size(256, 94);
             this.textBox4.TabIndex = 19;
             // 
             // label18
@@ -103,7 +103,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(98, 334);
+            this.label18.Location = new System.Drawing.Point(98, 340);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(155, 19);
             this.label18.TabIndex = 22;
@@ -113,7 +113,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(97, 225);
+            this.label17.Location = new System.Drawing.Point(97, 218);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(267, 19);
             this.label17.TabIndex = 20;
@@ -122,7 +122,7 @@
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(101, 196);
+            this.textBox5.Location = new System.Drawing.Point(101, 189);
             this.textBox5.MaxLength = 120;
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(256, 26);
@@ -132,7 +132,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(98, 172);
+            this.label16.Location = new System.Drawing.Point(98, 165);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(167, 19);
             this.label16.TabIndex = 17;
@@ -141,7 +141,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(101, 143);
+            this.textBox3.Location = new System.Drawing.Point(101, 136);
             this.textBox3.MaxLength = 4;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(256, 26);
@@ -183,6 +183,16 @@
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
+            // floorsBindingSource1
+            // 
+            this.floorsBindingSource1.DataMember = "Floors";
+            this.floorsBindingSource1.DataSource = this.buldingDataSet2;
+            // 
+            // buldingDataSet2
+            // 
+            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
+            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // floorsBindingSource
             // 
             this.floorsBindingSource.DataMember = "Floors";
@@ -208,16 +218,6 @@
             // 
             this.floorsTableAdapter.ClearBeforeFill = true;
             // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // floorsBindingSource1
-            // 
-            this.floorsBindingSource1.DataMember = "Floors";
-            this.floorsBindingSource1.DataSource = this.buldingDataSet2;
-            // 
             // floorsTableAdapter1
             // 
             this.floorsTableAdapter1.ClearBeforeFill = true;
@@ -228,7 +228,7 @@
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(101, 142);
+            this.comboBox2.Location = new System.Drawing.Point(101, 135);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(256, 27);
             this.comboBox2.TabIndex = 24;
@@ -239,7 +239,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(461, 472);
+            this.ClientSize = new System.Drawing.Size(461, 473);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
@@ -261,10 +261,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

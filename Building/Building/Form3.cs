@@ -13,9 +13,16 @@ namespace Building
 {
     public partial class Form3 : Form
     {
+        String data;
         public Form3()
         {
             InitializeComponent();
+        }
+
+        public Form3(String data)
+        {
+            InitializeComponent();
+            this.data = data;
         }
 
         Database database;
@@ -60,6 +67,20 @@ namespace Building
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
             this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
+            label4.Text = data + " информации об офисе";
+            if (data == "Добавление")
+            {
+                button1.Text = "Добавить";
+                textBox1.Visible = false;
+                comboBox1.Visible = true;
+               // label4.Location = new Point(label1.Location.X + 20, label1.Location.Y);
+            }
+            else
+            {
+                button1.Text = "Редактировать";
+                textBox1.Visible = true;
+                comboBox1.Visible = false;
+            }
             database = new Database();
             comboBox1.DisplayMember = "ID_FLOOR";
             comboBox1.ValueMember = "ID_FLOOR";

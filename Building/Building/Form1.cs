@@ -348,7 +348,10 @@ namespace Building
 
         private void камерыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            Form6 sixForm = new Form6("Редактирование");
+            sixForm.Text = "Редактировать информацию о камере";
+            sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Редактирование информации о камере"   
+            sixForm.ShowDialog();
         }
 
 
@@ -419,18 +422,16 @@ namespace Building
 
         private void этажToolStripMenuItem_Click(object sender, EventArgs e)        //Вызов формы "Редактировать этаж"   
         {
-            Form3 thirdForm = new Form3();
+            Form3 thirdForm = new Form3("Редактирование");
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.Show();
             thirdForm.Text = "Редактировать информацию об этаже";
-            // thirdForm.button1.Text = "2";   //ошибку с уровнем защиты. Разобраться и переименовать кнопку на 3-ей форме на "Выбрать"
-            //нужно создать глобальную переменную и в этой строчке присвоить ей 1.
         }
 
         private void офисыToolStripMenuItem_Click(object sender, EventArgs e)       //Вызов формы "Редактировать офис"
         {
             Form4 fourForm = new Form4("Редактирование");
-            fourForm.Text = "Редактирование информацию об офисе";
+            fourForm.Text = "Редактировать информацию об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Редактирование информации об офисах"   
             fourForm.ShowDialog();
         }
@@ -634,6 +635,35 @@ namespace Building
             fiveForm.Text = "Удаление информации о камере";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление камеры"   
             fiveForm.ShowDialog();
+        }
+
+        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void гToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form4 fourForm = new Form4("Добавление");
+            fourForm.Text = "Добавление информации об офисе";
+            fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Добавление информации об офисах"   
+            fourForm.ShowDialog();
+        }
+
+        private void информацияОКамереToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form6 sixForm = new Form6("Добавление");
+            sixForm.Text = "Добавление информации о камере";
+            sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Добавление информации о камере"   
+            sixForm.ShowDialog();
+        }
+
+        private void информацияОбЭтажеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 thirdForm = new Form3("Добавление");
+            thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
+            thirdForm.Show();
+            thirdForm.Text = "Добавить информацию об этаже";
         }
     }
 

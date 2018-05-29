@@ -33,6 +33,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.floorsBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.floorsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.buildingDataSet = new Building.BuildingDataSet();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,9 +48,10 @@
             this.companiesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.floorsTableAdapter1 = new Building.BuildingDataSetTableAdapters.FloorsTableAdapter();
             this.label4 = new System.Windows.Forms.Label();
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
-            this.floorsBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -56,13 +59,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companiesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource3)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button1.Location = new System.Drawing.Point(131, 404);
             this.button1.Name = "button1";
@@ -87,11 +87,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(191, 73);
+            this.label1.Location = new System.Drawing.Point(191, 71);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 19);
+            this.label1.Size = new System.Drawing.Size(99, 19);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Выберите номер этажа:";
+            this.label1.Text = "Номер этажа:";
             // 
             // comboBox1
             // 
@@ -101,11 +101,21 @@
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(193, 98);
+            this.comboBox1.Location = new System.Drawing.Point(193, 96);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(193, 27);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
+            // 
+            // floorsBindingSource3
+            // 
+            this.floorsBindingSource3.DataMember = "Floors";
+            this.floorsBindingSource3.DataSource = this.buldingDataSet2;
+            // 
+            // buldingDataSet2
+            // 
+            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
+            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // floorsBindingSource2
             // 
@@ -121,7 +131,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(192, 128);
+            this.label3.Location = new System.Drawing.Point(191, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 19);
             this.label3.TabIndex = 6;
@@ -139,7 +149,7 @@
             this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(482, 197);
+            this.button7.Location = new System.Drawing.Point(482, 195);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(25, 21);
             this.button7.TabIndex = 14;
@@ -153,7 +163,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(254, 278);
+            this.label14.Location = new System.Drawing.Point(254, 276);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 12;
@@ -166,7 +176,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.pictureBox1.Location = new System.Drawing.Point(83, 197);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(83, 195);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(424, 182);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -181,7 +192,7 @@
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(193, 150);
+            this.comboBox2.Location = new System.Drawing.Point(193, 148);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(193, 27);
             this.comboBox2.TabIndex = 4;
@@ -200,25 +211,24 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "Редактировать информации об этаже";
             // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // floorsBindingSource3
-            // 
-            this.floorsBindingSource3.DataMember = "Floors";
-            this.floorsBindingSource3.DataSource = this.buldingDataSet2;
-            // 
             // floorsTableAdapter
             // 
             this.floorsTableAdapter.ClearBeforeFill = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(193, 96);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(193, 26);
+            this.textBox1.TabIndex = 25;
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 450);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label14);
@@ -236,6 +246,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Редактирование информации об этаже";
             this.Load += new System.EventHandler(this.Form3_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -243,8 +255,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.companiesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +282,6 @@
         private BuldingDataSet2 buldingDataSet2;
         private System.Windows.Forms.BindingSource floorsBindingSource3;
         private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

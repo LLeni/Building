@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьЭтажToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.добавитьИнформациюОбОфисеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьЭтажToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.этажToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.офисыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,6 +114,10 @@
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.breachesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.гToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияОбЭтажеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияОКамереToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -162,7 +165,7 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.добавитьЭтажToolStripMenuItem,
-            this.добавитьИнформациюОбОфисеToolStripMenuItem,
+            this.добавитьToolStripMenuItem,
             this.редактироватьЭтажToolStripMenuItem,
             this.удалитьЭтажToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
@@ -173,16 +176,9 @@
             // добавитьЭтажToolStripMenuItem
             // 
             this.добавитьЭтажToolStripMenuItem.Name = "добавитьЭтажToolStripMenuItem";
-            this.добавитьЭтажToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.добавитьЭтажToolStripMenuItem.Text = "Добавить информацию об этаже";
+            this.добавитьЭтажToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.добавитьЭтажToolStripMenuItem.Text = "Модуль добавления";
             this.добавитьЭтажToolStripMenuItem.Click += new System.EventHandler(this.добавитьЭтажToolStripMenuItem_Click);
-            // 
-            // добавитьИнформациюОбОфисеToolStripMenuItem
-            // 
-            this.добавитьИнформациюОбОфисеToolStripMenuItem.Name = "добавитьИнформациюОбОфисеToolStripMenuItem";
-            this.добавитьИнформациюОбОфисеToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
-            this.добавитьИнформациюОбОфисеToolStripMenuItem.Text = "Добавить информацию об офисе";
-            this.добавитьИнформациюОбОфисеToolStripMenuItem.Click += new System.EventHandler(this.добавитьИнформациюОбОфисеToolStripMenuItem_Click);
             // 
             // редактироватьЭтажToolStripMenuItem
             // 
@@ -191,7 +187,7 @@
             this.офисыToolStripMenuItem,
             this.камерыToolStripMenuItem1});
             this.редактироватьЭтажToolStripMenuItem.Name = "редактироватьЭтажToolStripMenuItem";
-            this.редактироватьЭтажToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.редактироватьЭтажToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.редактироватьЭтажToolStripMenuItem.Text = "Редактировать";
             this.редактироватьЭтажToolStripMenuItem.Click += new System.EventHandler(this.редактироватьЭтажToolStripMenuItem_Click);
             // 
@@ -223,7 +219,7 @@
             this.офисToolStripMenuItem,
             this.камераToolStripMenuItem});
             this.удалитьЭтажToolStripMenuItem.Name = "удалитьЭтажToolStripMenuItem";
-            this.удалитьЭтажToolStripMenuItem.Size = new System.Drawing.Size(260, 22);
+            this.удалитьЭтажToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.удалитьЭтажToolStripMenuItem.Text = "Удалить";
             // 
             // этажToolStripMenuItem1
@@ -326,13 +322,13 @@
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.помощьToolStripMenuItem.Text = "Помощь";
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
             // splitContainer1
@@ -375,7 +371,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(889, 371);
-            this.splitContainer2.SplitterDistance = 702;
+            this.splitContainer2.SplitterDistance = 705;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -415,7 +411,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.label22);
             this.splitContainer3.Panel2.Controls.Add(this.label7);
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel2_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(702, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(705, 371);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -434,7 +430,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(622, 0);
+            this.button1.Location = new System.Drawing.Point(625, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
@@ -463,7 +459,7 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(167, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(452, 26);
+            this.textBox1.Size = new System.Drawing.Size(455, 26);
             this.textBox1.TabIndex = 0;
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -738,6 +734,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(34, 87);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(538, 234);
@@ -1143,6 +1140,38 @@
             // 
             this.breachesBindingSource1.DataMember = "Breaches";
             // 
+            // добавитьToolStripMenuItem
+            // 
+            this.добавитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.информацияОбЭтажеToolStripMenuItem,
+            this.гToolStripMenuItem,
+            this.информацияОКамереToolStripMenuItem});
+            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.добавитьToolStripMenuItem.Text = "Добавить";
+            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
+            // 
+            // гToolStripMenuItem
+            // 
+            this.гToolStripMenuItem.Name = "гToolStripMenuItem";
+            this.гToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.гToolStripMenuItem.Text = "Информация об офисе";
+            this.гToolStripMenuItem.Click += new System.EventHandler(this.гToolStripMenuItem_Click);
+            // 
+            // информацияОбЭтажеToolStripMenuItem
+            // 
+            this.информацияОбЭтажеToolStripMenuItem.Name = "информацияОбЭтажеToolStripMenuItem";
+            this.информацияОбЭтажеToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.информацияОбЭтажеToolStripMenuItem.Text = "Информация об этаже";
+            this.информацияОбЭтажеToolStripMenuItem.Click += new System.EventHandler(this.информацияОбЭтажеToolStripMenuItem_Click);
+            // 
+            // информацияОКамереToolStripMenuItem
+            // 
+            this.информацияОКамереToolStripMenuItem.Name = "информацияОКамереToolStripMenuItem";
+            this.информацияОКамереToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.информацияОКамереToolStripMenuItem.Text = "Информация о камере";
+            this.информацияОКамереToolStripMenuItem.Click += new System.EventHandler(this.информацияОКамереToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1286,7 +1315,6 @@
         private System.Windows.Forms.ToolStripMenuItem офисToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem камераToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.ToolStripMenuItem добавитьИнформациюОбОфисеToolStripMenuItem;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.BindingSource breachesBindingSource1;
@@ -1305,6 +1333,10 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button_start_web;
         private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem гToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem информацияОбЭтажеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem информацияОКамереToolStripMenuItem;
     }
 }
 
