@@ -34,39 +34,43 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.floorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buildingDataSet = new Building.BuildingDataSet();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.officesBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.officesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.camerasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.camerasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.breachesTableAdapter = new Building.BuildingDataSetTableAdapters.BreachesTableAdapter();
             this.floorsTableAdapter = new Building.BuildingDataSetTableAdapters.FloorsTableAdapter();
             this.officesTableAdapter = new Building.BuildingDataSetTableAdapters.OfficesTableAdapter();
             this.camerasTableAdapter = new Building.BuildingDataSetTableAdapters.CamerasTableAdapter();
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
-            this.floorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.floorsTableAdapter1 = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             this.buldingDataSet2BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.officesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.officesTableAdapter1 = new Building.BuldingDataSet2TableAdapters.OfficesTableAdapter();
-            this.camerasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.camerasTableAdapter1 = new Building.BuldingDataSet2TableAdapters.CamerasTableAdapter();
             this.officesBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
-            this.officesBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
+            this.buldingDataSet2BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.floorsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -114,8 +118,7 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.DataSource = this.floorsBindingSource1;
-            this.comboBox1.DisplayMember = "ID_FLOOR";
+            this.comboBox1.DataSource = this.floorsBindingSource2;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
@@ -124,6 +127,16 @@
             this.comboBox1.Size = new System.Drawing.Size(194, 27);
             this.comboBox1.TabIndex = 25;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // floorsBindingSource1
+            // 
+            this.floorsBindingSource1.DataMember = "Floors";
+            this.floorsBindingSource1.DataSource = this.buldingDataSet2;
+            // 
+            // buldingDataSet2
+            // 
+            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
+            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // floorsBindingSource
             // 
@@ -146,6 +159,11 @@
             this.comboBox2.Size = new System.Drawing.Size(194, 27);
             this.comboBox2.TabIndex = 26;
             // 
+            // officesBindingSource3
+            // 
+            this.officesBindingSource3.DataMember = "Offices";
+            this.officesBindingSource3.DataSource = this.buldingDataSet2;
+            // 
             // officesBindingSource
             // 
             this.officesBindingSource.DataMember = "Offices";
@@ -162,6 +180,11 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(194, 27);
             this.comboBox3.TabIndex = 27;
+            // 
+            // camerasBindingSource1
+            // 
+            this.camerasBindingSource1.DataMember = "Cameras";
+            this.camerasBindingSource1.DataSource = this.buldingDataSet2;
             // 
             // camerasBindingSource
             // 
@@ -189,16 +212,6 @@
             // 
             this.camerasTableAdapter.ClearBeforeFill = true;
             // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // floorsBindingSource1
-            // 
-            this.floorsBindingSource1.DataMember = "Floors";
-            this.floorsBindingSource1.DataSource = this.buldingDataSet2;
-            // 
             // floorsTableAdapter1
             // 
             this.floorsTableAdapter1.ClearBeforeFill = true;
@@ -217,11 +230,6 @@
             // 
             this.officesTableAdapter1.ClearBeforeFill = true;
             // 
-            // camerasBindingSource1
-            // 
-            this.camerasBindingSource1.DataMember = "Cameras";
-            this.camerasBindingSource1.DataSource = this.buldingDataSet2;
-            // 
             // camerasTableAdapter1
             // 
             this.camerasTableAdapter1.ClearBeforeFill = true;
@@ -231,10 +239,15 @@
             this.officesBindingSource2.DataMember = "Offices";
             this.officesBindingSource2.DataSource = this.buldingDataSet2;
             // 
-            // officesBindingSource3
+            // buldingDataSet2BindingSource1
             // 
-            this.officesBindingSource3.DataMember = "Offices";
-            this.officesBindingSource3.DataSource = this.buldingDataSet2;
+            this.buldingDataSet2BindingSource1.DataSource = this.buldingDataSet2;
+            this.buldingDataSet2BindingSource1.Position = 0;
+            // 
+            // floorsBindingSource2
+            // 
+            this.floorsBindingSource2.DataMember = "Floors";
+            this.floorsBindingSource2.DataSource = this.buldingDataSet2;
             // 
             // Form5
             // 
@@ -255,18 +268,20 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form5";
             this.Load += new System.EventHandler(this.Form5_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,5 +315,7 @@
         private BuldingDataSet2TableAdapters.CamerasTableAdapter camerasTableAdapter1;
         private System.Windows.Forms.BindingSource officesBindingSource2;
         private System.Windows.Forms.BindingSource officesBindingSource3;
+        private System.Windows.Forms.BindingSource floorsBindingSource2;
+        private System.Windows.Forms.BindingSource buldingDataSet2BindingSource1;
     }
 }

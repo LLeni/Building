@@ -35,7 +35,7 @@ namespace Building
 
         private void Form6_Load(object sender, EventArgs e)
         {
-            label1.Text = data + " информации об офисе";
+            label1.Text = data + " информации о камере";
             if (data == "Добавление")
             {
                 button1.Text = "Добавить";

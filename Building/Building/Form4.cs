@@ -30,6 +30,7 @@ namespace Building
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
             this.floorsTableAdapter1.Fill(this.buldingDataSet2.Floors);
+
             label1.Text = data + " информации об офисе";
             if (data == "Добавление")
             {

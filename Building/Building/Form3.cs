@@ -67,19 +67,19 @@ namespace Building
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
             this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
-            label4.Text = data + " информации об офисе";
+            label4.Text = data + " информации об этаже";
             if (data == "Добавление")
             {
                 button1.Text = "Добавить";
-                textBox1.Visible = false;
-                comboBox1.Visible = true;
+                textBox1.Visible = true;
+                comboBox1.Visible = false;
                // label4.Location = new Point(label1.Location.X + 20, label1.Location.Y);
             }
             else
             {
                 button1.Text = "Редактировать";
-                textBox1.Visible = true;
-                comboBox1.Visible = false;
+                textBox1.Visible = false;
+                comboBox1.Visible = true;
             }
             database = new Database();
             comboBox1.DisplayMember = "ID_FLOOR";
@@ -149,6 +149,11 @@ namespace Building
             pictureBox1.Image = (Image)image;
 
             database.CloseConnection();
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -111,3 +111,4 @@ C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form5.
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form4.resources
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form5.resources
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form6.resources
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form6.resources

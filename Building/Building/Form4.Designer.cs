@@ -49,10 +49,12 @@
             this.floorsTableAdapter = new Building.BuildingDataSetTableAdapters.FloorsTableAdapter();
             this.floorsTableAdapter1 = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.floorsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -170,7 +172,7 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.DataSource = this.floorsBindingSource1;
+            this.comboBox1.DataSource = this.floorsBindingSource2;
             this.comboBox1.DisplayMember = "ID_FLOOR";
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -235,6 +237,11 @@
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
+            // floorsBindingSource2
+            // 
+            this.floorsBindingSource2.DataMember = "Floors";
+            this.floorsBindingSource2.DataSource = this.buldingDataSet2;
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,6 +272,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,5 +300,6 @@
         private System.Windows.Forms.BindingSource floorsBindingSource1;
         private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.BindingSource floorsBindingSource2;
     }
 }
