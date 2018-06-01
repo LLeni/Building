@@ -32,6 +32,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьЭтажToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияОбЭтажеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.гToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияОКамереToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактироватьЭтажToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.этажToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.офисыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,18 +61,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.add = new System.Windows.Forms.Panel();
@@ -96,7 +88,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -114,10 +105,6 @@
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.breachesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.гToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.информацияОбЭтажеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.информацияОКамереToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -129,14 +116,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.add.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
@@ -148,7 +128,6 @@
             this.splitContainer5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.main_panel.SuspendLayout();
@@ -179,6 +158,38 @@
             this.добавитьЭтажToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.добавитьЭтажToolStripMenuItem.Text = "Модуль добавления";
             this.добавитьЭтажToolStripMenuItem.Click += new System.EventHandler(this.добавитьЭтажToolStripMenuItem_Click);
+            // 
+            // добавитьToolStripMenuItem
+            // 
+            this.добавитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.информацияОбЭтажеToolStripMenuItem,
+            this.гToolStripMenuItem,
+            this.информацияОКамереToolStripMenuItem});
+            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.добавитьToolStripMenuItem.Text = "Добавить";
+            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
+            // 
+            // информацияОбЭтажеToolStripMenuItem
+            // 
+            this.информацияОбЭтажеToolStripMenuItem.Name = "информацияОбЭтажеToolStripMenuItem";
+            this.информацияОбЭтажеToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.информацияОбЭтажеToolStripMenuItem.Text = "Информация об этаже";
+            this.информацияОбЭтажеToolStripMenuItem.Click += new System.EventHandler(this.информацияОбЭтажеToolStripMenuItem_Click);
+            // 
+            // гToolStripMenuItem
+            // 
+            this.гToolStripMenuItem.Name = "гToolStripMenuItem";
+            this.гToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.гToolStripMenuItem.Text = "Информация об офисе";
+            this.гToolStripMenuItem.Click += new System.EventHandler(this.гToolStripMenuItem_Click);
+            // 
+            // информацияОКамереToolStripMenuItem
+            // 
+            this.информацияОКамереToolStripMenuItem.Name = "информацияОКамереToolStripMenuItem";
+            this.информацияОКамереToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.информацияОКамереToolStripMenuItem.Text = "Информация о камере";
+            this.информацияОКамереToolStripMenuItem.Click += new System.EventHandler(this.информацияОКамереToolStripMenuItem_Click);
             // 
             // редактироватьЭтажToolStripMenuItem
             // 
@@ -322,13 +333,13 @@
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.помощьToolStripMenuItem.Text = "Помощь";
             // 
             // оПрограммеToolStripMenuItem
             // 
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             // 
             // splitContainer1
@@ -371,7 +382,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(889, 371);
-            this.splitContainer2.SplitterDistance = 705;
+            this.splitContainer2.SplitterDistance = 711;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
@@ -398,20 +409,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Panel2.Controls.Add(this.pictureBox7);
-            this.splitContainer3.Panel2.Controls.Add(this.pictureBox6);
-            this.splitContainer3.Panel2.Controls.Add(this.pictureBox5);
-            this.splitContainer3.Panel2.Controls.Add(this.pictureBox4);
-            this.splitContainer3.Panel2.Controls.Add(this.pictureBox3);
-            this.splitContainer3.Panel2.Controls.Add(this.pictureBox2);
-            this.splitContainer3.Panel2.Controls.Add(this.label26);
-            this.splitContainer3.Panel2.Controls.Add(this.label25);
-            this.splitContainer3.Panel2.Controls.Add(this.label24);
-            this.splitContainer3.Panel2.Controls.Add(this.label23);
-            this.splitContainer3.Panel2.Controls.Add(this.label22);
-            this.splitContainer3.Panel2.Controls.Add(this.label7);
             this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel2_Paint);
-            this.splitContainer3.Size = new System.Drawing.Size(705, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(711, 371);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -430,7 +429,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(625, 0);
+            this.button1.Location = new System.Drawing.Point(631, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
@@ -459,135 +458,9 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(167, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(455, 26);
+            this.textBox1.Size = new System.Drawing.Size(461, 26);
             this.textBox1.TabIndex = 0;
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox7.Location = new System.Drawing.Point(414, 186);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(167, 102);
-            this.pictureBox7.TabIndex = 4;
-            this.pictureBox7.TabStop = false;
-            this.pictureBox7.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox6.Location = new System.Drawing.Point(220, 189);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(167, 102);
-            this.pictureBox6.TabIndex = 4;
-            this.pictureBox6.TabStop = false;
-            this.pictureBox6.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox5.Location = new System.Drawing.Point(26, 189);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(167, 102);
-            this.pictureBox5.TabIndex = 4;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox4.Location = new System.Drawing.Point(414, 35);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(167, 102);
-            this.pictureBox4.TabIndex = 4;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox3.Location = new System.Drawing.Point(220, 35);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(167, 102);
-            this.pictureBox3.TabIndex = 4;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.pictureBox2.Location = new System.Drawing.Point(22, 35);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(167, 102);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label26.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.label26.Location = new System.Drawing.Point(469, 294);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 17);
-            this.label26.TabIndex = 3;
-            this.label26.Text = "Этаж 6";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label25.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.label25.Location = new System.Drawing.Point(276, 294);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(53, 17);
-            this.label25.TabIndex = 3;
-            this.label25.Text = "Этаж 5";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label24.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.label24.Location = new System.Drawing.Point(80, 294);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(53, 17);
-            this.label24.TabIndex = 3;
-            this.label24.Text = "Этаж 4";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label23.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.label23.Location = new System.Drawing.Point(469, 140);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(53, 17);
-            this.label23.TabIndex = 3;
-            this.label23.Text = "Этаж 3";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label22.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.label22.Location = new System.Drawing.Point(276, 140);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(53, 17);
-            this.label22.TabIndex = 3;
-            this.label22.Text = "Этаж 2";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Cursor = System.Windows.Forms.Cursors.Default;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 11F);
-            this.label7.Location = new System.Drawing.Point(80, 140);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(53, 17);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Этаж 1";
             // 
             // label3
             // 
@@ -945,23 +818,12 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox2.Controls.Add(this.pictureBox9);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Location = new System.Drawing.Point(56, 33);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(200, 100);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox9.Location = new System.Drawing.Point(6, 0);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(188, 94);
-            this.pictureBox9.TabIndex = 11;
-            this.pictureBox9.TabStop = false;
-            this.pictureBox9.Visible = false;
             // 
             // label11
             // 
@@ -1140,47 +1002,15 @@
             // 
             this.breachesBindingSource1.DataMember = "Breaches";
             // 
-            // добавитьToolStripMenuItem
-            // 
-            this.добавитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.информацияОбЭтажеToolStripMenuItem,
-            this.гToolStripMenuItem,
-            this.информацияОКамереToolStripMenuItem});
-            this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.добавитьToolStripMenuItem.Text = "Добавить";
-            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
-            // 
-            // гToolStripMenuItem
-            // 
-            this.гToolStripMenuItem.Name = "гToolStripMenuItem";
-            this.гToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.гToolStripMenuItem.Text = "Информация об офисе";
-            this.гToolStripMenuItem.Click += new System.EventHandler(this.гToolStripMenuItem_Click);
-            // 
-            // информацияОбЭтажеToolStripMenuItem
-            // 
-            this.информацияОбЭтажеToolStripMenuItem.Name = "информацияОбЭтажеToolStripMenuItem";
-            this.информацияОбЭтажеToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.информацияОбЭтажеToolStripMenuItem.Text = "Информация об этаже";
-            this.информацияОбЭтажеToolStripMenuItem.Click += new System.EventHandler(this.информацияОбЭтажеToolStripMenuItem_Click);
-            // 
-            // информацияОКамереToolStripMenuItem
-            // 
-            this.информацияОКамереToolStripMenuItem.Name = "информацияОКамереToolStripMenuItem";
-            this.информацияОКамереToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.информацияОКамереToolStripMenuItem.Text = "Информация о камере";
-            this.информацияОКамереToolStripMenuItem.Click += new System.EventHandler(this.информацияОКамереToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 567);
-            this.Controls.Add(this.add);
-            this.Controls.Add(this.error);
-            this.Controls.Add(this.camera);
             this.Controls.Add(this.main_panel);
+            this.Controls.Add(this.error);
+            this.Controls.Add(this.add);
+            this.Controls.Add(this.camera);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(905, 589);
@@ -1190,6 +1020,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -1204,16 +1035,8 @@
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.add.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
@@ -1229,7 +1052,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -1299,7 +1121,6 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ToolStripMenuItem камерыToolStripMenuItem;
@@ -1314,25 +1135,13 @@
         private System.Windows.Forms.ToolStripMenuItem этажToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem офисToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem камераToolStripMenuItem;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.BindingSource breachesBindingSource1;
         private System.Windows.Forms.DataGridView breachesDataGridView;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button button_start_web;
-        private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem гToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem информацияОбЭтажеToolStripMenuItem;

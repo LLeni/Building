@@ -18,8 +18,17 @@ namespace Building
 {
     public partial class Form1 : Form
     {
+        const int INDENT_LEFT = 15;
+        const int INDENT_TOP = 20;
+        const int INDENT_BETWEEN_PICTURE_BOXES = 5;
+        const int INDENT_WIDTH_LABEL = 75;
+        const int INDENT_HEIGHT_LABEL = 110;
+        const int WIDTH_PICTURE_BOX = 180;
+        const int HEIGHT_PICTURE_BOX = 100;
+
         public FilterInfoCollection videoDevices;
         public VideoCaptureDevice videoSource;
+
 
         public Form1()
         {
@@ -117,7 +126,6 @@ namespace Building
             comboBox2.SelectedIndex = 0;
 
 
-            database = new Database();
 
             //Таблица "Нарушения"
             DataSet ds = new DataSet();
@@ -210,6 +218,10 @@ namespace Building
             панельКамерToolStripMenuItem.Enabled = true;            //Снятие блокировки с возможности добавления панели камер
         }
 
+        int wightPanel;
+        int heightPanel;
+        List<Label> setLabel;
+        List<PictureBox> setPictureBox;
         private void Form1_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buildingNewDataSet.Breaches". При необходимости она может быть перемещена или удалена.
@@ -221,13 +233,63 @@ namespace Building
                     listBox1.Items.Add(device.Name);
                 }
                 listBox1.SelectedIndex = 0;
-            }
 
+
+                //Код появления динамических компанентов. МАГИЯ.
+            }
             //Необходимо для относительного пути к базе данных
             string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string path = (System.IO.Path.GetDirectoryName(executable));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
-            
+
+            setLabel = new List<Label>();
+            setPictureBox = new List<PictureBox>();
+            int XLocationCurrentComponent = 0;
+            int YLocationCurrentComponent = 0;
+            wightPanel = this.splitContainer3.Panel2.Width;
+            heightPanel = this.splitContainer3.Panel2.Height;
+            database = new Database();
+            database.OpenConnection();
+            //Получение наибольшего значения идентификатора в таблице "Компании"
+            string queryDataFloor = "SELECT * FROM Floors";
+            SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
+            myCommandDataFloor.CommandText = queryDataFloor;
+            myCommandDataFloor.CommandType = CommandType.Text;
+            SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Label labelFloor = new Label();
+                labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Tag = Convert.ToString(reader["PATH"]);
+                pictureBox.BackColor = Color.Black;
+                pictureBox.Width = WIDTH_PICTURE_BOX;
+                pictureBox.Height = HEIGHT_PICTURE_BOX;
+
+
+                if(XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                {
+                    XLocationCurrentComponent = 0;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                }
+
+                pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
+                labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+
+                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+
+                setLabel.Add(labelFloor);
+                setPictureBox.Add(pictureBox);
+
+                //Добавляем элементы на форму
+                this.splitContainer3.Panel2.Controls.Add(setPictureBox.Last());
+                this.splitContainer3.Panel2.Controls.Add(setLabel.Last());
+            }
+
+            database.CloseConnection();
+            MessageBox.Show("Вот столько компонентов" + setLabel.Count);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -515,8 +577,6 @@ namespace Building
         {
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             pictureBox8.Image = bitmap;
-            pictureBox9.Visible = true;         //ОШИБКА несколько потоков воспроизведения видео. ИСПРАВИТЬ
-            pictureBox9.Image = bitmap;
 
         }
 
@@ -664,6 +724,28 @@ namespace Building
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.Show();
             thirdForm.Text = "Добавить информацию об этаже";
+        }
+
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            int XLocationCurrentComponent = 0;
+            int YLocationCurrentComponent = 0;
+
+            foreach(PictureBox currentPictureBox in setPictureBox){
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                {
+                    XLocationCurrentComponent = 0;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                }
+
+                currentPictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
+                //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+
+                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+            }
+            MessageBox.Show("Лол");
         }
     }
 
