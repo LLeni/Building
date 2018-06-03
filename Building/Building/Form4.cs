@@ -41,7 +41,7 @@ namespace Building
             }
             else
             {
-                button1.Text = "Редактировать";
+                button1.Text = "Изменить";
                 comboBox2.Visible = true;
                 textBox3.Visible = false;
             }

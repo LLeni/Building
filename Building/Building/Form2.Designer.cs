@@ -196,7 +196,7 @@
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Building. Добавление информации о нарушениях";
+            this.Text = "Добавление информации о нарушениях";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Shown += new System.EventHandler(this.Form2_Shown);
             this.ResumeLayout(false);

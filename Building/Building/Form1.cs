@@ -18,13 +18,20 @@ namespace Building
 {
     public partial class Form1 : Form
     {
-        const int INDENT_LEFT = 15;
+        const int INDENT_LEFT = 2;
         const int INDENT_TOP = 25;
-        const int INDENT_BETWEEN_PICTURE_BOXES = 5;
-        const int INDENT_WIDTH_LABEL = 75;
-        const int INDENT_HEIGHT_LABEL = 110;
-        const int WIDTH_PICTURE_BOX = 180;
-        const int HEIGHT_PICTURE_BOX = 100;
+        const int INDENT_BETWEEN_PICTURE_BOXES = 10;
+        const int INDENT_WIDTH_LABEL = 90;
+        const int INDENT_HEIGHT_LABEL = 150;
+        const int WIDTH_PICTURE_BOX = 230;
+        const int HEIGHT_PICTURE_BOX = 140;
+
+
+        int wightPanel;
+        int heightPanel;
+        List<Label> setLabel;
+        List<PictureBox> setPictureBox;
+        List<List<TreeNode>> setTreeNodes; // Необходимо для отображений офисов при выборе конкретного этажа на главной вкладке 
 
         public FilterInfoCollection videoDevices;
         public VideoCaptureDevice videoSource;
@@ -165,12 +172,11 @@ namespace Building
             панельКамерToolStripMenuItem.Enabled = true;            //Снятие блокировки с возможности добавления панели камер
         }
 
-        int wightPanel;
-        int heightPanel;
-        List<Label> setLabel;
-        List<PictureBox> setPictureBox;
         private void Form1_Load(object sender, EventArgs e)
         {
+            Form7 titulForm = new Form7();
+            titulForm.ShowInTaskbar = false;                           //скрыть вторую форму из панели задач   
+            titulForm.ShowDialog();
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buildingNewDataSet.Breaches". При необходимости она может быть перемещена или удалена.
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             if (videoDevices.Count > 0)
@@ -188,6 +194,13 @@ namespace Building
             string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string path = (System.IO.Path.GetDirectoryName(executable));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
+
+
+   
+            this.splitContainer3.Panel2.HorizontalScroll.Enabled = false;
+            this.splitContainer3.Panel2.HorizontalScroll.Visible = false;
+            this.splitContainer3.Panel2.HorizontalScroll.Maximum = 0;
+            this.splitContainer3.Panel2.AutoScroll = true;
 
             setLabel = new List<Label>();
             setPictureBox = new List<PictureBox>();
@@ -215,6 +228,7 @@ namespace Building
                 labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Tag = Convert.ToString(reader["PATH"]);
+                pictureBox.Click += new EventHandler(PictureBoxClick);
 
                 pictureBox.Width = WIDTH_PICTURE_BOX;
                 pictureBox.Height = HEIGHT_PICTURE_BOX;
@@ -269,6 +283,65 @@ namespace Building
             }
         }
 
+
+        private void PictureBoxClick(object sender, System.EventArgs e)
+        {
+
+            treeView1.Nodes.Clear();
+            string idFloor = null;
+
+            database.OpenConnection();
+
+            //Получение наибольшего значения идентификатора в таблице "Компании"
+            string queryIDFloor = "SELECT ID_FLOOR FROM Floors WHERE PATH = '" + (sender as PictureBox).Tag + "'";
+            SQLiteCommand myCommandIDFloor = database.myConnection.CreateCommand();
+            myCommandIDFloor.CommandText = queryIDFloor;
+            myCommandIDFloor.CommandType = CommandType.Text;
+            SQLiteDataReader readerIDFloor = myCommandIDFloor.ExecuteReader();
+            while (readerIDFloor.Read())
+            {
+                idFloor = Convert.ToString(readerIDFloor["ID_FLOOR"]);
+            }
+
+            string queryDataOffices = "SELECT * FROM Offices WHERE ID_FLOOR = " + idFloor;
+            SQLiteCommand myCommandDataOffices = database.myConnection.CreateCommand();
+            myCommandDataOffices.CommandText = queryIDFloor;
+            myCommandDataOffices.CommandType = CommandType.Text;
+            SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
+
+            TreeNode treeNodeOffice;
+            TreeNode treeNodeNameCompany;
+            TreeNode treeNodeDescription;
+            TreeNode treeNodePhone;
+            List<TreeNode> setIDOffices = new List<TreeNode>();
+            string idCompany = null;
+            while (readerDataOffices.Read())
+            {
+                treeNodeOffice = new TreeNode(Convert.ToString(readerDataOffices["ID_OFFICE"]));
+                setIDOffices.Add(treeNodeOffice);
+                treeView1.Nodes.Add(treeNodeOffice);
+
+                idCompany = Convert.ToString(readerIDFloor["ID_COMPANY"]);
+
+                // Извлекаем данные о компании
+                string queryDataCompany = "SELECT * FROM Companies WHERE ID_COMPANY = " + idCompany;
+                SQLiteCommand myCommandDataCompany = database.myConnection.CreateCommand();
+                myCommandDataCompany.CommandText = queryDataCompany;
+                myCommandDataCompany.CommandType = CommandType.Text;
+                SQLiteDataReader readerCompany = myCommandDataCompany.ExecuteReader();
+                while (readerCompany.Read())
+                {
+                    treeNodeNameCompany = new TreeNode(Convert.ToString(readerIDFloor["NAME_COMPANY"]));
+                    treeNodeDescription = new TreeNode(Convert.ToString(readerIDFloor["DESCRIPTION"]));
+                    treeNodePhone = new TreeNode(Convert.ToString(readerIDFloor["PHONE"]));
+
+                    //treeView1.Nodes
+                }
+            }
+
+
+            database.CloseConnection();
+        }
 
 
         private void breachesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -386,7 +459,7 @@ namespace Building
         {
             Form3 thirdForm = new Form3("Редактирование");
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
-            thirdForm.Show();
+            thirdForm.ShowDialog();
             thirdForm.Text = "Редактировать информацию об этаже";
         }
 
@@ -583,7 +656,7 @@ namespace Building
         {
             Form3 thirdForm = new Form3("Добавление");
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
-            thirdForm.Show();
+            thirdForm.ShowDialog();
             thirdForm.Text = "Добавить информацию об этаже";
         }
 
@@ -596,7 +669,7 @@ namespace Building
             heightPanel = this.splitContainer3.Panel2.Height;
 
             foreach (PictureBox currentPictureBox in setPictureBox){
-                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15> wightPanel )
                 {
                     XLocationCurrentComponent = 0;
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
@@ -612,7 +685,7 @@ namespace Building
             YLocationCurrentComponent = 0;
             foreach (Label currentLabel in setLabel)
             {
-                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15 > wightPanel)
                 {
                     XLocationCurrentComponent = 0;
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;

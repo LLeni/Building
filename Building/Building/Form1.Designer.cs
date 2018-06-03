@@ -61,6 +61,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.add = new System.Windows.Forms.Panel();
@@ -298,7 +299,7 @@
             this.спарвкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(889, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(914, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -354,7 +355,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(889, 543);
+            this.splitContainer1.Size = new System.Drawing.Size(914, 543);
             this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -373,9 +374,10 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(889, 371);
-            this.splitContainer2.SplitterDistance = 711;
+            this.splitContainer2.Size = new System.Drawing.Size(914, 371);
+            this.splitContainer2.SplitterDistance = 742;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -400,7 +402,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Size = new System.Drawing.Size(711, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(742, 371);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -419,7 +421,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(631, 0);
+            this.button1.Location = new System.Drawing.Point(662, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
@@ -448,8 +450,15 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(167, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(461, 26);
+            this.textBox1.Size = new System.Drawing.Size(492, 26);
             this.textBox1.TabIndex = 0;
+            // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(5, 30);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(162, 334);
+            this.treeView1.TabIndex = 5;
             // 
             // label3
             // 
@@ -482,7 +491,7 @@
             this.add.Dock = System.Windows.Forms.DockStyle.Fill;
             this.add.Location = new System.Drawing.Point(0, 24);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(889, 543);
+            this.add.Size = new System.Drawing.Size(914, 543);
             this.add.TabIndex = 4;
             this.add.Visible = false;
             // 
@@ -507,7 +516,7 @@
             this.splitContainer4.Panel2.Controls.Add(this.label10);
             this.splitContainer4.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer4.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer4.Size = new System.Drawing.Size(889, 543);
+            this.splitContainer4.Size = new System.Drawing.Size(914, 543);
             this.splitContainer4.SplitterDistance = 374;
             this.splitContainer4.TabIndex = 1;
             // 
@@ -549,8 +558,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.textBox3);
             this.splitContainer5.Panel2.Controls.Add(this.label15);
             this.splitContainer5.Panel2.Controls.Add(this.label9);
-            this.splitContainer5.Size = new System.Drawing.Size(889, 374);
-            this.splitContainer5.SplitterDistance = 610;
+            this.splitContainer5.Size = new System.Drawing.Size(914, 374);
+            this.splitContainer5.SplitterDistance = 635;
             this.splitContainer5.TabIndex = 2;
             // 
             // button7
@@ -565,7 +574,7 @@
             this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(547, 87);
+            this.button7.Location = new System.Drawing.Point(572, 87);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(25, 21);
             this.button7.TabIndex = 11;
@@ -579,7 +588,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(252, 185);
+            this.label14.Location = new System.Drawing.Point(264, 185);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 0;
@@ -595,7 +604,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(34, 87);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(538, 234);
+            this.pictureBox1.Size = new System.Drawing.Size(563, 234);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -611,7 +620,7 @@
             "Этаж",
             "Подвал",
             "Крыша"});
-            this.comboBox2.Location = new System.Drawing.Point(414, 53);
+            this.comboBox2.Location = new System.Drawing.Point(426, 53);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(78, 27);
             this.comboBox2.TabIndex = 9;
@@ -621,7 +630,7 @@
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.Location = new System.Drawing.Point(325, 56);
+            this.label20.Location = new System.Drawing.Point(337, 56);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(91, 20);
             this.label20.TabIndex = 5;
@@ -632,7 +641,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(106, 53);
+            this.label8.Location = new System.Drawing.Point(118, 53);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(114, 20);
             this.label8.TabIndex = 3;
@@ -642,7 +651,7 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(220, 52);
+            this.textBox2.Location = new System.Drawing.Point(232, 52);
             this.textBox2.MaxLength = 5;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(55, 26);
@@ -654,7 +663,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(184, 10);
+            this.label6.Location = new System.Drawing.Point(196, 10);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(221, 25);
             this.label6.TabIndex = 0;
@@ -667,7 +676,7 @@
             this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(0, 341);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(606, 29);
+            this.button3.Size = new System.Drawing.Size(631, 29);
             this.button3.TabIndex = 9;
             this.button3.Text = "Добавить этаж";
             this.button3.UseVisualStyleBackColor = true;
@@ -870,27 +879,27 @@
             this.main_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.main_panel.Location = new System.Drawing.Point(0, 24);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(889, 543);
+            this.main_panel.Size = new System.Drawing.Size(914, 543);
             this.main_panel.TabIndex = 1;
             // 
             // error
             // 
-            this.error.Controls.Add(this.button5);
             this.error.Controls.Add(this.breachesDataGridView);
+            this.error.Controls.Add(this.button5);
             this.error.Dock = System.Windows.Forms.DockStyle.Fill;
             this.error.Location = new System.Drawing.Point(0, 24);
             this.error.Name = "error";
-            this.error.Size = new System.Drawing.Size(889, 543);
+            this.error.Size = new System.Drawing.Size(914, 543);
             this.error.TabIndex = 1;
             this.error.Visible = false;
             // 
             // button5
             // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button5.AutoSize = true;
-            this.button5.Location = new System.Drawing.Point(5, 498);
+            this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button5.Location = new System.Drawing.Point(0, 514);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(884, 29);
+            this.button5.Size = new System.Drawing.Size(914, 29);
             this.button5.TabIndex = 9;
             this.button5.Text = "Добавить";
             this.button5.UseVisualStyleBackColor = true;
@@ -900,15 +909,13 @@
             // 
             this.breachesDataGridView.AllowUserToAddRows = false;
             this.breachesDataGridView.AllowUserToDeleteRows = false;
-            this.breachesDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.breachesDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.breachesDataGridView.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.breachesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.breachesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.breachesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.breachesDataGridView.Name = "breachesDataGridView";
-            this.breachesDataGridView.Size = new System.Drawing.Size(884, 529);
+            this.breachesDataGridView.Size = new System.Drawing.Size(914, 514);
             this.breachesDataGridView.TabIndex = 9;
             // 
             // camera
@@ -917,7 +924,7 @@
             this.camera.Dock = System.Windows.Forms.DockStyle.Fill;
             this.camera.Location = new System.Drawing.Point(0, 24);
             this.camera.Name = "camera";
-            this.camera.Size = new System.Drawing.Size(889, 543);
+            this.camera.Size = new System.Drawing.Size(914, 543);
             this.camera.TabIndex = 11;
             this.camera.Visible = false;
             // 
@@ -939,7 +946,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(889, 543);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(914, 543);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // listBox1
@@ -951,7 +958,7 @@
             this.listBox1.ItemHeight = 19;
             this.listBox1.Location = new System.Drawing.Point(5, 258);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(284, 245);
+            this.listBox1.Size = new System.Drawing.Size(293, 245);
             this.listBox1.TabIndex = 1;
             // 
             // button_start_web
@@ -960,7 +967,7 @@
             this.button_start_web.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_start_web.Location = new System.Drawing.Point(5, 511);
             this.button_start_web.Name = "button_start_web";
-            this.button_start_web.Size = new System.Drawing.Size(284, 27);
+            this.button_start_web.Size = new System.Drawing.Size(293, 27);
             this.button_start_web.TabIndex = 12;
             this.button_start_web.Text = "Начать воспроизведение";
             this.button_start_web.UseVisualStyleBackColor = true;
@@ -972,7 +979,7 @@
             this.pictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox8.Location = new System.Drawing.Point(5, 5);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(284, 245);
+            this.pictureBox8.Size = new System.Drawing.Size(293, 245);
             this.pictureBox8.TabIndex = 0;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
@@ -985,14 +992,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 567);
+            this.ClientSize = new System.Drawing.Size(914, 567);
             this.Controls.Add(this.main_panel);
             this.Controls.Add(this.error);
             this.Controls.Add(this.add);
             this.Controls.Add(this.camera);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(905, 589);
+            this.MinimumSize = new System.Drawing.Size(930, 589);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Building";
@@ -1125,6 +1132,7 @@
         private System.Windows.Forms.ToolStripMenuItem гToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem информацияОбЭтажеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem информацияОКамереToolStripMenuItem;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

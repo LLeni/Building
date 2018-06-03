@@ -58,7 +58,6 @@ namespace Building
         }
 
         Image image;
-        string numberFloorStr;
         private void button3_Click(object sender, EventArgs e)
         {
            }
