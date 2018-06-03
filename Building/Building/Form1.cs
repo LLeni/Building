@@ -19,7 +19,7 @@ namespace Building
     public partial class Form1 : Form
     {
         const int INDENT_LEFT = 15;
-        const int INDENT_TOP = 20;
+        const int INDENT_TOP = 25;
         const int INDENT_BETWEEN_PICTURE_BOXES = 5;
         const int INDENT_WIDTH_LABEL = 75;
         const int INDENT_HEIGHT_LABEL = 110;
@@ -37,11 +37,6 @@ namespace Building
         }
         public Boolean start = false;
         private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
@@ -64,16 +59,6 @@ namespace Building
             splitContainer3.Panel1.Hide();
         }
 
-        private void menuStrip1_ItemClicked_1(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void toolStripMenuItem3_Click(object sender, EventArgs e)
-        {
-    
-        }
-
         private void скрытьОкноИнформацииToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (скрытьОкноИнформацииToolStripMenuItem.Checked)
@@ -89,34 +74,6 @@ namespace Building
 
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void splitContainer3_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-        }
 
         Database database;
         private void Form1_Shown(object sender, EventArgs e)
@@ -196,16 +153,6 @@ namespace Building
             splitContainer3.Panel1.Hide(); 
         }
 
-        private void splitContainer3_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void главнаяToolStripMenuItem_Click(object sender, EventArgs e)     //Отображение главной панели
         {
             main_panel.Visible = true;                              //Отображается главная вкладка
@@ -244,12 +191,17 @@ namespace Building
 
             setLabel = new List<Label>();
             setPictureBox = new List<PictureBox>();
+
             int XLocationCurrentComponent = 0;
             int YLocationCurrentComponent = 0;
+            String errorMessageDownloadImagesStr = null;
+
             wightPanel = this.splitContainer3.Panel2.Width;
             heightPanel = this.splitContainer3.Panel2.Height;
+
             database = new Database();
             database.OpenConnection();
+
             //Получение наибольшего значения идентификатора в таблице "Компании"
             string queryDataFloor = "SELECT * FROM Floors";
             SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
@@ -263,12 +215,34 @@ namespace Building
                 labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Tag = Convert.ToString(reader["PATH"]);
-                pictureBox.BackColor = Color.Black;
+
                 pictureBox.Width = WIDTH_PICTURE_BOX;
                 pictureBox.Height = HEIGHT_PICTURE_BOX;
 
+                try
+                {
+                    //Если абсолютный путь
+                    pictureBox.Load(Convert.ToString(reader["PATH"]));
+                } catch
+                {
+                    try
+                    {
+                        //Если относительный путь 
+                        pictureBox.Load(Directory.GetCurrentDirectory() + Convert.ToString(reader["PATH"]));
+                    }
+                    catch { 
+                        errorMessageDownloadImagesStr +=  "\n" + labelFloor.Text;
+                        //TODO: pictureBox.Load(); Загрузка изображения "Ошибка при загрузке плана"
+                    }
 
-                if(XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                }
+                pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+
+
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
                 {
                     XLocationCurrentComponent = 0;
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
@@ -289,35 +263,13 @@ namespace Building
             }
 
             database.CloseConnection();
-            MessageBox.Show("Вот столько компонентов" + setLabel.Count);
+            if (errorMessageDownloadImagesStr != null)
+            {
+                MessageBox.Show("Проблемы с путем имеют следующие этажи:" + errorMessageDownloadImagesStr, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-
-   
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            //Получаем ссылку на кнопку, на которую нажали
-            Button oldbutton = (Button)sender;
-            //Создаем новую кнопку
-            Button newbutton = new Button();
-            //Меняем текст на новой кнопке
-            newbutton.Text = "Кнопка №2";
-            newbutton.Width = oldbutton.Width; 
-            newbutton.Height = oldbutton.Height;
-            //Размещаем ее ниже (на 10px) кнопки, на которую мы нажали
-            newbutton.Location = new Point(oldbutton.Location.X, oldbutton.Location.Y + oldbutton.Height + 1);
-            //Добавляем событие нажатия на новую кнопку 
-            //(то же что и при нажатии на исходную)
-            newbutton.Click += new EventHandler(button1_Click);
-            //Добавляем элемент на форму
-            main_panel.Controls.Add(newbutton);
-
-
-        }
 
         private void breachesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
@@ -325,56 +277,11 @@ namespace Building
             this.breachesBindingSource.EndEdit();
         }
 
-        private void breachesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             Form2 secondForm = new Form2();
             secondForm.ShowInTaskbar = false;                           //скрыть вторую форму из панели задач   
             secondForm.ShowDialog();
-        }
-
-        private void splitContainer5_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
-
-        private void splitContainer5_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void камерыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -401,11 +308,6 @@ namespace Building
             pictureBox1.Invalidate();
             label14.Visible = true;
             button7.Visible = false;
-        }
-
-        private void редактироватьЭтажToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void камерыToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -449,11 +351,6 @@ namespace Building
             openDialog();
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void label14_Click(object sender, EventArgs e)
         {
             openDialog();
@@ -471,8 +368,11 @@ namespace Building
                     label14.Visible = false;
                     button7.Visible = true;
 
-                    //Сохранение пути изображения в свойстве компонента PictureBox
-                    pictureBox1.Tag = ofd.FileName;
+                    ofd.InitialDirectory = System.IO.Path.GetFullPath(Directory.GetCurrentDirectory());
+
+                    //Сохранение пути изображения в свойстве компонента PictureBox. Причем если изображение находится в папке программы, то сохраняется относительный путь
+                    pictureBox1.Tag = ofd.FileName.Replace(Directory.GetCurrentDirectory(), "");
+                    MessageBox.Show(ofd.FileName.Replace(Directory.GetCurrentDirectory(), ""));
                 }
                 catch
                 {
@@ -547,41 +447,17 @@ namespace Building
             }
         }
 
-        private void label21_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar <= 48 || e.KeyChar >= 59) && e.KeyChar != 8 && e.KeyChar != 16 && e.KeyChar != 45 )
                 e.Handled = true;
         }
 
-        private void textBox2_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void button6_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void breachesDataGridView_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             pictureBox8.Image = bitmap;
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -655,16 +531,6 @@ namespace Building
             }
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer5_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void добавитьИнформациюОбОфисеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form4 fourForm = new Form4("Добавление");
@@ -697,11 +563,6 @@ namespace Building
             fiveForm.ShowDialog();
         }
 
-        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void гToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form4 fourForm = new Form4("Добавление");
@@ -731,8 +592,10 @@ namespace Building
         {
             int XLocationCurrentComponent = 0;
             int YLocationCurrentComponent = 0;
+            wightPanel = this.splitContainer3.Panel2.Width;
+            heightPanel = this.splitContainer3.Panel2.Height;
 
-            foreach(PictureBox currentPictureBox in setPictureBox){
+            foreach (PictureBox currentPictureBox in setPictureBox){
                 if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
                 {
                     XLocationCurrentComponent = 0;
@@ -745,9 +608,27 @@ namespace Building
 
                 XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
             }
-            MessageBox.Show("Лол");
+            XLocationCurrentComponent = 0;
+            YLocationCurrentComponent = 0;
+            foreach (Label currentLabel in setLabel)
+            {
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                {
+                    XLocationCurrentComponent = 0;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                }
+
+                currentLabel.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+                //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+
+                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+            }
         }
     }
+
+
 
 }
 

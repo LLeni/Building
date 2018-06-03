@@ -150,7 +150,6 @@
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(85, 20);
             this.toolStripMenuItem1.Text = "Управление";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // добавитьЭтажToolStripMenuItem
             // 
@@ -168,7 +167,6 @@
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
             this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.добавитьToolStripMenuItem.Text = "Добавить";
-            this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
             // 
             // информацияОбЭтажеToolStripMenuItem
             // 
@@ -200,7 +198,6 @@
             this.редактироватьЭтажToolStripMenuItem.Name = "редактироватьЭтажToolStripMenuItem";
             this.редактироватьЭтажToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.редактироватьЭтажToolStripMenuItem.Text = "Редактировать";
-            this.редактироватьЭтажToolStripMenuItem.Click += new System.EventHandler(this.редактироватьЭтажToolStripMenuItem_Click);
             // 
             // этажToolStripMenuItem
             // 
@@ -269,7 +266,6 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(39, 20);
             this.toolStripMenuItem3.Text = "Вид";
-            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // скрытьОкноИнформацииToolStripMenuItem
             // 
@@ -305,7 +301,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(889, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked_1);
             // 
             // главнаяToolStripMenuItem
             // 
@@ -359,7 +354,6 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(889, 543);
             this.splitContainer1.SplitterDistance = 371;
             this.splitContainer1.TabIndex = 7;
@@ -380,12 +374,10 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer2_Panel2_Paint);
             this.splitContainer2.Size = new System.Drawing.Size(889, 371);
             this.splitContainer2.SplitterDistance = 711;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
-            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // splitContainer3
             // 
@@ -404,12 +396,10 @@
             this.splitContainer3.Panel1.Controls.Add(this.button1);
             this.splitContainer3.Panel1.Controls.Add(this.comboBox1);
             this.splitContainer3.Panel1.Controls.Add(this.textBox1);
-            this.splitContainer3.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel1_Paint);
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer3_Panel2_Paint);
             this.splitContainer3.Size = new System.Drawing.Size(711, 371);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
@@ -460,7 +450,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(461, 26);
             this.textBox1.TabIndex = 0;
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // label3
             // 
@@ -496,7 +485,6 @@
             this.add.Size = new System.Drawing.Size(889, 543);
             this.add.TabIndex = 4;
             this.add.Visible = false;
-            this.add.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // splitContainer4
             // 
@@ -545,7 +533,6 @@
             this.splitContainer5.Panel1.Controls.Add(this.textBox2);
             this.splitContainer5.Panel1.Controls.Add(this.label6);
             this.splitContainer5.Panel1.Controls.Add(this.button3);
-            this.splitContainer5.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer5_Panel1_Paint);
             // 
             // splitContainer5.Panel2
             // 
@@ -562,11 +549,9 @@
             this.splitContainer5.Panel2.Controls.Add(this.textBox3);
             this.splitContainer5.Panel2.Controls.Add(this.label15);
             this.splitContainer5.Panel2.Controls.Add(this.label9);
-            this.splitContainer5.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer5_Panel2_Paint);
             this.splitContainer5.Size = new System.Drawing.Size(889, 374);
             this.splitContainer5.SplitterDistance = 610;
             this.splitContainer5.TabIndex = 2;
-            this.splitContainer5.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer5_SplitterMoved);
             // 
             // button7
             // 
@@ -652,7 +637,6 @@
             this.label8.Size = new System.Drawing.Size(114, 20);
             this.label8.TabIndex = 3;
             this.label8.Text = "Номер этажа:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // textBox2
             // 
@@ -663,8 +647,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(55, 26);
             this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            this.textBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox2_KeyDown);
             this.textBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox2_KeyPress);
             // 
             // label6
@@ -700,7 +682,6 @@
             this.label21.Size = new System.Drawing.Size(193, 19);
             this.label21.TabIndex = 16;
             this.label21.Text = "Офис находится на этаже...";
-            this.label21.Click += new System.EventHandler(this.label21_Click);
             // 
             // label19
             // 
@@ -929,7 +910,6 @@
             this.breachesDataGridView.Name = "breachesDataGridView";
             this.breachesDataGridView.Size = new System.Drawing.Size(884, 529);
             this.breachesDataGridView.TabIndex = 9;
-            this.breachesDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.breachesDataGridView_CellContentClick_1);
             // 
             // camera
             // 
@@ -973,7 +953,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(284, 245);
             this.listBox1.TabIndex = 1;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button_start_web
             // 
