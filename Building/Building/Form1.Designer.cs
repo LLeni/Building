@@ -97,15 +97,18 @@
             this.label13 = new System.Windows.Forms.Label();
             this.main_panel = new System.Windows.Forms.Panel();
             this.error = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.breachesDataGridView = new System.Windows.Forms.DataGridView();
+            this.button5 = new System.Windows.Forms.Button();
             this.camera = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button_start_web = new System.Windows.Forms.Button();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.breachesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.axWindowsMediaPlayer2 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.axWindowsMediaPlayer3 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.axWindowsMediaPlayer4 = new AxWMPLib.AxWindowsMediaPlayer();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -139,6 +142,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer4)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -355,8 +362,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(914, 543);
-            this.splitContainer1.SplitterDistance = 371;
+            this.splitContainer1.Size = new System.Drawing.Size(914, 588);
+            this.splitContainer1.SplitterDistance = 416;
             this.splitContainer1.TabIndex = 7;
             // 
             // splitContainer2
@@ -376,8 +383,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(914, 371);
-            this.splitContainer2.SplitterDistance = 742;
+            this.splitContainer2.Size = new System.Drawing.Size(914, 416);
+            this.splitContainer2.SplitterDistance = 745;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -402,7 +409,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Size = new System.Drawing.Size(742, 371);
+            this.splitContainer3.Size = new System.Drawing.Size(745, 416);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -421,7 +428,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(662, 0);
+            this.button1.Location = new System.Drawing.Point(665, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
@@ -450,14 +457,15 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(167, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(492, 26);
+            this.textBox1.Size = new System.Drawing.Size(495, 26);
             this.textBox1.TabIndex = 0;
             // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(5, 30);
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.treeView1.Location = new System.Drawing.Point(5, 26);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(162, 334);
+            this.treeView1.Size = new System.Drawing.Size(156, 383);
             this.treeView1.TabIndex = 5;
             // 
             // label3
@@ -491,7 +499,7 @@
             this.add.Dock = System.Windows.Forms.DockStyle.Fill;
             this.add.Location = new System.Drawing.Point(0, 24);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(914, 543);
+            this.add.Size = new System.Drawing.Size(914, 588);
             this.add.TabIndex = 4;
             this.add.Visible = false;
             // 
@@ -516,8 +524,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.label10);
             this.splitContainer4.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer4.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer4.Size = new System.Drawing.Size(914, 543);
-            this.splitContainer4.SplitterDistance = 374;
+            this.splitContainer4.Size = new System.Drawing.Size(914, 588);
+            this.splitContainer4.SplitterDistance = 419;
             this.splitContainer4.TabIndex = 1;
             // 
             // splitContainer5
@@ -558,7 +566,7 @@
             this.splitContainer5.Panel2.Controls.Add(this.textBox3);
             this.splitContainer5.Panel2.Controls.Add(this.label15);
             this.splitContainer5.Panel2.Controls.Add(this.label9);
-            this.splitContainer5.Size = new System.Drawing.Size(914, 374);
+            this.splitContainer5.Size = new System.Drawing.Size(914, 419);
             this.splitContainer5.SplitterDistance = 635;
             this.splitContainer5.TabIndex = 2;
             // 
@@ -588,7 +596,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(264, 185);
+            this.label14.Location = new System.Drawing.Point(264, 207);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 0;
@@ -604,7 +612,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(34, 87);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(563, 234);
+            this.pictureBox1.Size = new System.Drawing.Size(563, 279);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -674,7 +682,7 @@
             this.button3.AutoSize = true;
             this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(0, 341);
+            this.button3.Location = new System.Drawing.Point(0, 386);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(631, 29);
             this.button3.TabIndex = 9;
@@ -705,7 +713,7 @@
             // 
             this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(8, 310);
+            this.textBox6.Location = new System.Drawing.Point(8, 355);
             this.textBox6.MaxLength = 12;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(256, 26);
@@ -719,7 +727,7 @@
             this.textBox4.MaxLength = 240;
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(256, 66);
+            this.textBox4.Size = new System.Drawing.Size(256, 111);
             this.textBox4.TabIndex = 13;
             // 
             // label18
@@ -727,7 +735,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(5, 283);
+            this.label18.Location = new System.Drawing.Point(5, 328);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(155, 19);
             this.label18.TabIndex = 14;
@@ -767,7 +775,7 @@
             this.button4.AutoSize = true;
             this.button4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(0, 341);
+            this.button4.Location = new System.Drawing.Point(0, 386);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(271, 29);
             this.button4.TabIndex = 10;
@@ -879,7 +887,7 @@
             this.main_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.main_panel.Location = new System.Drawing.Point(0, 24);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(914, 543);
+            this.main_panel.Size = new System.Drawing.Size(914, 588);
             this.main_panel.TabIndex = 1;
             // 
             // error
@@ -889,21 +897,9 @@
             this.error.Dock = System.Windows.Forms.DockStyle.Fill;
             this.error.Location = new System.Drawing.Point(0, 24);
             this.error.Name = "error";
-            this.error.Size = new System.Drawing.Size(914, 543);
+            this.error.Size = new System.Drawing.Size(914, 588);
             this.error.TabIndex = 1;
             this.error.Visible = false;
-            // 
-            // button5
-            // 
-            this.button5.AutoSize = true;
-            this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button5.Location = new System.Drawing.Point(0, 514);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(914, 29);
-            this.button5.TabIndex = 9;
-            this.button5.Text = "Добавить";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // breachesDataGridView
             // 
@@ -915,8 +911,20 @@
             this.breachesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.breachesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.breachesDataGridView.Name = "breachesDataGridView";
-            this.breachesDataGridView.Size = new System.Drawing.Size(914, 514);
+            this.breachesDataGridView.Size = new System.Drawing.Size(914, 559);
             this.breachesDataGridView.TabIndex = 9;
+            // 
+            // button5
+            // 
+            this.button5.AutoSize = true;
+            this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.button5.Location = new System.Drawing.Point(0, 559);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(914, 29);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "Добавить";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // camera
             // 
@@ -924,7 +932,7 @@
             this.camera.Dock = System.Windows.Forms.DockStyle.Fill;
             this.camera.Location = new System.Drawing.Point(0, 24);
             this.camera.Name = "camera";
-            this.camera.Size = new System.Drawing.Size(914, 543);
+            this.camera.Size = new System.Drawing.Size(914, 588);
             this.camera.TabIndex = 11;
             this.camera.Visible = false;
             // 
@@ -937,41 +945,20 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.51485F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.47525F));
             this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button_start_web, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox8, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer3, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer4, 2, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(914, 543);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(914, 588);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // listBox1
-            // 
-            this.listBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(5, 258);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(293, 245);
-            this.listBox1.TabIndex = 1;
-            // 
-            // button_start_web
-            // 
-            this.button_start_web.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_start_web.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_start_web.Location = new System.Drawing.Point(5, 511);
-            this.button_start_web.Name = "button_start_web";
-            this.button_start_web.Size = new System.Drawing.Size(293, 27);
-            this.button_start_web.TabIndex = 12;
-            this.button_start_web.Text = "Начать воспроизведение";
-            this.button_start_web.UseVisualStyleBackColor = true;
-            this.button_start_web.Click += new System.EventHandler(this.button_start_web_Click);
             // 
             // pictureBox8
             // 
@@ -979,7 +966,7 @@
             this.pictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox8.Location = new System.Drawing.Point(5, 5);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(293, 245);
+            this.pictureBox8.Size = new System.Drawing.Size(293, 285);
             this.pictureBox8.TabIndex = 0;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
@@ -988,15 +975,76 @@
             // 
             this.breachesBindingSource1.DataMember = "Breaches";
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(306, 5);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(297, 285);
+            this.axWindowsMediaPlayer1.TabIndex = 13;
+            // 
+            // axWindowsMediaPlayer2
+            // 
+            this.axWindowsMediaPlayer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer2.Enabled = true;
+            this.axWindowsMediaPlayer2.Location = new System.Drawing.Point(611, 5);
+            this.axWindowsMediaPlayer2.Name = "axWindowsMediaPlayer2";
+            this.axWindowsMediaPlayer2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer2.OcxState")));
+            this.axWindowsMediaPlayer2.Size = new System.Drawing.Size(298, 285);
+            this.axWindowsMediaPlayer2.TabIndex = 13;
+            // 
+            // axWindowsMediaPlayer3
+            // 
+            this.axWindowsMediaPlayer3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer3.Enabled = true;
+            this.axWindowsMediaPlayer3.Location = new System.Drawing.Point(306, 298);
+            this.axWindowsMediaPlayer3.Name = "axWindowsMediaPlayer3";
+            this.axWindowsMediaPlayer3.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer3.OcxState")));
+            this.axWindowsMediaPlayer3.Size = new System.Drawing.Size(297, 285);
+            this.axWindowsMediaPlayer3.TabIndex = 13;
+            // 
+            // axWindowsMediaPlayer4
+            // 
+            this.axWindowsMediaPlayer4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer4.Enabled = true;
+            this.axWindowsMediaPlayer4.Location = new System.Drawing.Point(611, 298);
+            this.axWindowsMediaPlayer4.Name = "axWindowsMediaPlayer4";
+            this.axWindowsMediaPlayer4.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer4.OcxState")));
+            this.axWindowsMediaPlayer4.Size = new System.Drawing.Size(298, 285);
+            this.axWindowsMediaPlayer4.TabIndex = 13;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 19;
+            this.listBox1.Location = new System.Drawing.Point(5, 298);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(293, 285);
+            this.listBox1.TabIndex = 1;
+            this.listBox1.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 567);
+            this.ClientSize = new System.Drawing.Size(914, 612);
+            this.Controls.Add(this.camera);
             this.Controls.Add(this.main_panel);
             this.Controls.Add(this.error);
             this.Controls.Add(this.add);
-            this.Controls.Add(this.camera);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(930, 589);
@@ -1051,6 +1099,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1126,13 +1178,16 @@
         private System.Windows.Forms.BindingSource breachesBindingSource1;
         private System.Windows.Forms.DataGridView breachesDataGridView;
         private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button_start_web;
         private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem гToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem информацияОбЭтажеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem информацияОКамереToolStripMenuItem;
         private System.Windows.Forms.TreeView treeView1;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer2;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer3;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer4;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

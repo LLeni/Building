@@ -13,7 +13,10 @@ namespace Building
 {
     public partial class Form3 : Form
     {
+        Database database;
         String data;
+        String pathWorkDirectory;
+
         public Form3()
         {
             InitializeComponent();
@@ -25,7 +28,14 @@ namespace Building
             this.data = data;
         }
 
-        Database database;
+
+        public Form3(String data, String pathWorkDirectory)
+        {
+            InitializeComponent();
+            this.data = data;
+            this.pathWorkDirectory = pathWorkDirectory;
+        }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -137,12 +147,25 @@ namespace Building
             }
             try
             {
+                label14.Visible = false; ;
+                button7.Visible = true;
                 image = Image.FromFile(Convert.ToString(pictureBox1.Tag));
-                label14.Text = "";
+
             }
             catch
             {
-                MessageBox.Show("Проблема с путем плана этажа!");
+                try
+                {
+                    image = Image.FromFile(pathWorkDirectory + Convert.ToString(pictureBox1.Tag));
+                }
+                catch
+                {
+                    label14.Visible = true;
+                    button7.Visible = false;
+                    MessageBox.Show("Проблема с путем плана этажа!");
+
+                }
+
             }
 
             pictureBox1.Image = (Image)image;

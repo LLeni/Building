@@ -16,6 +16,23 @@ using AForge.Video.DirectShow;
 
 namespace Building
 {
+    //TODO: Сделать так, чтобы видеозаписи раскрывались на всю ячейку при расширении формы
+    //TODO: Добавить пару Label на титульник
+    //TODO: При нажатии правой кнопкой мыши на picturebox этажа, то на передний план переходит панель с большим одним picturebox, на котором и будет соотвествующий план этажа
+    //TODO: При добавлении/изменении чего-либо в БД на отдельных формах, надо  чтобы информация на главной форме обновлялась
+    //TODO: Сделать так, чтобы работал Поиск
+    //TODO: Сделать так, чтобы у источника данных был относительный путь к БД
+    //TODO: При появлении и скрытии Панели информации, чтобы компоненты перестроились 
+
+    //TODO: Формы О программе и Помощь
+
+    //TODO: Документ Схема алгоритма
+    //TODO: Документ Инструкция пользователя
+    //TODO: Документ ER-Диаграмма. Просто разместить каждую таблицу на отдельный лист
+
+    //Больше относится к Захару
+    //TODO: Чтобы каждый pictureBox, кроме на главной форме подстраивался правильно под изображения (т.е 16:10, 16:9, 4:3)
+    //TODO: Выход с титульника поправить
     public partial class Form1 : Form
     {
         const int INDENT_LEFT = 2;
@@ -195,8 +212,30 @@ namespace Building
             string path = (System.IO.Path.GetDirectoryName(executable));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
+            //Убираем панели контроля видеоряда 
+            axWindowsMediaPlayer1.uiMode = "none";
+            axWindowsMediaPlayer2.uiMode = "none";
+            axWindowsMediaPlayer3.uiMode = "none";
+            axWindowsMediaPlayer4.uiMode = "none";
 
-   
+            axWindowsMediaPlayer1.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera1.mp4";
+            axWindowsMediaPlayer2.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera2.mp4";
+            axWindowsMediaPlayer3.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera3.mp4";
+            axWindowsMediaPlayer4.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera4.mp4";
+
+            axWindowsMediaPlayer1.settings.mute = true;
+            axWindowsMediaPlayer2.settings.mute = true;
+            axWindowsMediaPlayer3.settings.mute = true;
+            axWindowsMediaPlayer4.settings.mute = true;
+
+
+            axWindowsMediaPlayer1.settings.playCount = 1000;
+            axWindowsMediaPlayer2.settings.playCount = 1000;
+            axWindowsMediaPlayer3.settings.playCount = 1000;
+            axWindowsMediaPlayer4.settings.playCount = 1000;
+
+
+
             this.splitContainer3.Panel2.HorizontalScroll.Enabled = false;
             this.splitContainer3.Panel2.HorizontalScroll.Visible = false;
             this.splitContainer3.Panel2.HorizontalScroll.Maximum = 0;
@@ -305,7 +344,7 @@ namespace Building
 
             string queryDataOffices = "SELECT * FROM Offices WHERE ID_FLOOR = " + idFloor;
             SQLiteCommand myCommandDataOffices = database.myConnection.CreateCommand();
-            myCommandDataOffices.CommandText = queryIDFloor;
+            myCommandDataOffices.CommandText = queryDataOffices;
             myCommandDataOffices.CommandType = CommandType.Text;
             SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
 
@@ -315,13 +354,14 @@ namespace Building
             TreeNode treeNodePhone;
             List<TreeNode> setIDOffices = new List<TreeNode>();
             string idCompany = null;
+            int numberOffice = 0;
             while (readerDataOffices.Read())
             {
-                treeNodeOffice = new TreeNode(Convert.ToString(readerDataOffices["ID_OFFICE"]));
+                treeNodeOffice = new TreeNode("Офис " + Convert.ToString(readerDataOffices["ID_OFFICE"]));
                 setIDOffices.Add(treeNodeOffice);
                 treeView1.Nodes.Add(treeNodeOffice);
 
-                idCompany = Convert.ToString(readerIDFloor["ID_COMPANY"]);
+                idCompany = Convert.ToString(readerDataOffices["ID_COMPANY"]);
 
                 // Извлекаем данные о компании
                 string queryDataCompany = "SELECT * FROM Companies WHERE ID_COMPANY = " + idCompany;
@@ -331,11 +371,14 @@ namespace Building
                 SQLiteDataReader readerCompany = myCommandDataCompany.ExecuteReader();
                 while (readerCompany.Read())
                 {
-                    treeNodeNameCompany = new TreeNode(Convert.ToString(readerIDFloor["NAME_COMPANY"]));
-                    treeNodeDescription = new TreeNode(Convert.ToString(readerIDFloor["DESCRIPTION"]));
-                    treeNodePhone = new TreeNode(Convert.ToString(readerIDFloor["PHONE"]));
+                    treeNodeNameCompany = new TreeNode(Convert.ToString(readerCompany["NAME_COMPANY"]));
+                    treeNodeDescription = new TreeNode(Convert.ToString(readerCompany["DESCRIPTION"]));
+                    treeNodePhone = new TreeNode(Convert.ToString(readerCompany["PHONE_COMPANY"]));
 
-                    //treeView1.Nodes
+                    treeView1.Nodes[numberOffice].Nodes.Add(treeNodeNameCompany);
+                    treeView1.Nodes[numberOffice].Nodes.Add(treeNodeDescription);
+                    treeView1.Nodes[numberOffice].Nodes.Add(treeNodePhone);
+                    numberOffice++;
                 }
             }
 
@@ -359,6 +402,24 @@ namespace Building
 
         private void камерыToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (listBox1.Items.Count != 0)
+                {
+                    videoSource = new VideoCaptureDevice(videoDevices[listBox1.SelectedIndex].MonikerString);
+                    videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                    videoSource.Start();
+                }
+                else
+                {
+                    MessageBox.Show("К вашему компьютеру не подключена ни одна вебкамера");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Во время попытки подключится к вебкамере произошла ошибка!");
+            }
+
             main_panel.Visible = false;                             //Скрывается главная вкладка
             add.Visible = false;                                 //Скрывается вкладка добавления этажей
             error.Visible = false;                                 //Скрывается вкладка нарушений
@@ -457,7 +518,7 @@ namespace Building
 
         private void этажToolStripMenuItem_Click(object sender, EventArgs e)        //Вызов формы "Редактировать этаж"   
         {
-            Form3 thirdForm = new Form3("Редактирование");
+            Form3 thirdForm = new Form3("Редактирование", Directory.GetCurrentDirectory());
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.ShowDialog();
             thirdForm.Text = "Редактировать информацию об этаже";
@@ -536,21 +597,7 @@ namespace Building
 
         private void button_start_web_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (listBox1.Items.Count != 0)
-                {
-                    videoSource = new VideoCaptureDevice(videoDevices[listBox1.SelectedIndex].MonikerString);
-                    videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
-                    videoSource.Start();
-                } else
-                {
-                    MessageBox.Show("К вашему компьютеру не подключена ни одна вебкамера");
-                }
-            } catch
-            {
-                MessageBox.Show("Во время попытки подключится к вебкамере произошла ошибка!");
-            }
+
             //ОПАСНО написать строку проверки. Если ListBox1 пустой, то вписать текст о несущесвтующих подключениях.
         }
 

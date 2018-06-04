@@ -55,6 +55,10 @@ namespace Building
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
             this.floorsTableAdapter1.Fill(this.buldingDataSet2.Floors);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
+            this.officesTableAdapter1.Fill(this.buldingDataSet2.Offices);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
+            this.camerasTableAdapter1.Fill(this.buldingDataSet2.Cameras);
 
             database = new Database();
         }
