@@ -36,18 +36,18 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.camerasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.camerasTableAdapter = new Building.BuldingDataSet2TableAdapters.CamerasTableAdapter();
-            this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -55,7 +55,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(68, 24);
+            this.label1.Location = new System.Drawing.Point(42, 20);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(313, 23);
             this.label1.TabIndex = 24;
@@ -120,6 +120,16 @@
             this.comboBox1.Size = new System.Drawing.Size(265, 27);
             this.comboBox1.TabIndex = 30;
             // 
+            // floorsBindingSource
+            // 
+            this.floorsBindingSource.DataMember = "Floors";
+            this.floorsBindingSource.DataSource = this.buldingDataSet2;
+            // 
+            // buldingDataSet2
+            // 
+            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
+            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -160,11 +170,6 @@
             this.label5.TabIndex = 34;
             this.label5.Text = "Краткое описание видимости камеры:";
             // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // camerasBindingSource
             // 
             this.camerasBindingSource.DataMember = "Cameras";
@@ -173,11 +178,6 @@
             // camerasTableAdapter
             // 
             this.camerasTableAdapter.ClearBeforeFill = true;
-            // 
-            // floorsBindingSource
-            // 
-            this.floorsBindingSource.DataMember = "Floors";
-            this.floorsBindingSource.DataSource = this.buldingDataSet2;
             // 
             // floorsTableAdapter
             // 
@@ -206,9 +206,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form6";
             this.Load += new System.EventHandler(this.Form6_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

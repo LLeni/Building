@@ -35,10 +35,6 @@ namespace Building
 
         private void Form6_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Cameras". При необходимости она может быть перемещена или удалена.
-            this.camerasTableAdapter.Fill(this.buldingDataSet2.Cameras);
             label1.Text = data + " информации о камере";
             if (data == "Добавление")
             {
@@ -50,6 +46,11 @@ namespace Building
                 button1.Text = "Редактировать";
                 label1.Text = "Редактирование информации о камере";
             }
+
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
+            this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Cameras". При необходимости она может быть перемещена или удалена.
+            this.camerasTableAdapter.Fill(this.buldingDataSet2.Cameras);
         }
     }
 }

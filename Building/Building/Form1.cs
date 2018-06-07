@@ -16,13 +16,10 @@ using AForge.Video.DirectShow;
 
 namespace Building
 {
-    //TODO: Сделать так, чтобы видеозаписи раскрывались на всю ячейку при расширении формы
-    //TODO: Добавить пару Label на титульник
     //TODO: При нажатии правой кнопкой мыши на picturebox этажа, то на передний план переходит панель с большим одним picturebox, на котором и будет соотвествующий план этажа
     //TODO: При добавлении/изменении чего-либо в БД на отдельных формах, надо  чтобы информация на главной форме обновлялась
     //TODO: Сделать так, чтобы работал Поиск
     //TODO: Сделать так, чтобы у источника данных был относительный путь к БД
-    //TODO: При появлении и скрытии Панели информации, чтобы компоненты перестроились 
 
     //TODO: Формы О программе и Помощь
 
@@ -47,7 +44,10 @@ namespace Building
         int wightPanel;
         int heightPanel;
         List<Label> setLabel;
+        List<Label> setShowLabel;
         List<PictureBox> setPictureBox;
+        List<PictureBox> setShowPictureBox;
+        List<String> setIDFloors;
         List<List<TreeNode>> setTreeNodes; // Необходимо для отображений офисов при выборе конкретного этажа на главной вкладке 
 
         public FilterInfoCollection videoDevices;
@@ -95,9 +95,52 @@ namespace Building
                 splitContainer2.Panel2Collapsed = true;
                 splitContainer2.Panel2.Hide();
             }
-
+            alignComponentsFloors();
         }
 
+        private void alignComponentsFloors()
+        {
+            int XLocationCurrentComponent = 0;
+            int YLocationCurrentComponent = 0;
+            wightPanel = this.splitContainer3.Panel2.Width;
+            heightPanel = this.splitContainer3.Panel2.Height;
+            
+            foreach (PictureBox currentPictureBox in setShowPictureBox)
+            {
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15 > wightPanel)
+                {
+                    XLocationCurrentComponent = 0;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                }
+
+                currentPictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
+                //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+                currentPictureBox.Visible = true;
+
+                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+            }
+
+            XLocationCurrentComponent = 0;
+            YLocationCurrentComponent = 0;
+
+            foreach (Label currentLabel in setShowLabel)
+            {
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15 > wightPanel)
+                {
+                    XLocationCurrentComponent = 0;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                }
+
+                currentLabel.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+                //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+                currentLabel.Visible = true;
+
+                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+            }
+        }
 
         Database database;
         private void Form1_Shown(object sender, EventArgs e)
@@ -189,6 +232,7 @@ namespace Building
             панельКамерToolStripMenuItem.Enabled = true;            //Снятие блокировки с возможности добавления панели камер
         }
 
+        List<String> setWebCameras = new List<String>();
         private void Form1_Load(object sender, EventArgs e)
         {
             Form7 titulForm = new Form7();
@@ -201,6 +245,7 @@ namespace Building
                 foreach (FilterInfo device in videoDevices)
                 {
                     listBox1.Items.Add(device.Name);
+                    setWebCameras.Add(device.Name);
                 }
                 listBox1.SelectedIndex = 0;
 
@@ -243,6 +288,9 @@ namespace Building
 
             setLabel = new List<Label>();
             setPictureBox = new List<PictureBox>();
+            setShowLabel = new List<Label>();
+            setShowPictureBox = new List<PictureBox>();
+            setIDFloors = new List<string>();
 
             int XLocationCurrentComponent = 0;
             int YLocationCurrentComponent = 0;
@@ -263,6 +311,8 @@ namespace Building
 
             while (reader.Read())
             {
+                setIDFloors.Add(Convert.ToString(reader["ID_FLOOR"]));
+
                 Label labelFloor = new Label();
                 labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
                 PictureBox pictureBox = new PictureBox();
@@ -308,7 +358,9 @@ namespace Building
                 XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
 
                 setLabel.Add(labelFloor);
+                setShowLabel.Add(labelFloor);
                 setPictureBox.Add(pictureBox);
+                setShowPictureBox.Add(pictureBox);
 
                 //Добавляем элементы на форму
                 this.splitContainer3.Panel2.Controls.Add(setPictureBox.Last());
@@ -406,7 +458,8 @@ namespace Building
             {
                 if (listBox1.Items.Count != 0)
                 {
-                    videoSource = new VideoCaptureDevice(videoDevices[listBox1.SelectedIndex].MonikerString);
+                    MessageBox.Show(setWebCameras[0]);
+                    videoSource = new VideoCaptureDevice(setWebCameras[0]);
                     videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                     videoSource.Start();
                 }
@@ -446,7 +499,7 @@ namespace Building
 
         private void камерыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form6 sixForm = new Form6("Редактирование");
+            Form6 sixForm = new Form6(" ");
             sixForm.Text = "Редактировать информацию о камере";
             sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Редактирование информации о камере"   
             sixForm.ShowDialog();
@@ -710,41 +763,212 @@ namespace Building
 
         private void Form1_Resize(object sender, EventArgs e)
         {
+            alignComponentsFloors();
+        }
+
+        private void редактироватьЭтажToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Вы ничего не ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                database.OpenConnection();
+                foreach (var pictureBox in setPictureBox)
+                {
+                    pictureBox.Visible = false;
+                }
+                foreach (var label in setLabel)
+                {
+                    label.Visible = false;
+                }
+                switch (comboBox1.Text)
+                {
+                    case "Номер этажа":
+                        if (setIDFloors.Contains(textBox1.Text))
+                        {
+                            setShowLabel.Clear();
+                            setShowPictureBox.Clear();
+                            setShowPictureBox.Add(setPictureBox[setIDFloors.IndexOf(textBox1.Text)]);
+                            setShowLabel.Add(setLabel[setIDFloors.IndexOf(textBox1.Text)]);
+                        } else
+                        {
+                            MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        break;
+                    case "Номер офиса":
+                        string queryDataOffices = "SELECT * FROM Offices WHERE ID_OFFICE = " + textBox1.Text;
+                        SQLiteCommand myCommandDataOffices = database.myConnection.CreateCommand();
+                        myCommandDataOffices.CommandText = queryDataOffices;
+                        myCommandDataOffices.CommandType = CommandType.Text;
+                        SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
+                        if(readerDataOffices.StepCount == 0)
+                        {
+                            MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        } else
+                        {
+                            setShowLabel.Clear();
+                            setShowPictureBox.Clear();
+                        }
+                        while (readerDataOffices.Read())
+                        {
+                            setShowPictureBox.Add(setPictureBox[setIDFloors.IndexOf(Convert.ToString(readerDataOffices["ID_FLOOR"]))]);
+                            setShowLabel.Add(setLabel[setIDFloors.IndexOf(Convert.ToString(readerDataOffices["ID_FLOOR"]))]);
+                        }
+                        break;
+                    case "Тип этажа":
+                        string queryDataFloor = "SELECT * FROM Floors WHERE CATEGORY_FLOOR = '" + textBox1.Text + "'";
+                        SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
+                        myCommandDataFloor.CommandText = queryDataFloor;
+                        myCommandDataFloor.CommandType = CommandType.Text;
+                        SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
+                        if (reader.StepCount == 0)
+                        {
+                            MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            setShowLabel.Clear();
+                            setShowPictureBox.Clear();
+                        }
+                        while (reader.Read())
+                        {
+                            setShowPictureBox.Add(setPictureBox[setIDFloors.IndexOf(Convert.ToString(reader["ID_FLOOR"]))]);
+                            setShowLabel.Add(setLabel[setIDFloors.IndexOf(Convert.ToString(reader["ID_FLOOR"]))]);
+                        }
+                        break;
+
+                }
+
+                database.CloseConnection();
+                alignComponentsFloors();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            setShowLabel.Clear();
+            setShowPictureBox.Clear();
+
+            foreach (var pictureBox in setPictureBox)
+            {
+                setShowPictureBox.Add(pictureBox);
+            }
+
+            foreach (var label in setLabel)
+            {
+                setShowLabel.Add(label);
+            }
+
+            alignComponentsFloors();
+        }
+
+        private void обновитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            setShowLabel.Clear();
+            setShowPictureBox.Clear();
+
+            database.OpenConnection();
+
+            string queryDataFloor = "SELECT * FROM Floors";
+            SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
+            myCommandDataFloor.CommandText = queryDataFloor;
+            myCommandDataFloor.CommandType = CommandType.Text;
+            SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
+
+
             int XLocationCurrentComponent = 0;
             int YLocationCurrentComponent = 0;
-            wightPanel = this.splitContainer3.Panel2.Width;
-            heightPanel = this.splitContainer3.Panel2.Height;
+            String errorMessageDownloadImagesStr = null;
 
-            foreach (PictureBox currentPictureBox in setPictureBox){
-                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15> wightPanel )
-                {
-                    XLocationCurrentComponent = 0;
-                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
-                }
+            setIDFloors.Clear();
 
-                currentPictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
-                //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
-
-
-                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
-            }
-            XLocationCurrentComponent = 0;
-            YLocationCurrentComponent = 0;
-            foreach (Label currentLabel in setLabel)
+            foreach(var pictureBox in setPictureBox)
             {
-                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15 > wightPanel)
-                {
-                    XLocationCurrentComponent = 0;
-                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                pictureBox.Dispose();
+            }
+            setPictureBox.Clear();
+
+            foreach(var label in setLabel)
+            {
+                label.Dispose();
+            }
+            setLabel.Clear();
+
+            while (reader.Read())
+            {
+                //if()
+                //Если не содержит
+               // if (!setIDFloors.Contains(Convert.ToString(reader["ID_FLOOR"]))){
+                    setIDFloors.Add(Convert.ToString(reader["ID_FLOOR"]));
+
+                    Label labelFloor = new Label();
+                    labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
+                    PictureBox pictureBox = new PictureBox();
+                    pictureBox.Tag = Convert.ToString(reader["PATH"]);
+                    pictureBox.Click += new EventHandler(PictureBoxClick);
+
+                    pictureBox.Width = WIDTH_PICTURE_BOX;
+                    pictureBox.Height = HEIGHT_PICTURE_BOX;
+
+                    try
+                    {
+                        //Если абсолютный путь
+                        pictureBox.Load(Convert.ToString(reader["PATH"]));
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            //Если относительный путь 
+                            pictureBox.Load(Directory.GetCurrentDirectory() + Convert.ToString(reader["PATH"]));
+                        }
+                        catch
+                        {
+                            errorMessageDownloadImagesStr += "\n" + labelFloor.Text;
+                            //TODO: pictureBox.Load(); Загрузка изображения "Ошибка при загрузке плана"
+                        }
+
+                    }
+                    pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+
+
+                    if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                    {
+                        XLocationCurrentComponent = 0;
+                        YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                    }
+
+                    pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
+                    labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+
+                    XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+
+                    setLabel.Add(labelFloor);
+                    setShowLabel.Add(labelFloor);
+                    setPictureBox.Add(pictureBox);
+                    setShowPictureBox.Add(pictureBox);
+                    //Добавляем элементы на форму
+                    this.splitContainer3.Panel2.Controls.Add(setPictureBox.Last());
+                    this.splitContainer3.Panel2.Controls.Add(setLabel.Last());
                 }
 
-                currentLabel.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
-
-                //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+            //}
 
 
-                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
-            }
+
+            database.CloseConnection();
         }
     }
 

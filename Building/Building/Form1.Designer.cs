@@ -88,27 +88,23 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.main_panel = new System.Windows.Forms.Panel();
             this.error = new System.Windows.Forms.Panel();
             this.breachesDataGridView = new System.Windows.Forms.DataGridView();
             this.button5 = new System.Windows.Forms.Button();
             this.camera = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.breachesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.axWindowsMediaPlayer2 = new AxWMPLib.AxWindowsMediaPlayer();
             this.axWindowsMediaPlayer3 = new AxWMPLib.AxWindowsMediaPlayer();
             this.axWindowsMediaPlayer4 = new AxWMPLib.AxWindowsMediaPlayer();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.breachesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.button2 = new System.Windows.Forms.Button();
+            this.обновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -120,6 +116,7 @@
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             this.add.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
@@ -131,21 +128,18 @@
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.main_panel.SuspendLayout();
             this.error.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.breachesDataGridView)).BeginInit();
             this.camera.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // toolStripMenuItem1
@@ -206,6 +200,7 @@
             this.редактироватьЭтажToolStripMenuItem.Name = "редактироватьЭтажToolStripMenuItem";
             this.редактироватьЭтажToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.редактироватьЭтажToolStripMenuItem.Text = "Редактировать";
+            this.редактироватьЭтажToolStripMenuItem.Click += new System.EventHandler(this.редактироватьЭтажToolStripMenuItem_Click);
             // 
             // этажToolStripMenuItem
             // 
@@ -303,10 +298,11 @@
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.камерыToolStripMenuItem,
-            this.спарвкаToolStripMenuItem});
+            this.спарвкаToolStripMenuItem,
+            this.обновитьToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(914, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1014, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -362,7 +358,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(914, 588);
+            this.splitContainer1.Size = new System.Drawing.Size(1014, 588);
             this.splitContainer1.SplitterDistance = 416;
             this.splitContainer1.TabIndex = 7;
             // 
@@ -383,8 +379,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
-            this.splitContainer2.Size = new System.Drawing.Size(914, 416);
-            this.splitContainer2.SplitterDistance = 745;
+            this.splitContainer2.Size = new System.Drawing.Size(1014, 416);
+            this.splitContainer2.SplitterDistance = 771;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -409,7 +405,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Size = new System.Drawing.Size(745, 416);
+            this.splitContainer3.Panel2.Controls.Add(this.button2);
+            this.splitContainer3.Size = new System.Drawing.Size(771, 416);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -426,14 +423,15 @@
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(665, 0);
+            this.button1.Location = new System.Drawing.Point(692, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 5;
             this.button1.Text = "Найти";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // comboBox1
             // 
@@ -441,12 +439,13 @@
             this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "Этаж",
-            "Офис",
+            "Номер этажа",
+            "Тип этажа",
+            "Номер офиса",
             "Камера"});
             this.comboBox1.Location = new System.Drawing.Point(71, 1);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(90, 27);
+            this.comboBox1.Size = new System.Drawing.Size(158, 27);
             this.comboBox1.TabIndex = 4;
             // 
             // textBox1
@@ -455,23 +454,24 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.textBox1.Location = new System.Drawing.Point(167, 1);
+            this.textBox1.Location = new System.Drawing.Point(235, 1);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(495, 26);
+            this.textBox1.Size = new System.Drawing.Size(453, 26);
             this.textBox1.TabIndex = 0;
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.treeView1.Location = new System.Drawing.Point(5, 26);
+            this.treeView1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.treeView1.Location = new System.Drawing.Point(0, 26);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(156, 383);
+            this.treeView1.Size = new System.Drawing.Size(237, 391);
             this.treeView1.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label3.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(1, 2);
             this.label3.Name = "label3";
@@ -499,7 +499,7 @@
             this.add.Dock = System.Windows.Forms.DockStyle.Fill;
             this.add.Location = new System.Drawing.Point(0, 24);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(914, 588);
+            this.add.Size = new System.Drawing.Size(1014, 588);
             this.add.TabIndex = 4;
             this.add.Visible = false;
             // 
@@ -520,11 +520,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.BackColor = System.Drawing.SystemColors.Control;
-            this.splitContainer4.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer4.Panel2.Controls.Add(this.label10);
-            this.splitContainer4.Panel2.Controls.Add(this.groupBox4);
-            this.splitContainer4.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer4.Size = new System.Drawing.Size(914, 588);
+            this.splitContainer4.Size = new System.Drawing.Size(1014, 588);
             this.splitContainer4.SplitterDistance = 419;
             this.splitContainer4.TabIndex = 1;
             // 
@@ -566,8 +563,8 @@
             this.splitContainer5.Panel2.Controls.Add(this.textBox3);
             this.splitContainer5.Panel2.Controls.Add(this.label15);
             this.splitContainer5.Panel2.Controls.Add(this.label9);
-            this.splitContainer5.Size = new System.Drawing.Size(914, 419);
-            this.splitContainer5.SplitterDistance = 635;
+            this.splitContainer5.Size = new System.Drawing.Size(1014, 419);
+            this.splitContainer5.SplitterDistance = 735;
             this.splitContainer5.TabIndex = 2;
             // 
             // button7
@@ -582,7 +579,7 @@
             this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(572, 87);
+            this.button7.Location = new System.Drawing.Point(672, 87);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(25, 21);
             this.button7.TabIndex = 11;
@@ -596,7 +593,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(264, 207);
+            this.label14.Location = new System.Drawing.Point(314, 195);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 0;
@@ -612,7 +609,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(34, 87);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(563, 279);
+            this.pictureBox1.Size = new System.Drawing.Size(663, 255);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -628,7 +625,7 @@
             "Этаж",
             "Подвал",
             "Крыша"});
-            this.comboBox2.Location = new System.Drawing.Point(426, 53);
+            this.comboBox2.Location = new System.Drawing.Point(476, 53);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(78, 27);
             this.comboBox2.TabIndex = 9;
@@ -638,7 +635,7 @@
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.Location = new System.Drawing.Point(337, 56);
+            this.label20.Location = new System.Drawing.Point(387, 56);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(91, 20);
             this.label20.TabIndex = 5;
@@ -649,7 +646,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(118, 53);
+            this.label8.Location = new System.Drawing.Point(168, 53);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(114, 20);
             this.label8.TabIndex = 3;
@@ -659,7 +656,7 @@
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(232, 52);
+            this.textBox2.Location = new System.Drawing.Point(282, 52);
             this.textBox2.MaxLength = 5;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(55, 26);
@@ -671,7 +668,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(196, 10);
+            this.label6.Location = new System.Drawing.Point(246, 10);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(221, 25);
             this.label6.TabIndex = 0;
@@ -684,7 +681,7 @@
             this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button3.Location = new System.Drawing.Point(0, 386);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(631, 29);
+            this.button3.Size = new System.Drawing.Size(731, 29);
             this.button3.TabIndex = 9;
             this.button3.Text = "Добавить этаж";
             this.button3.UseVisualStyleBackColor = true;
@@ -713,7 +710,7 @@
             // 
             this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(8, 355);
+            this.textBox6.Location = new System.Drawing.Point(8, 331);
             this.textBox6.MaxLength = 12;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(256, 26);
@@ -727,7 +724,7 @@
             this.textBox4.MaxLength = 240;
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(256, 111);
+            this.textBox4.Size = new System.Drawing.Size(256, 87);
             this.textBox4.TabIndex = 13;
             // 
             // label18
@@ -735,7 +732,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(5, 328);
+            this.label18.Location = new System.Drawing.Point(5, 304);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(155, 19);
             this.label18.TabIndex = 14;
@@ -813,25 +810,6 @@
             this.label9.TabIndex = 8;
             this.label9.Text = "Информация об офисе";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(56, 33);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(67, 44);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Камера №1";
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -843,51 +821,13 @@
             this.label10.TabIndex = 10;
             this.label10.Text = "Панель камер";
             // 
-            // groupBox4
-            // 
-            this.groupBox4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Location = new System.Drawing.Point(595, 33);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 100);
-            this.groupBox4.TabIndex = 2;
-            this.groupBox4.TabStop = false;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(67, 45);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 13);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Камера №3";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.groupBox3.Controls.Add(this.label13);
-            this.groupBox3.Location = new System.Drawing.Point(322, 33);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 100);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(67, 44);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Камера №2";
-            // 
             // main_panel
             // 
             this.main_panel.Controls.Add(this.splitContainer1);
             this.main_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.main_panel.Location = new System.Drawing.Point(0, 24);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(914, 588);
+            this.main_panel.Size = new System.Drawing.Size(1014, 588);
             this.main_panel.TabIndex = 1;
             // 
             // error
@@ -897,7 +837,7 @@
             this.error.Dock = System.Windows.Forms.DockStyle.Fill;
             this.error.Location = new System.Drawing.Point(0, 24);
             this.error.Name = "error";
-            this.error.Size = new System.Drawing.Size(914, 588);
+            this.error.Size = new System.Drawing.Size(1014, 588);
             this.error.TabIndex = 1;
             this.error.Visible = false;
             // 
@@ -911,7 +851,7 @@
             this.breachesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.breachesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.breachesDataGridView.Name = "breachesDataGridView";
-            this.breachesDataGridView.Size = new System.Drawing.Size(914, 559);
+            this.breachesDataGridView.Size = new System.Drawing.Size(1014, 559);
             this.breachesDataGridView.TabIndex = 9;
             // 
             // button5
@@ -920,7 +860,7 @@
             this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button5.Location = new System.Drawing.Point(0, 559);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(914, 29);
+            this.button5.Size = new System.Drawing.Size(1014, 29);
             this.button5.TabIndex = 9;
             this.button5.Text = "Добавить";
             this.button5.UseVisualStyleBackColor = true;
@@ -932,7 +872,7 @@
             this.camera.Dock = System.Windows.Forms.DockStyle.Fill;
             this.camera.Location = new System.Drawing.Point(0, 24);
             this.camera.Name = "camera";
-            this.camera.Size = new System.Drawing.Size(914, 588);
+            this.camera.Size = new System.Drawing.Size(1014, 588);
             this.camera.TabIndex = 11;
             this.camera.Visible = false;
             // 
@@ -944,12 +884,12 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.0099F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.51485F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.47525F));
-            this.tableLayoutPanel1.Controls.Add(this.listBox1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox8, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer3, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer4, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.listBox1, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.axWindowsMediaPlayer4, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -957,71 +897,8 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(914, 588);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1014, 588);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.BackColor = System.Drawing.SystemColors.Control;
-            this.pictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox8.Location = new System.Drawing.Point(5, 5);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(293, 285);
-            this.pictureBox8.TabIndex = 0;
-            this.pictureBox8.TabStop = false;
-            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
-            // 
-            // breachesBindingSource1
-            // 
-            this.breachesBindingSource1.DataMember = "Breaches";
-            // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(306, 5);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(297, 285);
-            this.axWindowsMediaPlayer1.TabIndex = 13;
-            // 
-            // axWindowsMediaPlayer2
-            // 
-            this.axWindowsMediaPlayer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.axWindowsMediaPlayer2.Enabled = true;
-            this.axWindowsMediaPlayer2.Location = new System.Drawing.Point(611, 5);
-            this.axWindowsMediaPlayer2.Name = "axWindowsMediaPlayer2";
-            this.axWindowsMediaPlayer2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer2.OcxState")));
-            this.axWindowsMediaPlayer2.Size = new System.Drawing.Size(298, 285);
-            this.axWindowsMediaPlayer2.TabIndex = 13;
-            // 
-            // axWindowsMediaPlayer3
-            // 
-            this.axWindowsMediaPlayer3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.axWindowsMediaPlayer3.Enabled = true;
-            this.axWindowsMediaPlayer3.Location = new System.Drawing.Point(306, 298);
-            this.axWindowsMediaPlayer3.Name = "axWindowsMediaPlayer3";
-            this.axWindowsMediaPlayer3.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer3.OcxState")));
-            this.axWindowsMediaPlayer3.Size = new System.Drawing.Size(297, 285);
-            this.axWindowsMediaPlayer3.TabIndex = 13;
-            // 
-            // axWindowsMediaPlayer4
-            // 
-            this.axWindowsMediaPlayer4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.axWindowsMediaPlayer4.Enabled = true;
-            this.axWindowsMediaPlayer4.Location = new System.Drawing.Point(611, 298);
-            this.axWindowsMediaPlayer4.Name = "axWindowsMediaPlayer4";
-            this.axWindowsMediaPlayer4.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer4.OcxState")));
-            this.axWindowsMediaPlayer4.Size = new System.Drawing.Size(298, 285);
-            this.axWindowsMediaPlayer4.TabIndex = 13;
             // 
             // listBox1
             // 
@@ -1030,24 +907,104 @@
             this.listBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(5, 298);
+            this.listBox1.Location = new System.Drawing.Point(678, 298);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(293, 285);
+            this.listBox1.Size = new System.Drawing.Size(331, 285);
             this.listBox1.TabIndex = 1;
             this.listBox1.Visible = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox8.Location = new System.Drawing.Point(5, 5);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(326, 285);
+            this.pictureBox8.TabIndex = 0;
+            this.pictureBox8.TabStop = false;
+            this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
+            // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(339, 5);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(331, 285);
+            this.axWindowsMediaPlayer1.TabIndex = 13;
+            // 
+            // axWindowsMediaPlayer2
+            // 
+            this.axWindowsMediaPlayer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer2.Enabled = true;
+            this.axWindowsMediaPlayer2.Location = new System.Drawing.Point(678, 5);
+            this.axWindowsMediaPlayer2.Name = "axWindowsMediaPlayer2";
+            this.axWindowsMediaPlayer2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer2.OcxState")));
+            this.axWindowsMediaPlayer2.Size = new System.Drawing.Size(331, 285);
+            this.axWindowsMediaPlayer2.TabIndex = 13;
+            // 
+            // axWindowsMediaPlayer3
+            // 
+            this.axWindowsMediaPlayer3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer3.Enabled = true;
+            this.axWindowsMediaPlayer3.Location = new System.Drawing.Point(5, 298);
+            this.axWindowsMediaPlayer3.Name = "axWindowsMediaPlayer3";
+            this.axWindowsMediaPlayer3.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer3.OcxState")));
+            this.axWindowsMediaPlayer3.Size = new System.Drawing.Size(326, 285);
+            this.axWindowsMediaPlayer3.TabIndex = 13;
+            // 
+            // axWindowsMediaPlayer4
+            // 
+            this.axWindowsMediaPlayer4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.axWindowsMediaPlayer4.Enabled = true;
+            this.axWindowsMediaPlayer4.Location = new System.Drawing.Point(339, 298);
+            this.axWindowsMediaPlayer4.Name = "axWindowsMediaPlayer4";
+            this.axWindowsMediaPlayer4.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer4.OcxState")));
+            this.axWindowsMediaPlayer4.Size = new System.Drawing.Size(331, 285);
+            this.axWindowsMediaPlayer4.TabIndex = 13;
+            // 
+            // breachesBindingSource1
+            // 
+            this.breachesBindingSource1.DataMember = "Breaches";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(622, 1);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(142, 31);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "Показать все";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // обновитьToolStripMenuItem
+            // 
+            this.обновитьToolStripMenuItem.Name = "обновитьToolStripMenuItem";
+            this.обновитьToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
+            this.обновитьToolStripMenuItem.Text = "Обновить";
+            this.обновитьToolStripMenuItem.Click += new System.EventHandler(this.обновитьToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 612);
-            this.Controls.Add(this.camera);
+            this.ClientSize = new System.Drawing.Size(1014, 612);
             this.Controls.Add(this.main_panel);
-            this.Controls.Add(this.error);
             this.Controls.Add(this.add);
+            this.Controls.Add(this.camera);
+            this.Controls.Add(this.error);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(930, 589);
+            this.MinimumSize = new System.Drawing.Size(1030, 583);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Building";
@@ -1069,6 +1026,7 @@
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
+            this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             this.add.ResumeLayout(false);
@@ -1084,12 +1042,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.main_panel.ResumeLayout(false);
             this.error.ResumeLayout(false);
             this.error.PerformLayout();
@@ -1097,12 +1049,12 @@
             this.camera.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1140,14 +1092,8 @@
         private System.Windows.Forms.BindingSource breachesBindingSource;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
@@ -1188,6 +1134,8 @@
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer3;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer4;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripMenuItem обновитьToolStripMenuItem;
     }
 }
 

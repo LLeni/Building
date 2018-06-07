@@ -53,6 +53,7 @@ namespace Building
         Database database;
         private void Form5_Load(object sender, EventArgs e)
         {
+            database = new Database();
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
             this.floorsTableAdapter1.Fill(this.buldingDataSet2.Floors);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
@@ -60,7 +61,7 @@ namespace Building
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
             this.camerasTableAdapter1.Fill(this.buldingDataSet2.Cameras);
 
-            database = new Database();
+
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -13,9 +13,15 @@ namespace Building
 {
     public partial class Form2 : Form
     {
+        DataGridView dgv;
         public Form2()
         {
             InitializeComponent();
+        }
+
+        public Form2(DataGridView dgv)
+        {
+            this.dgv = dgv;
         }
 
         private void Form2_Shown(object sender, EventArgs e)
@@ -57,6 +63,9 @@ namespace Building
             myCommand.Parameters.AddWithValue("@CONDITION_BREACH", 0);
             myCommand.ExecuteNonQuery();
             database.CloseConnection();
+
+
+
             this.Hide();
         }
 
