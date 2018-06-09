@@ -30,7 +30,7 @@ namespace Building
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Пока не работает");
         }
 
         private void Form6_Load(object sender, EventArgs e)

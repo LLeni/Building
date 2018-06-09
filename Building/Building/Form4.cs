@@ -75,40 +75,71 @@ namespace Building
 
             if (data == "Добавление")
             {
-
-                //Получение наибольшего значения идентификатора в таблице "Компании"
-                string queryIDCompany = "SELECT ID_COMPANY FROM Companies ORDER BY ID_COMPANY DESC LIMIT 1";
-                SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
-                myCommandIDCompany.CommandText = queryIDCompany;
-                myCommandIDCompany.CommandType = CommandType.Text;
-                SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
-                int IDCompany = 0;
-                while (reader.Read())
+                if (textBox5.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox6.Text == "")
                 {
-                    IDCompany = Convert.ToInt16(Convert.ToString(reader["ID_COMPANY"])) + 1;
+                    MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                else
+                {
+                    //Проверка на наличие офиса
+                    string queryCheckExist = "SELECT ID_OFFICE FROM Offices WHERE ID_OFFICE =  " + textBox3.Text;
+                    SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
+                    myCommandCheckExist.CommandText = queryCheckExist;
+                    myCommandCheckExist.CommandType = CommandType.Text;
+                    SQLiteDataReader readerCheckExist = myCommandCheckExist.ExecuteReader();
+                    Boolean isExist = false;
+                    while (readerCheckExist.Read())
+                    {
+                        isExist = true;
+                    }
 
-                // Таблица "Компании"
-                string query = "INSERT INTO Companies ('ID_COMPANY','NAME_COMPANY', 'DESCRIPTION', 'PHONE_COMPANY') VALUES (@ID_COMPANY, @NAME_COMPANY, @DESCRIPTION, @PHONE_COMPANY) ";
-                SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
-                myCommand.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
-                myCommand.Parameters.AddWithValue("@NAME_COMPANY", textBox5.Text);
-                myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
-                myCommand.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
-                myCommand.ExecuteNonQuery();
+                    if (isExist)
+                    {
+                        MessageBox.Show("Данный офис существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
 
-                //Таблица "Офисы"
-                string query2 = "INSERT INTO Offices ('ID_OFFICE', 'ID_FLOOR', 'ID_COMPANY') VALUES (@ID_OFFICE, @ID_FLOOR, @ID_COMPANY) ";
-                SQLiteCommand myCommand2 = new SQLiteCommand(query2, database.myConnection);
-                myCommand2.Parameters.AddWithValue("@ID_OFFICE", textBox3.Text);
-                myCommand2.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
-                myCommand2.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
-                myCommand2.ExecuteNonQuery();
-                MessageBox.Show("Сведения об офисе были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+                        //Получение наибольшего значения идентификатора в таблице "Компании"
+                        string queryIDCompany = "SELECT ID_COMPANY FROM Companies ORDER BY ID_COMPANY DESC LIMIT 1";
+                        SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
+                        myCommandIDCompany.CommandText = queryIDCompany;
+                        myCommandIDCompany.CommandType = CommandType.Text;
+                        SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
+                        int IDCompany = 0;
+                        while (reader.Read())
+                        {
+                            IDCompany = Convert.ToInt16(Convert.ToString(reader["ID_COMPANY"])) + 1;
+                        }
+
+                        // Таблица "Компании"
+                        string query = "INSERT INTO Companies ('ID_COMPANY','NAME_COMPANY', 'DESCRIPTION', 'PHONE_COMPANY') VALUES (@ID_COMPANY, @NAME_COMPANY, @DESCRIPTION, @PHONE_COMPANY) ";
+                        SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                        myCommand.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
+                        myCommand.Parameters.AddWithValue("@NAME_COMPANY", textBox5.Text);
+                        myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
+                        myCommand.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
+                        myCommand.ExecuteNonQuery();
+
+                        //Таблица "Офисы"
+                        string query2 = "INSERT INTO Offices ('ID_OFFICE', 'ID_FLOOR', 'ID_COMPANY') VALUES (@ID_OFFICE, @ID_FLOOR, @ID_COMPANY) ";
+                        SQLiteCommand myCommand2 = new SQLiteCommand(query2, database.myConnection);
+                        myCommand2.Parameters.AddWithValue("@ID_OFFICE", textBox3.Text);
+                        myCommand2.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
+                        myCommand2.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
+                        myCommand2.ExecuteNonQuery();
+                        MessageBox.Show("Сведения об офисе были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    }
+                }
+            }
             else
             {
-
+                if (textBox5.Text == "" || textBox4.Text == "" || textBox6.Text == "")
+                {
+                    MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 string queryUpdateCompany = "UPDATE Companies SET NAME_COMPANY = @NAME_COMPANY, DESCRIPTION = @DESCRIPTION, PHONE_COMPANY = @PHONE_COMPANY WHERE ID_COMPANY = @ID_COMPANY";
                 SQLiteCommand myCommandUpdateCompany = database.myConnection.CreateCommand();
                 myCommandUpdateCompany.CommandText = queryUpdateCompany;
@@ -117,6 +148,9 @@ namespace Building
                 myCommandUpdateCompany.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
                 myCommandUpdateCompany.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
                 myCommandUpdateCompany.ExecuteNonQuery();
+
+                MessageBox.Show("Сведения об офисе были изменены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
 
             database.CloseConnection();

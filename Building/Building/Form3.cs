@@ -45,23 +45,76 @@ namespace Building
         //Кнопка "Изменить"
         private void button1_Click(object sender, EventArgs e)
         {
-            database.OpenConnection();
+            if (data == "Добавление")
+            {
+                if (textBox1.Text == "" || comboBox2.Text == "" || pictureBox1.Tag == null)
+                {
+                    MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else
+                {
+                    database.OpenConnection();
+                    string queryCheckExist = "SELECT ID_FLOOR FROM Floors WHERE ID_FLOOR =  " + textBox1.Text;
+                    SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
+                    myCommandCheckExist.CommandText = queryCheckExist;
+                    myCommandCheckExist.CommandType = CommandType.Text;
+                    SQLiteDataReader reader = myCommandCheckExist.ExecuteReader();
+                    Boolean isExist = false;
+                    while (reader.Read())
+                    {
+                        isExist = true;   
+                    }
 
-            string queryUpdateFloor = "UPDATE Floors SET CATEGORY_FLOOR = @CATEGORY_FLOOR, PATH = @PATH WHERE ID_FLOOR = @ID_FLOOR";
-            SQLiteCommand myCommandUpdateFloor = database.myConnection.CreateCommand();
-            myCommandUpdateFloor.CommandText = queryUpdateFloor;
-            myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
-            myCommandUpdateFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
-            myCommandUpdateFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
-            myCommandUpdateFloor.ExecuteNonQuery();
+                    if (isExist)
+                    {
+                        MessageBox.Show("Данный этаж существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
 
-            database.CloseConnection();
+                        string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
+                        SQLiteCommand myCommandInsertFloor = database.myConnection.CreateCommand();
+                        myCommandInsertFloor.CommandText = query;
+                        myCommandInsertFloor.Parameters.AddWithValue("@ID_FLOOR", textBox1.Text);
+                        myCommandInsertFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
+                        myCommandInsertFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
+                        myCommandInsertFloor.ExecuteNonQuery();
+
+                        database.CloseConnection();
+
+                        MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            else
+            {
+                if (comboBox2.Text == "" || pictureBox1.Tag == null)
+                {
+                    MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    database.OpenConnection();
+
+                    string queryUpdateFloor = "UPDATE Floors SET CATEGORY_FLOOR = @CATEGORY_FLOOR, PATH = @PATH WHERE ID_FLOOR = @ID_FLOOR";
+                    SQLiteCommand myCommandUpdateFloor = database.myConnection.CreateCommand();
+                    myCommandUpdateFloor.CommandText = queryUpdateFloor;
+                    myCommandUpdateFloor.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
+                    myCommandUpdateFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
+                    myCommandUpdateFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
+                    myCommandUpdateFloor.ExecuteNonQuery();
+
+                    database.CloseConnection();
+
+                    MessageBox.Show("Информация была изменена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         //Кнопка "Выход"
         private void button7_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
+            pictureBox1.Tag = null;
             pictureBox1.Invalidate();
             label14.Visible = true;
             button7.Visible = false;

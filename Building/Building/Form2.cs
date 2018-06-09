@@ -38,6 +38,8 @@ namespace Building
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
+            this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
 
         }
 
@@ -52,21 +54,27 @@ namespace Building
 
         private void button1_Click(object sender, EventArgs e)
         {
-            database.OpenConnection();
-            string query = "INSERT INTO Breaches(ID_FLOOR, LOCATION_BREACH, TOPIC_BREACH, DESCRIPTION_BREACH, DATE_BREACH, CONDITION_BREACH) VALUES (@ID_FLOOR, @LOCATION_BREACH, @TOPIC_BREACH,@DESCRIPTION_BREACH, @DATE_BREACH, @CONDITION_BREACH) ";
-            SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
-            myCommand.Parameters.AddWithValue("@ID_FLOOR", iD_FLOORTextBox.Text);
-            myCommand.Parameters.AddWithValue("@LOCATION_BREACH", lOCATION_BREACHTextBox.Text);
-            myCommand.Parameters.AddWithValue("@TOPIC_BREACH", tOPIC_BREACHTextBox.Text);
-            myCommand.Parameters.AddWithValue("@DESCRIPTION_BREACH", richTextBox1.Text);
-            myCommand.Parameters.AddWithValue("@DATE_BREACH", dATE_BREACHDateTimePicker.Text);
-            myCommand.Parameters.AddWithValue("@CONDITION_BREACH", 0);
-            myCommand.ExecuteNonQuery();
-            database.CloseConnection();
+            if (lOCATION_BREACHTextBox.Text == "" || tOPIC_BREACHTextBox.Text == "" || tOPIC_BREACHTextBox.Text == "" || richTextBox1.Text == "" || dATE_BREACHDateTimePicker.Text == "")
+            {
+                MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                database.OpenConnection();
+                string query = "INSERT INTO Breaches(ID_FLOOR, LOCATION_BREACH, TOPIC_BREACH, DESCRIPTION_BREACH, DATE_BREACH, CONDITION_BREACH) VALUES (@ID_FLOOR, @LOCATION_BREACH, @TOPIC_BREACH,@DESCRIPTION_BREACH, @DATE_BREACH, @CONDITION_BREACH) ";
+                SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                myCommand.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
+                myCommand.Parameters.AddWithValue("@LOCATION_BREACH", lOCATION_BREACHTextBox.Text);
+                myCommand.Parameters.AddWithValue("@TOPIC_BREACH", tOPIC_BREACHTextBox.Text);
+                myCommand.Parameters.AddWithValue("@DESCRIPTION_BREACH", richTextBox1.Text);
+                myCommand.Parameters.AddWithValue("@DATE_BREACH", dATE_BREACHDateTimePicker.Text);
+                myCommand.Parameters.AddWithValue("@CONDITION_BREACH", 0);
+                myCommand.ExecuteNonQuery();
+                database.CloseConnection();
 
 
 
-            this.Hide();
+                this.Hide();
+            }
         }
 
         private void iD_FLOORLabel_Click(object sender, EventArgs e)

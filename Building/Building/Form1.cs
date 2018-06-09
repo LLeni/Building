@@ -18,16 +18,24 @@ namespace Building
 {
     //TODO: При нажатии правой кнопкой мыши на picturebox этажа, то на передний план переходит панель с большим одним picturebox, на котором и будет соотвествующий план этажа
     //TODO: При добавлении/изменении чего-либо в БД на отдельных формах, надо  чтобы информация на главной форме обновлялась
-    //TODO: Сделать так, чтобы работал Поиск
     //TODO: Сделать так, чтобы у источника данных был относительный путь к БД
+    //TODO: При одинаковых путях до плана этажей не то показывает при нажатии на pictureBox на главной панели
+    //TODO: Если есть крыша, то вторую добавить нельзя
+    //TODO: На главной панели стали странно размещаться компоненты
+    //TODO: Спустя 60 дней данные о нарушении должны удаляться 
+    //TODO: При удалении этажа/офиса/камеры должна пропадать возможность их выбрать повторно в списке
+    //TODO: При открытии формы Добавления этажа, чтобы сразу же была информация о первом этаже
+    //TODO: В модуле добавления при вводе номера этажа минус можно ставить тольком первым знаком
+    //TODO: Проверить везде порядок табуляции
+    //TODO: При добавлении офиса при выборе этажа, чтобы ничего не очищалось
+    //TODO: Пускай уж будет возможность добавить и редактировать камеру
 
     //TODO: Формы О программе и Помощь
 
     //TODO: Документ Схема алгоритма
-    //TODO: Документ Инструкция пользователя
     //TODO: Документ ER-Диаграмма. Просто разместить каждую таблицу на отдельный лист
 
-    //Больше относится к Захару
+    //Больше относиться к Захару
     //TODO: Чтобы каждый pictureBox, кроме на главной форме подстраивался правильно под изображения (т.е 16:10, 16:9, 4:3)
     //TODO: Выход с титульника поправить
     public partial class Form1 : Form
@@ -35,7 +43,8 @@ namespace Building
         const int INDENT_LEFT = 2;
         const int INDENT_TOP = 25;
         const int INDENT_BETWEEN_PICTURE_BOXES = 10;
-        const int INDENT_WIDTH_LABEL = 90;
+        const int INDENT_BETWEEN_LINE_PICTURE_BOXES = 30;
+        const int INDENT_WIDTH_LABEL = 85;
         const int INDENT_HEIGHT_LABEL = 150;
         const int WIDTH_PICTURE_BOX = 230;
         const int HEIGHT_PICTURE_BOX = 140;
@@ -110,7 +119,7 @@ namespace Building
                 if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15 > wightPanel)
                 {
                     XLocationCurrentComponent = 0;
-                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
                 currentPictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
@@ -129,7 +138,7 @@ namespace Building
                 if (XLocationCurrentComponent + WIDTH_PICTURE_BOX + 15 > wightPanel)
                 {
                     XLocationCurrentComponent = 0;
-                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
                 currentLabel.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
@@ -315,6 +324,7 @@ namespace Building
 
                 Label labelFloor = new Label();
                 labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
+                labelFloor.Font = new Font("Arial", 12);
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Tag = Convert.ToString(reader["PATH"]);
                 pictureBox.Click += new EventHandler(PictureBoxClick);
@@ -348,7 +358,7 @@ namespace Building
                 if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
                 {
                     XLocationCurrentComponent = 0;
-                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
                 pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
@@ -458,7 +468,7 @@ namespace Building
             {
                 if (listBox1.Items.Count != 0)
                 {
-                    MessageBox.Show(setWebCameras[0]);
+                    //MessageBox.Show(setWebCameras[0]);
                     videoSource = new VideoCaptureDevice(setWebCameras[0]);
                     videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                     videoSource.Start();
@@ -492,6 +502,7 @@ namespace Building
         private void button7_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
+            pictureBox1.Tag = null;
             pictureBox1.Invalidate();
             label14.Visible = true;
             button7.Visible = false;
@@ -509,7 +520,7 @@ namespace Building
         string currentFloor;
         private void button3_Click_1(object sender, EventArgs e)
         {
- 
+            
             if (textBox2.Text.Equals("") || pictureBox1.Tag == null)
             {
                 MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -519,17 +530,37 @@ namespace Building
                 label21.Text = "Офис находится на этаже";       
                 label19.Text = textBox2.Text;                   //добавляем номер этажа в графу "офис находится на этаже".
 
-                // Таблица "Этажи"
-                string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
-                SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
                 database.OpenConnection();
-                myCommand.Parameters.AddWithValue("@ID_FLOOR", textBox2.Text);
-                myCommand.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
-                myCommand.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
-                myCommand.ExecuteNonQuery();
-                database.CloseConnection();
-                currentFloor = textBox2.Text;
-                MessageBox.Show("Сведения об этаже были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                //Проверка на наличие этажа
+                string queryCheckExist = "SELECT ID_FLOOR FROM Floors WHERE ID_FLOOR =  " + textBox2.Text;
+                SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
+                myCommandCheckExist.CommandText = queryCheckExist;
+                myCommandCheckExist.CommandType = CommandType.Text;
+                SQLiteDataReader reader = myCommandCheckExist.ExecuteReader();
+                Boolean isExist = false;
+                while (reader.Read())
+                {
+                    isExist = true;
+                }
+
+                if (isExist)
+                {
+                    MessageBox.Show("Данный этаж существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    // Таблица "Этажи"
+                    string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
+                    SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                    myCommand.Parameters.AddWithValue("@ID_FLOOR", textBox2.Text);
+                    myCommand.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
+                    myCommand.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
+                    myCommand.ExecuteNonQuery();
+                    database.CloseConnection();
+                    currentFloor = textBox2.Text;
+                    MessageBox.Show("Сведения об этаже были успешно добавлены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -559,7 +590,7 @@ namespace Building
 
                     //Сохранение пути изображения в свойстве компонента PictureBox. Причем если изображение находится в папке программы, то сохраняется относительный путь
                     pictureBox1.Tag = ofd.FileName.Replace(Directory.GetCurrentDirectory(), "");
-                    MessageBox.Show(ofd.FileName.Replace(Directory.GetCurrentDirectory(), ""));
+                   // MessageBox.Show(ofd.FileName.Replace(Directory.GetCurrentDirectory(), ""));
                 }
                 catch
                 {
@@ -597,39 +628,59 @@ namespace Building
                 {
                     MessageBox.Show("Вы не все ввели", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                else { 
-                database.OpenConnection();
-
-                //Получение наибольшего значения идентификатора в таблице "Компании"
-                string queryIDCompany = "SELECT ID_COMPANY FROM Companies ORDER BY ID_COMPANY DESC LIMIT 1";
-                SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
-                myCommandIDCompany.CommandText = queryIDCompany;
-                myCommandIDCompany.CommandType = CommandType.Text;
-                SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
-                int IDCompany = 0;
-                while (reader.Read())
+                else
                 {
-                    IDCompany = Convert.ToInt16(Convert.ToString(reader["ID_COMPANY"])) + 1;
-                }
+                    database.OpenConnection();
 
-                // Таблица "Компании"
-                string query = "INSERT INTO Companies ('ID_COMPANY','NAME_COMPANY', 'DESCRIPTION', 'PHONE_COMPANY') VALUES (@ID_COMPANY, @NAME_COMPANY, @DESCRIPTION, @PHONE_COMPANY) ";
-                SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
-                myCommand.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
-                myCommand.Parameters.AddWithValue("@NAME_COMPANY", textBox5.Text);
-                myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
-                myCommand.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
-                myCommand.ExecuteNonQuery();
+                    //Проверка на наличие офиса
+                    string queryCheckExist = "SELECT ID_OFFICE FROM Offices WHERE ID_OFFICE =  " + textBox3.Text;
+                    SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
+                    myCommandCheckExist.CommandText = queryCheckExist;
+                    myCommandCheckExist.CommandType = CommandType.Text;
+                    SQLiteDataReader readerCheckExist = myCommandCheckExist.ExecuteReader();
+                    Boolean isExist = false;
+                    while (readerCheckExist.Read())
+                    {
+                        isExist = true;
+                    }
 
-                //Таблица "Офисы"
-                string query2 = "INSERT INTO Offices ('ID_OFFICE', 'ID_FLOOR', 'ID_COMPANY') VALUES (@ID_OFFICE, @ID_FLOOR, @ID_COMPANY) ";
-                SQLiteCommand myCommand2 = new SQLiteCommand(query2, database.myConnection);
-                myCommand2.Parameters.AddWithValue("@ID_OFFICE", textBox3.Text);
-                myCommand2.Parameters.AddWithValue("@ID_FLOOR", currentFloor);
-                myCommand2.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
-                myCommand2.ExecuteNonQuery();
-                database.CloseConnection();
-                MessageBox.Show("Сведения об офисе были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (isExist)
+                    {
+                        MessageBox.Show("Данный офис существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        //Получение наибольшего значения идентификатора в таблице "Компании"
+                        string queryIDCompany = "SELECT ID_COMPANY FROM Companies ORDER BY ID_COMPANY DESC LIMIT 1";
+                        SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
+                        myCommandIDCompany.CommandText = queryIDCompany;
+                        myCommandIDCompany.CommandType = CommandType.Text;
+                        SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
+                        int IDCompany = 0;
+                        while (reader.Read())
+                        {
+                            IDCompany = Convert.ToInt16(Convert.ToString(reader["ID_COMPANY"])) + 1;
+                        }
+
+                        // Таблица "Компании"
+                        string query = "INSERT INTO Companies ('ID_COMPANY','NAME_COMPANY', 'DESCRIPTION', 'PHONE_COMPANY') VALUES (@ID_COMPANY, @NAME_COMPANY, @DESCRIPTION, @PHONE_COMPANY) ";
+                        SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                        myCommand.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
+                        myCommand.Parameters.AddWithValue("@NAME_COMPANY", textBox5.Text);
+                        myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
+                        myCommand.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
+                        myCommand.ExecuteNonQuery();
+
+                        //Таблица "Офисы"
+                        string query2 = "INSERT INTO Offices ('ID_OFFICE', 'ID_FLOOR', 'ID_COMPANY') VALUES (@ID_OFFICE, @ID_FLOOR, @ID_COMPANY) ";
+                        SQLiteCommand myCommand2 = new SQLiteCommand(query2, database.myConnection);
+                        myCommand2.Parameters.AddWithValue("@ID_OFFICE", textBox3.Text);
+                        myCommand2.Parameters.AddWithValue("@ID_FLOOR", currentFloor);
+                        myCommand2.Parameters.AddWithValue("@ID_COMPANY", IDCompany);
+                        myCommand2.ExecuteNonQuery();
+                        database.CloseConnection();
+                        MessageBox.Show("Сведения об офисе были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
@@ -911,6 +962,7 @@ namespace Building
 
                     Label labelFloor = new Label();
                     labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
+                    labelFloor.Font = new Font("Arial", 12);
                     PictureBox pictureBox = new PictureBox();
                     pictureBox.Tag = Convert.ToString(reader["PATH"]);
                     pictureBox.Click += new EventHandler(PictureBoxClick);
@@ -946,7 +998,7 @@ namespace Building
                     if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
                     {
                         XLocationCurrentComponent = 0;
-                        YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL;
+                        YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                     }
 
                     pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);

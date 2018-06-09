@@ -41,19 +41,19 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buildingDataSet = new Building.BuildingDataSet();
             this.floorsBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.buldingDataSet2 = new Building.BuldingDataSet2();
+            this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buildingDataSet = new Building.BuildingDataSet();
             this.floorsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.floorsTableAdapter = new Building.BuildingDataSetTableAdapters.FloorsTableAdapter();
             this.floorsTableAdapter1 = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -185,16 +185,6 @@
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
-            // floorsBindingSource
-            // 
-            this.floorsBindingSource.DataMember = "Floors";
-            this.floorsBindingSource.DataSource = this.buildingDataSet;
-            // 
-            // buildingDataSet
-            // 
-            this.buildingDataSet.DataSetName = "BuildingDataSet";
-            this.buildingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // floorsBindingSource2
             // 
             this.floorsBindingSource2.DataMember = "Floors";
@@ -204,6 +194,16 @@
             // 
             this.buldingDataSet2.DataSetName = "BuldingDataSet2";
             this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // floorsBindingSource
+            // 
+            this.floorsBindingSource.DataMember = "Floors";
+            this.floorsBindingSource.DataSource = this.buildingDataSet;
+            // 
+            // buildingDataSet
+            // 
+            this.buildingDataSet.DataSetName = "BuildingDataSet";
+            this.buildingDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // floorsBindingSource1
             // 
@@ -268,10 +268,10 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buildingDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
