@@ -266,6 +266,7 @@ namespace Building
             string path = (System.IO.Path.GetDirectoryName(executable));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
+
             //Убираем панели контроля видеоряда 
             axWindowsMediaPlayer1.uiMode = "none";
             axWindowsMediaPlayer2.uiMode = "none";
@@ -511,7 +512,7 @@ namespace Building
         private void камерыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Form6 sixForm = new Form6(" ");
-            sixForm.Text = "Редактировать информацию о камере";
+            sixForm.Text = "Редактирование информации о камере";
             sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Редактирование информации о камере"   
             sixForm.ShowDialog();
         }
@@ -605,13 +606,13 @@ namespace Building
             Form3 thirdForm = new Form3("Редактирование", Directory.GetCurrentDirectory());
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.ShowDialog();
-            thirdForm.Text = "Редактировать информацию об этаже";
+            thirdForm.Text = "Редактирование информации об этаже";
         }
 
         private void офисыToolStripMenuItem_Click(object sender, EventArgs e)       //Вызов формы "Редактировать офис"
         {
             Form4 fourForm = new Form4("Редактирование");
-            fourForm.Text = "Редактировать информацию об офисе";
+            fourForm.Text = "Редактирование информации об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Редактирование информации об офисах"   
             fourForm.ShowDialog();
         }
@@ -806,9 +807,9 @@ namespace Building
         private void информацияОбЭтажеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form3 thirdForm = new Form3("Добавление");
+            thirdForm.Text = "Добавление информации об этаже";
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.ShowDialog();
-            thirdForm.Text = "Добавить информацию об этаже";
         }
 
 

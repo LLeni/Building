@@ -42,16 +42,16 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             iD_FLOORLabel = new System.Windows.Forms.Label();
             lOCATION_BREACHLabel = new System.Windows.Forms.Label();
             tOPIC_BREACHLabel = new System.Windows.Forms.Label();
             dESCRIPTION_BREACHLabel = new System.Windows.Forms.Label();
             dATE_BREACHLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             this.SuspendLayout();
             // 
             // iD_FLOORLabel
@@ -69,7 +69,7 @@
             // 
             lOCATION_BREACHLabel.AutoSize = true;
             lOCATION_BREACHLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            lOCATION_BREACHLabel.Location = new System.Drawing.Point(169, 100);
+            lOCATION_BREACHLabel.Location = new System.Drawing.Point(169, 107);
             lOCATION_BREACHLabel.Name = "lOCATION_BREACHLabel";
             lOCATION_BREACHLabel.Size = new System.Drawing.Size(131, 19);
             lOCATION_BREACHLabel.TabIndex = 5;
@@ -79,7 +79,7 @@
             // 
             tOPIC_BREACHLabel.AutoSize = true;
             tOPIC_BREACHLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            tOPIC_BREACHLabel.Location = new System.Drawing.Point(169, 150);
+            tOPIC_BREACHLabel.Location = new System.Drawing.Point(169, 160);
             tOPIC_BREACHLabel.Name = "tOPIC_BREACHLabel";
             tOPIC_BREACHLabel.Size = new System.Drawing.Size(122, 19);
             tOPIC_BREACHLabel.TabIndex = 7;
@@ -89,7 +89,7 @@
             // 
             dESCRIPTION_BREACHLabel.AutoSize = true;
             dESCRIPTION_BREACHLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dESCRIPTION_BREACHLabel.Location = new System.Drawing.Point(169, 201);
+            dESCRIPTION_BREACHLabel.Location = new System.Drawing.Point(169, 211);
             dESCRIPTION_BREACHLabel.Name = "dESCRIPTION_BREACHLabel";
             dESCRIPTION_BREACHLabel.Size = new System.Drawing.Size(159, 19);
             dESCRIPTION_BREACHLabel.TabIndex = 9;
@@ -99,7 +99,7 @@
             // 
             dATE_BREACHLabel.AutoSize = true;
             dATE_BREACHLabel.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dATE_BREACHLabel.Location = new System.Drawing.Point(169, 351);
+            dATE_BREACHLabel.Location = new System.Drawing.Point(169, 361);
             dATE_BREACHLabel.Name = "dATE_BREACHLabel";
             dATE_BREACHLabel.Size = new System.Drawing.Size(230, 19);
             dATE_BREACHLabel.TabIndex = 11;
@@ -108,7 +108,7 @@
             // lOCATION_BREACHTextBox
             // 
             this.lOCATION_BREACHTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lOCATION_BREACHTextBox.Location = new System.Drawing.Point(173, 122);
+            this.lOCATION_BREACHTextBox.Location = new System.Drawing.Point(173, 131);
             this.lOCATION_BREACHTextBox.Name = "lOCATION_BREACHTextBox";
             this.lOCATION_BREACHTextBox.Size = new System.Drawing.Size(251, 26);
             this.lOCATION_BREACHTextBox.TabIndex = 2;
@@ -117,7 +117,7 @@
             // tOPIC_BREACHTextBox
             // 
             this.tOPIC_BREACHTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tOPIC_BREACHTextBox.Location = new System.Drawing.Point(173, 172);
+            this.tOPIC_BREACHTextBox.Location = new System.Drawing.Point(173, 182);
             this.tOPIC_BREACHTextBox.Name = "tOPIC_BREACHTextBox";
             this.tOPIC_BREACHTextBox.Size = new System.Drawing.Size(251, 26);
             this.tOPIC_BREACHTextBox.TabIndex = 3;
@@ -125,7 +125,7 @@
             // dATE_BREACHDateTimePicker
             // 
             this.dATE_BREACHDateTimePicker.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dATE_BREACHDateTimePicker.Location = new System.Drawing.Point(173, 373);
+            this.dATE_BREACHDateTimePicker.Location = new System.Drawing.Point(173, 383);
             this.dATE_BREACHDateTimePicker.Name = "dATE_BREACHDateTimePicker";
             this.dATE_BREACHDateTimePicker.Size = new System.Drawing.Size(251, 26);
             this.dATE_BREACHDateTimePicker.TabIndex = 5;
@@ -148,14 +148,14 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(191, 30);
             this.button2.TabIndex = 7;
-            this.button2.Text = "Отмена";
+            this.button2.Text = "Закрыть";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBox1.Location = new System.Drawing.Point(173, 223);
+            this.richTextBox1.Location = new System.Drawing.Point(173, 233);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(251, 125);
             this.richTextBox1.TabIndex = 4;
@@ -175,21 +175,24 @@
             // 
             this.comboBox1.DataSource = this.floorsBindingSource;
             this.comboBox1.DisplayMember = "ID_FLOOR";
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(173, 76);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(251, 21);
+            this.comboBox1.Size = new System.Drawing.Size(251, 28);
             this.comboBox1.TabIndex = 13;
-            // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // floorsBindingSource
             // 
             this.floorsBindingSource.DataMember = "Floors";
             this.floorsBindingSource.DataSource = this.buldingDataSet2;
+            // 
+            // buldingDataSet2
+            // 
+            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
+            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // floorsTableAdapter
             // 
@@ -221,8 +224,8 @@
             this.Text = "Добавление информации о нарушениях";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Shown += new System.EventHandler(this.Form2_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

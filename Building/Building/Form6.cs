@@ -43,7 +43,7 @@ namespace Building
             }
             else
             {
-                button1.Text = "Редактировать";
+                button1.Text = "Изменить";
                 label1.Text = "Редактирование информации о камере";
             }
 

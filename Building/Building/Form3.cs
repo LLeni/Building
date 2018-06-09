@@ -139,7 +139,7 @@ namespace Building
             }
             else
             {
-                button1.Text = "Редактировать";
+                button1.Text = "Изменить";
                 textBox1.Visible = false;
                 comboBox1.Visible = true;
             }
