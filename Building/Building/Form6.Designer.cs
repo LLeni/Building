@@ -32,7 +32,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -45,6 +44,7 @@
             this.camerasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.camerasTableAdapter = new Building.BuldingDataSet2TableAdapters.CamerasTableAdapter();
             this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
@@ -83,16 +83,9 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(85, 135);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(264, 26);
-            this.textBox1.TabIndex = 27;
-            // 
             // textBox2
             // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox2.Location = new System.Drawing.Point(86, 186);
             this.textBox2.Name = "textBox2";
@@ -101,6 +94,7 @@
             // 
             // textBox3
             // 
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox3.Location = new System.Drawing.Point(85, 238);
             this.textBox3.Multiline = true;
@@ -166,9 +160,9 @@
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(82, 215);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(268, 19);
+            this.label5.Size = new System.Drawing.Size(214, 19);
             this.label5.TabIndex = 34;
-            this.label5.Text = "Краткое описание видимости камеры:";
+            this.label5.Text = "Описание видимости камеры:";
             // 
             // camerasBindingSource
             // 
@@ -183,11 +177,24 @@
             // 
             this.floorsTableAdapter.ClearBeforeFill = true;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.DataSource = this.floorsBindingSource;
+            this.comboBox2.DisplayMember = "ID_FLOOR";
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(84, 135);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(265, 27);
+            this.comboBox2.TabIndex = 35;
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 417);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -195,7 +202,6 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
@@ -219,7 +225,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -232,5 +237,6 @@
         private BuldingDataSet2TableAdapters.CamerasTableAdapter camerasTableAdapter;
         private System.Windows.Forms.BindingSource floorsBindingSource;
         private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

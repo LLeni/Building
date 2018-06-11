@@ -119,3 +119,8 @@ C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\bin\Debug\AxInterop.W
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Interop.WMPLib.dll
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.csproj.ResolveComReference.cache
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Interop.WMPLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Interop.WMPLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.csproj.ResolveComReference.cache

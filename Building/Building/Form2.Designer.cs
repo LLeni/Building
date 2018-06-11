@@ -107,6 +107,7 @@
             // 
             // lOCATION_BREACHTextBox
             // 
+            this.lOCATION_BREACHTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lOCATION_BREACHTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lOCATION_BREACHTextBox.Location = new System.Drawing.Point(173, 131);
             this.lOCATION_BREACHTextBox.Name = "lOCATION_BREACHTextBox";
@@ -116,6 +117,7 @@
             // 
             // tOPIC_BREACHTextBox
             // 
+            this.tOPIC_BREACHTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tOPIC_BREACHTextBox.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tOPIC_BREACHTextBox.Location = new System.Drawing.Point(173, 182);
             this.tOPIC_BREACHTextBox.Name = "tOPIC_BREACHTextBox";
@@ -154,6 +156,7 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.richTextBox1.Location = new System.Drawing.Point(173, 233);
             this.richTextBox1.Name = "richTextBox1";

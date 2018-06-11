@@ -29,6 +29,7 @@ namespace Building
     //TODO: Проверить везде порядок табуляции
     //TODO: При добавлении офиса при выборе этажа, чтобы ничего не очищалось
     //TODO: Пускай уж будет возможность добавить и редактировать камеру
+    //пишет Захар, поэтому без ТЮДЮ.  Дбавить синхронизацию скролинга и колёсика мыши.
 
     //TODO: Формы О программе и Помощь
 
@@ -38,6 +39,7 @@ namespace Building
     //Больше относиться к Захару
     //TODO: Чтобы каждый pictureBox, кроме на главной форме подстраивался правильно под изображения (т.е 16:10, 16:9, 4:3)
     //TODO: Выход с титульника поправить
+
     public partial class Form1 : Form
     {
         const int INDENT_LEFT = 2;
@@ -52,6 +54,8 @@ namespace Building
 
         int wightPanel;
         int heightPanel;
+        Boolean isPanelInfoView = true;
+        Boolean isPanelCamerasView = true;
         List<Label> setLabel;
         List<Label> setShowLabel;
         List<PictureBox> setPictureBox;
@@ -66,6 +70,7 @@ namespace Building
         public Form1()
         {
             InitializeComponent();
+            this.MouseWheel += new MouseEventHandler(this_MouseWheel);
 
         }
         public Boolean start = false;
@@ -98,11 +103,13 @@ namespace Building
             {
                 splitContainer2.Panel2Collapsed = false;
                 splitContainer2.Panel2.Show();
+                isPanelInfoView = true;
             }
             else
             {
                 splitContainer2.Panel2Collapsed = true;
                 splitContainer2.Panel2.Hide();
+                isPanelInfoView = false;
             }
             alignComponentsFloors();
         }
@@ -203,11 +210,13 @@ namespace Building
             {
                 splitContainer1.Panel2Collapsed = false;
                 splitContainer1.Panel2.Show();
+                isPanelCamerasView = true;
             }
             else
             {
                 splitContainer1.Panel2Collapsed = true;
                 splitContainer1.Panel2.Hide();
+                isPanelCamerasView = false;
             }
         }
 
@@ -239,6 +248,31 @@ namespace Building
             splitContainer3.Panel1.Show();
             скрытьОкноИнформацииToolStripMenuItem.Enabled = true;   //Снятие блокировки с возможности добавления окна информации
             панельКамерToolStripMenuItem.Enabled = true;            //Снятие блокировки с возможности добавления панели камер
+            if (isPanelInfoView)
+            {
+                splitContainer2.Panel2Collapsed = false;
+                splitContainer2.Panel2.Show();
+                скрытьОкноИнформацииToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                splitContainer2.Panel2Collapsed = true;
+                splitContainer2.Panel2.Hide();
+                скрытьОкноИнформацииToolStripMenuItem.Checked = false;
+            }
+            if (isPanelCamerasView)
+            {
+                splitContainer1.Panel2Collapsed = false;
+                splitContainer1.Panel2.Show();
+                панельКамерToolStripMenuItem.Checked = true;
+            }
+            else
+            {
+                splitContainer1.Panel2Collapsed = true;
+                splitContainer1.Panel2.Hide();
+                панельКамерToolStripMenuItem.Checked = false;
+            }
+            alignComponentsFloors();
         }
 
         List<String> setWebCameras = new List<String>();
@@ -449,7 +483,19 @@ namespace Building
             database.CloseConnection();
         }
 
-
+        private void this_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                textBox1.Text = "Вверх";
+                MessageBox.Show("ВВЕРХ");
+            }
+            else
+            {
+                textBox1.Text = "Вниз";
+                MessageBox.Show("ВНИЗ");
+            }
+        }
         private void breachesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
         {
             this.Validate();
@@ -528,9 +574,8 @@ namespace Building
             }
             else
             {
-                label21.Text = "Офис находится на этаже";       
-                label19.Text = textBox2.Text;                   //добавляем номер этажа в графу "офис находится на этаже".
-
+                label21.Text = "Офис находится на этаже " + textBox2.Text;
+                label2.Text = "Камера находится на этаже " + textBox2.Text;
                 database.OpenConnection();
 
                 //Проверка на наличие этажа
@@ -816,6 +861,13 @@ namespace Building
         private void Form1_Resize(object sender, EventArgs e)
         {
             alignComponentsFloors();
+            if (splitContainer3.Panel2.VerticalScroll.Visible)
+            {
+                button2.Location = new Point(button2.Location.X - 15,button2.Location.Y);
+            } else
+            {
+                button2.Location = new Point(button2.Location.X + 15, button2.Location.Y);
+            }
         }
 
         private void редактироватьЭтажToolStripMenuItem_Click(object sender, EventArgs e)
@@ -850,6 +902,7 @@ namespace Building
                             setShowPictureBox.Clear();
                             setShowPictureBox.Add(setPictureBox[setIDFloors.IndexOf(textBox1.Text)]);
                             setShowLabel.Add(setLabel[setIDFloors.IndexOf(textBox1.Text)]);
+                            button2.Visible = true;
                         } else
                         {
                             MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -868,6 +921,7 @@ namespace Building
                         {
                             setShowLabel.Clear();
                             setShowPictureBox.Clear();
+                            button2.Visible = true;
                         }
                         while (readerDataOffices.Read())
                         {
@@ -889,6 +943,7 @@ namespace Building
                         {
                             setShowLabel.Clear();
                             setShowPictureBox.Clear();
+                            button2.Visible = true;
                         }
                         while (reader.Read())
                         {
@@ -1022,6 +1077,16 @@ namespace Building
 
 
             database.CloseConnection();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
