@@ -287,13 +287,10 @@ namespace Building
             {
                 foreach (FilterInfo device in videoDevices)
                 {
-                    listBox1.Items.Add(device.Name);
                     setWebCameras.Add(device.Name);
                 }
-                listBox1.SelectedIndex = 0;
 
 
-                //Код появления динамических компанентов. МАГИЯ.
             }
             //Необходимо для относительного пути к базе данных
             string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
@@ -445,18 +442,30 @@ namespace Building
             myCommandDataOffices.CommandType = CommandType.Text;
             SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
 
+            TreeNode treeNodeTitleNameCompany;
+            TreeNode treeNodeTitleDescription;
+            TreeNode treeNodeTitlePhoneCompany;
+
             TreeNode treeNodeOffice;
             TreeNode treeNodeNameCompany;
             TreeNode treeNodeDescription;
             TreeNode treeNodePhone;
+
+            TreeNode treeNodeTitleOffices;
+            treeNodeTitleOffices = new TreeNode("Офисы");
+            treeView1.Nodes.Add(treeNodeTitleOffices);
+
             List<TreeNode> setIDOffices = new List<TreeNode>();
             string idCompany = null;
             int numberOffice = 0;
             while (readerDataOffices.Read())
             {
+                treeNodeTitleNameCompany = new TreeNode("Название организации");
+                treeNodeTitleDescription = new TreeNode("Описание деятельности");
+                treeNodeTitlePhoneCompany = new TreeNode("Контактный телефон");
                 treeNodeOffice = new TreeNode("Офис " + Convert.ToString(readerDataOffices["ID_OFFICE"]));
                 setIDOffices.Add(treeNodeOffice);
-                treeView1.Nodes.Add(treeNodeOffice);
+                //treeView1.Nodes.Add(treeNodeOffice);
 
                 idCompany = Convert.ToString(readerDataOffices["ID_COMPANY"]);
 
@@ -466,17 +475,43 @@ namespace Building
                 myCommandDataCompany.CommandText = queryDataCompany;
                 myCommandDataCompany.CommandType = CommandType.Text;
                 SQLiteDataReader readerCompany = myCommandDataCompany.ExecuteReader();
+                treeView1.Nodes[0].Nodes.Add(treeNodeOffice);
                 while (readerCompany.Read())
                 {
                     treeNodeNameCompany = new TreeNode(Convert.ToString(readerCompany["NAME_COMPANY"]));
                     treeNodeDescription = new TreeNode(Convert.ToString(readerCompany["DESCRIPTION"]));
                     treeNodePhone = new TreeNode(Convert.ToString(readerCompany["PHONE_COMPANY"]));
 
-                    treeView1.Nodes[numberOffice].Nodes.Add(treeNodeNameCompany);
-                    treeView1.Nodes[numberOffice].Nodes.Add(treeNodeDescription);
-                    treeView1.Nodes[numberOffice].Nodes.Add(treeNodePhone);
+                    treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitleNameCompany);
+                    treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitleDescription);
+                    treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitlePhoneCompany);
+
+                    treeView1.Nodes[0].Nodes[numberOffice].Nodes[0].Nodes.Add(treeNodeNameCompany);
+                    treeView1.Nodes[0].Nodes[numberOffice].Nodes[1].Nodes.Add(treeNodeDescription);
+                    treeView1.Nodes[0].Nodes[numberOffice].Nodes[2].Nodes.Add(treeNodePhone);
                     numberOffice++;
                 }
+            }
+
+            string queryDataCameras = "SELECT * FROM Cameras WHERE ID_FLOOR = " + idFloor;
+            SQLiteCommand myCommandDataCameras = database.myConnection.CreateCommand();
+            myCommandDataCameras.CommandText = queryDataCameras;
+            myCommandDataCameras.CommandType = CommandType.Text;
+            SQLiteDataReader readerDataCameras = myCommandDataCameras.ExecuteReader();
+
+            TreeNode treeNodeCamera;
+            TreeNode treeNodesDescription;
+            TreeNode treeNodeTitleCameras;
+            treeNodeTitleCameras = new TreeNode("Камеры");
+            treeView1.Nodes.Add(treeNodeTitleCameras);
+            int numberCamera = 0;
+            while (readerDataCameras.Read())
+            {
+                treeNodeCamera = new TreeNode(Convert.ToString(readerDataCameras["IP_CAMERA"]));
+                treeNodeDescription = new TreeNode(Convert.ToString(readerDataCameras["DESCRIPTION"]));
+                treeView1.Nodes[1].Nodes.Add(treeNodeCamera);
+                treeView1.Nodes[1].Nodes[numberCamera].Nodes.Add(treeNodeDescription);
+                numberCamera++;
             }
 
 
@@ -485,15 +520,29 @@ namespace Building
 
         private void this_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (e.Delta > 0)
+            if (main_panel.Visible)
             {
-                textBox1.Text = "Вверх";
-                MessageBox.Show("ВВЕРХ");
-            }
-            else
-            {
-                textBox1.Text = "Вниз";
-                MessageBox.Show("ВНИЗ");
+
+                if (e.Delta > 0)
+                {
+                    if (this.splitContainer3.Panel2.VerticalScroll.Value - 10  >= this.splitContainer3.Panel2.VerticalScroll.Minimum)
+                    {
+                        this.splitContainer3.Panel2.VerticalScroll.Value -= 10;
+                    } else
+                    {
+                        this.splitContainer3.Panel2.VerticalScroll.Value = this.splitContainer3.Panel2.VerticalScroll.Minimum;
+                    }
+                }
+                else
+                {
+                    if (this.splitContainer3.Panel2.VerticalScroll.Value + 10 <= this.splitContainer3.Panel2.VerticalScroll.Maximum)
+                    {
+                        this.splitContainer3.Panel2.VerticalScroll.Value += 10;
+                    } else
+                    {
+                        this.splitContainer3.Panel2.VerticalScroll.Value = this.splitContainer3.Panel2.VerticalScroll.Maximum;
+                    }
+                }
             }
         }
         private void breachesBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -513,11 +562,12 @@ namespace Building
         {
             try
             {
-                if (listBox1.Items.Count != 0)
+                if (setWebCameras.Count != 0)
                 {
-                    //MessageBox.Show(setWebCameras[0]);
-                    videoSource = new VideoCaptureDevice(setWebCameras[0]);
+                    MessageBox.Show(videoDevices[1].MonikerString);
+                    videoSource = new VideoCaptureDevice(videoDevices[1].MonikerString);
                     videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
+                   // MessageBox.Show(videoSource);
                     videoSource.Start();
                 }
                 else
@@ -527,7 +577,7 @@ namespace Building
             }
             catch
             {
-                MessageBox.Show("Во время попытки подключится к вебкамере произошла ошибка!");
+                MessageBox.Show("Во время попытки подключиться к вебкамере произошла ошибка!");
             }
 
             main_panel.Visible = false;                             //Скрывается главная вкладка
@@ -905,7 +955,7 @@ namespace Building
                             button2.Visible = true;
                         } else
                         {
-                            MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Ничего не было найдено", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         break;
                     case "Номер офиса":
@@ -1087,6 +1137,74 @@ namespace Building
         private void label11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (currentFloor == null)
+            {
+                MessageBox.Show("Вначале необходимо добавить сведения об этаже", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (textBox7.Text.Equals("") || textBox8.Text.Equals("") || textBox9.Text.Equals(""))
+                {
+                    MessageBox.Show("Вы не все ввели", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    database.OpenConnection();
+
+                    //Проверка на наличие камеры
+                    string queryCheckExist = "SELECT IP_CAMERA FROM Cameras WHERE IP_CAMERA =  " + textBox8.Text;
+                    SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
+                    myCommandCheckExist.CommandText = queryCheckExist;
+                    myCommandCheckExist.CommandType = CommandType.Text;
+                    SQLiteDataReader readerCheckExist = myCommandCheckExist.ExecuteReader();
+                    Boolean isExist = false;
+                    while (readerCheckExist.Read())
+                    {
+                        isExist = true;
+                    }
+
+                    if (isExist)
+                    {
+                        MessageBox.Show("Данная камера с таким IP-адресом уже существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+
+                        //Получение наибольшего значения идентификатора в таблице "Камеры"
+                        string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_COMPANY DESC LIMIT 1";
+                        SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
+                        myCommandIDCompany.CommandText = queryIDCompany;
+                        myCommandIDCompany.CommandType = CommandType.Text;
+                        SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
+                        int IDCamera = 0;
+                        while (reader.Read())
+                        {
+                            IDCamera = Convert.ToInt16(Convert.ToString(reader["ID_CAMERA"])) + 1;
+                        }
+
+                        // Таблица "Камеры"
+                        string query = "INSERT INTO Cameras ('ID_CAMERA','IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
+                        SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                        myCommand.Parameters.AddWithValue("@ID_CAMERA", IDCamera);
+                        myCommand.Parameters.AddWithValue("@IP_CAMERA", textBox8.Text);
+                        myCommand.Parameters.AddWithValue("@MAC_CAMERA", textBox7.Text);
+                        myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox9.Text);
+                        myCommand.ExecuteNonQuery();
+
+                    }
+
+                    database.CloseConnection();
+                }
+            }
+        }
+
+        private void спарвкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 

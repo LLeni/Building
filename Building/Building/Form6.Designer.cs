@@ -45,9 +45,11 @@
             this.camerasTableAdapter = new Building.BuldingDataSet2TableAdapters.CamerasTableAdapter();
             this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.camerasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -179,8 +181,8 @@
             // 
             // comboBox2
             // 
-            this.comboBox2.DataSource = this.floorsBindingSource;
-            this.comboBox2.DisplayMember = "ID_FLOOR";
+            this.comboBox2.DataSource = this.camerasBindingSource1;
+            this.comboBox2.DisplayMember = "IP_CAMERA";
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
@@ -188,6 +190,11 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(265, 27);
             this.comboBox2.TabIndex = 35;
+            // 
+            // camerasBindingSource1
+            // 
+            this.camerasBindingSource1.DataMember = "Cameras";
+            this.camerasBindingSource1.DataSource = this.buldingDataSet2;
             // 
             // Form6
             // 
@@ -215,6 +222,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,5 +246,6 @@
         private System.Windows.Forms.BindingSource floorsBindingSource;
         private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.BindingSource camerasBindingSource1;
     }
 }

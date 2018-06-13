@@ -43,6 +43,7 @@
             this.officesBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.officesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.camerasBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.camerasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.camerasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -64,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
@@ -179,7 +181,7 @@
             // comboBox3
             // 
             this.comboBox3.DataSource = this.camerasBindingSource1;
-            this.comboBox3.DisplayMember = "ID_CAMERA";
+            this.comboBox3.DisplayMember = "IP_CAMERA";
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox3.FormattingEnabled = true;
@@ -187,6 +189,11 @@
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(194, 27);
             this.comboBox3.TabIndex = 27;
+            // 
+            // camerasBindingSource2
+            // 
+            this.camerasBindingSource2.DataMember = "Cameras";
+            this.camerasBindingSource2.DataSource = this.buldingDataSet2;
             // 
             // camerasBindingSource1
             // 
@@ -277,6 +284,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
@@ -319,5 +327,6 @@
         private System.Windows.Forms.BindingSource officesBindingSource3;
         private System.Windows.Forms.BindingSource floorsBindingSource2;
         private System.Windows.Forms.BindingSource buldingDataSet2BindingSource1;
+        private System.Windows.Forms.BindingSource camerasBindingSource2;
     }
 }
