@@ -43,8 +43,8 @@
             this.officesBindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.officesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.camerasBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.camerasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.camerasBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.camerasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.breachesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.breachesTableAdapter = new Building.BuildingDataSetTableAdapters.BreachesTableAdapter();
@@ -65,8 +65,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2BindingSource)).BeginInit();
@@ -81,7 +81,7 @@
             this.button1.Location = new System.Drawing.Point(62, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(156, 30);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 1;
             this.button1.Text = "Удалить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -92,7 +92,7 @@
             this.button2.Location = new System.Drawing.Point(262, 109);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(156, 30);
-            this.button2.TabIndex = 1;
+            this.button2.TabIndex = 2;
             this.button2.Text = "Закрыть";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -188,17 +188,17 @@
             this.comboBox3.Location = new System.Drawing.Point(200, 55);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(194, 27);
-            this.comboBox3.TabIndex = 27;
-            // 
-            // camerasBindingSource2
-            // 
-            this.camerasBindingSource2.DataMember = "Cameras";
-            this.camerasBindingSource2.DataSource = this.buldingDataSet2;
+            this.comboBox3.TabIndex = 0;
             // 
             // camerasBindingSource1
             // 
             this.camerasBindingSource1.DataMember = "Cameras";
             this.camerasBindingSource1.DataSource = this.buldingDataSet2;
+            // 
+            // camerasBindingSource2
+            // 
+            this.camerasBindingSource2.DataMember = "Cameras";
+            this.camerasBindingSource2.DataSource = this.buldingDataSet2;
             // 
             // camerasBindingSource
             // 
@@ -284,8 +284,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.officesBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.breachesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2BindingSource)).EndInit();

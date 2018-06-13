@@ -69,7 +69,7 @@
             this.button1.Location = new System.Drawing.Point(46, 365);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(144, 30);
-            this.button1.TabIndex = 25;
+            this.button1.TabIndex = 4;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -80,7 +80,7 @@
             this.button2.Location = new System.Drawing.Point(237, 365);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(144, 30);
-            this.button2.TabIndex = 26;
+            this.button2.TabIndex = 5;
             this.button2.Text = "Закрыть";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -92,7 +92,7 @@
             this.textBox2.Location = new System.Drawing.Point(86, 186);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(264, 26);
-            this.textBox2.TabIndex = 28;
+            this.textBox2.TabIndex = 2;
             // 
             // textBox3
             // 
@@ -102,7 +102,7 @@
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(264, 94);
-            this.textBox3.TabIndex = 29;
+            this.textBox3.TabIndex = 3;
             // 
             // comboBox1
             // 
@@ -114,7 +114,7 @@
             this.comboBox1.Location = new System.Drawing.Point(84, 83);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(265, 27);
-            this.comboBox1.TabIndex = 30;
+            this.comboBox1.TabIndex = 0;
             // 
             // floorsBindingSource
             // 
@@ -189,7 +189,7 @@
             this.comboBox2.Location = new System.Drawing.Point(84, 135);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(265, 27);
-            this.comboBox2.TabIndex = 35;
+            this.comboBox2.TabIndex = 1;
             // 
             // camerasBindingSource1
             // 

@@ -67,7 +67,7 @@
             this.button1.Location = new System.Drawing.Point(131, 404);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(131, 34);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Изменить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -78,7 +78,7 @@
             this.button2.Location = new System.Drawing.Point(335, 404);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(131, 34);
-            this.button2.TabIndex = 1;
+            this.button2.TabIndex = 4;
             this.button2.Text = "Закрыть";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -103,7 +103,8 @@
             this.comboBox1.Location = new System.Drawing.Point(193, 96);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(193, 27);
-            this.comboBox1.TabIndex = 4;
+            this.comboBox1.TabIndex = 0;
+            this.comboBox1.TabStop = false;
             this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // floorsBindingSource3
@@ -152,6 +153,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(25, 21);
             this.button7.TabIndex = 14;
+            this.button7.TabStop = false;
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -197,7 +199,7 @@
             this.comboBox2.Location = new System.Drawing.Point(193, 148);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(193, 27);
-            this.comboBox2.TabIndex = 4;
+            this.comboBox2.TabIndex = 2;
             // 
             // floorsTableAdapter1
             // 
@@ -224,7 +226,7 @@
             this.textBox1.Location = new System.Drawing.Point(193, 97);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(193, 26);
-            this.textBox1.TabIndex = 25;
+            this.textBox1.TabIndex = 1;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form3

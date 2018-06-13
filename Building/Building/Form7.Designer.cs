@@ -68,7 +68,7 @@
             // 
             this.label1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1005, 56);
@@ -86,7 +86,7 @@
             this.label4.Size = new System.Drawing.Size(1005, 31);
             this.label4.TabIndex = 2;
             this.label4.Text = "Над дипломным проектом работали студенты группы П-478: Мазырин З.О. и Патраков Е." +
-    "А.";
+    "А.     ";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.label4.UseWaitCursor = true;
             // 

@@ -1204,7 +1204,9 @@ namespace Building
 
         private void спарвкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            //          (@".\Manual.pdf");                               //попробовать сокрощение пути
+            System.Diagnostics.Process.Start("C:/Users/Ironik/Desktop/w.pdf");               //Открвает конкретный файл
+
         }
     }
 
