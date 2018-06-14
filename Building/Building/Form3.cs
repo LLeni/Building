@@ -70,18 +70,37 @@ namespace Building
                     }
                     else
                     {
+                        //Проверка на наличие крыши
+                        string queryRoofExist = "SELECT CATEGORY_FLOOR FROM Floors WHERE CATEGORY_FLOOR =  '" + comboBox2.Text + "'";
+                        SQLiteCommand myCommandRoofExist = database.myConnection.CreateCommand();
+                        myCommandRoofExist.CommandText = queryRoofExist;
+                        myCommandRoofExist.CommandType = CommandType.Text;
+                        SQLiteDataReader readerRoof = myCommandRoofExist.ExecuteReader();
+                        isExist = false;
+                        while (readerRoof.Read())
+                        {
+                            isExist = true;
+                        }
 
-                        string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
-                        SQLiteCommand myCommandInsertFloor = database.myConnection.CreateCommand();
-                        myCommandInsertFloor.CommandText = query;
-                        myCommandInsertFloor.Parameters.AddWithValue("@ID_FLOOR", textBox1.Text);
-                        myCommandInsertFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
-                        myCommandInsertFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
-                        myCommandInsertFloor.ExecuteNonQuery();
+                        if (isExist)
+                        {
+                            MessageBox.Show("Информация о крыше уже есть. Невозможно добавить вторую", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
 
-                        database.CloseConnection();
+                            string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
+                            SQLiteCommand myCommandInsertFloor = database.myConnection.CreateCommand();
+                            myCommandInsertFloor.CommandText = query;
+                            myCommandInsertFloor.Parameters.AddWithValue("@ID_FLOOR", textBox1.Text);
+                            myCommandInsertFloor.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
+                            myCommandInsertFloor.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
+                            myCommandInsertFloor.ExecuteNonQuery();
 
-                        MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            database.CloseConnection();
+
+                            MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
             }

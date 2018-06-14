@@ -56,12 +56,18 @@ namespace Building
         int heightPanel;
         Boolean isPanelInfoView = true;
         Boolean isPanelCamerasView = true;
+        Boolean isVerticalScrollBeEarly = false;
         List<Label> setLabel;
         List<Label> setShowLabel;
         List<PictureBox> setPictureBox;
         List<PictureBox> setShowPictureBox;
         List<String> setIDFloors;
         List<List<TreeNode>> setTreeNodes; // Необходимо для отображений офисов при выборе конкретного этажа на главной вкладке 
+
+        BindingSource bindingSourceForBreaches = new BindingSource();
+        DataTable dataTableBreaches = new DataTable();
+        DataSet ds = new DataSet();
+        Database database;
 
         public FilterInfoCollection videoDevices;
         public VideoCaptureDevice videoSource;
@@ -158,7 +164,7 @@ namespace Building
             }
         }
 
-        Database database;
+
         private void Form1_Shown(object sender, EventArgs e)
         {
             Form1 firstForm = new Form1();
@@ -167,40 +173,7 @@ namespace Building
 
 
 
-            //Таблица "Нарушения"
-            DataSet ds = new DataSet();
-            database.OpenConnection();
-            string query = "Select * From Breaches";
-            //SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
-            try
-            {
 
-                    using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
-                    {
-                        da.Fill(ds);
-                        breachesDataGridView.DataSource = ds.Tables[0].DefaultView;
-                    }
-                
-            }
-            catch
-            {
-            }
-
-            //Настройка столбцов таблицы "Нарушения
-            breachesDataGridView.Columns[0].HeaderText = "Номер нарушения";
-            breachesDataGridView.Columns[1].HeaderText = "Номер этажа";
-            breachesDataGridView.Columns[2].HeaderText = "Местоположение";
-            breachesDataGridView.Columns[3].HeaderText = "Тема";
-            breachesDataGridView.Columns[4].HeaderText = "Описание";
-            breachesDataGridView.Columns[5].HeaderText = "Дата";
-            breachesDataGridView.Columns[6].HeaderText = "Исправлено";
-
-            breachesDataGridView.Columns[0].ReadOnly = true;
-            breachesDataGridView.Columns[1].ReadOnly = true;
-            breachesDataGridView.Columns[2].ReadOnly = true;
-            breachesDataGridView.Columns[3].ReadOnly = true;
-            breachesDataGridView.Columns[4].ReadOnly = true;
-            breachesDataGridView.Columns[5].ReadOnly = true;
         }
 
 
@@ -298,6 +271,7 @@ namespace Building
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
 
+
             //Убираем панели контроля видеоряда 
             axWindowsMediaPlayer1.uiMode = "none";
             axWindowsMediaPlayer2.uiMode = "none";
@@ -327,6 +301,46 @@ namespace Building
             this.splitContainer3.Panel2.HorizontalScroll.Maximum = 0;
             this.splitContainer3.Panel2.AutoScroll = true;
 
+
+            database = new Database();
+            database.OpenConnection();
+
+            //Таблица "Нарушения"
+            database.OpenConnection();
+            string query = "Select * From Breaches";
+            //SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableBreaches);
+                    breachesDataGridView.DataSource = dataTableBreaches;
+                }
+
+            }
+            catch
+            {
+            }
+
+            //Настройка столбцов таблицы "Нарушения
+            breachesDataGridView.Columns[0].HeaderText = "Номер нарушения";
+            breachesDataGridView.Columns[1].HeaderText = "Номер этажа";
+            breachesDataGridView.Columns[2].HeaderText = "Местоположение";
+            breachesDataGridView.Columns[3].HeaderText = "Тема";
+            breachesDataGridView.Columns[4].HeaderText = "Описание";
+            breachesDataGridView.Columns[5].HeaderText = "Дата";
+            breachesDataGridView.Columns[6].HeaderText = "Исправлено";
+
+
+
+            breachesDataGridView.Columns[0].ReadOnly = true;
+            breachesDataGridView.Columns[1].ReadOnly = true;
+            breachesDataGridView.Columns[2].ReadOnly = true;
+            breachesDataGridView.Columns[3].ReadOnly = true;
+            breachesDataGridView.Columns[4].ReadOnly = true;
+            breachesDataGridView.Columns[5].ReadOnly = true;
+
             setLabel = new List<Label>();
             setPictureBox = new List<PictureBox>();
             setShowLabel = new List<Label>();
@@ -340,10 +354,7 @@ namespace Building
             wightPanel = this.splitContainer3.Panel2.Width;
             heightPanel = this.splitContainer3.Panel2.Height;
 
-            database = new Database();
-            database.OpenConnection();
 
-            //Получение наибольшего значения идентификатора в таблице "Компании"
             string queryDataFloor = "SELECT * FROM Floors";
             SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
             myCommandDataFloor.CommandText = queryDataFloor;
@@ -425,7 +436,6 @@ namespace Building
 
             database.OpenConnection();
 
-            //Получение наибольшего значения идентификатора в таблице "Компании"
             string queryIDFloor = "SELECT ID_FLOOR FROM Floors WHERE PATH = '" + (sender as PictureBox).Tag + "'";
             SQLiteCommand myCommandIDFloor = database.myConnection.CreateCommand();
             myCommandIDFloor.CommandText = queryIDFloor;
@@ -553,7 +563,7 @@ namespace Building
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Form2 secondForm = new Form2();
+            Form2 secondForm = new Form2(dataTableBreaches);
             secondForm.ShowInTaskbar = false;                           //скрыть вторую форму из панели задач   
             secondForm.ShowDialog();
         }
@@ -624,8 +634,6 @@ namespace Building
             }
             else
             {
-                label21.Text = "Офис находится на этаже " + textBox2.Text;
-                label2.Text = "Камера находится на этаже " + textBox2.Text;
                 database.OpenConnection();
 
                 //Проверка на наличие этажа
@@ -642,20 +650,42 @@ namespace Building
 
                 if (isExist)
                 {
-                    MessageBox.Show("Данный этаж существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Данный этаж существует. Добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    // Таблица "Этажи"
-                    string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
-                    SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
-                    myCommand.Parameters.AddWithValue("@ID_FLOOR", textBox2.Text);
-                    myCommand.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
-                    myCommand.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
-                    myCommand.ExecuteNonQuery();
-                    database.CloseConnection();
-                    currentFloor = textBox2.Text;
-                    MessageBox.Show("Сведения об этаже были успешно добавлены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //Проверка на наличие крыши
+                    string queryRoofExist = "SELECT CATEGORY_FLOOR FROM Floors WHERE CATEGORY_FLOOR =  '" + comboBox2.Text + "'";
+                    SQLiteCommand myCommandRoofExist = database.myConnection.CreateCommand();
+                    myCommandRoofExist.CommandText = queryRoofExist;
+                    myCommandRoofExist.CommandType = CommandType.Text;
+                    SQLiteDataReader readerRoof = myCommandRoofExist.ExecuteReader();
+                    isExist = false;
+                    while (readerRoof.Read())
+                    {
+                        isExist = true;
+                    }
+
+                    if (isExist)
+                    {
+                        MessageBox.Show("Информация о крыше уже есть. Невозможно добавить вторую", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        label21.Text = "Офис находится на этаже " + textBox2.Text;
+                        label2.Text = "Камера находится на этаже " + textBox2.Text;
+
+                        // Таблица "Этажи"
+                        string query = "INSERT INTO Floors ('ID_FLOOR', 'CATEGORY_FLOOR', 'PATH') VALUES (@ID_FLOOR, @CATEGORY_FLOOR, @PATH) ";
+                        SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                        myCommand.Parameters.AddWithValue("@ID_FLOOR", textBox2.Text);
+                        myCommand.Parameters.AddWithValue("@CATEGORY_FLOOR", comboBox2.Text);
+                        myCommand.Parameters.AddWithValue("@PATH", pictureBox1.Tag);
+                        myCommand.ExecuteNonQuery();
+                        database.CloseConnection();
+                        currentFloor = textBox2.Text;
+                        MessageBox.Show("Сведения об этаже были успешно добавлены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
         }
@@ -913,10 +943,20 @@ namespace Building
             alignComponentsFloors();
             if (splitContainer3.Panel2.VerticalScroll.Visible)
             {
-                button2.Location = new Point(button2.Location.X - 15,button2.Location.Y);
+                if (isVerticalScrollBeEarly == false)
+                {
+                    button2.Location = new Point(button2.Location.X - 15, button2.Location.Y);
+                    //button2.Location = new Point(splitContainer3.Panel2.Width - 20, button2.Location.Y);
+                    isVerticalScrollBeEarly = true;
+                }
             } else
             {
-                button2.Location = new Point(button2.Location.X + 15, button2.Location.Y);
+                if (isVerticalScrollBeEarly == true)
+                {
+                    button2.Location = new Point(button2.Location.X + 15, button2.Location.Y);
+                    //button2.Location = new Point(splitContainer3.Panel2.Width - 5, button2.Location.Y);
+                    isVerticalScrollBeEarly = false;
+                }
             }
         }
 
@@ -1023,7 +1063,7 @@ namespace Building
             {
                 setShowLabel.Add(label);
             }
-
+            button2.Visible = false;
             alignComponentsFloors();
         }
 

@@ -357,8 +357,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(1014, 588);
-            this.splitContainer1.SplitterDistance = 439;
+            this.splitContainer1.Size = new System.Drawing.Size(1014, 600);
+            this.splitContainer1.SplitterDistance = 451;
             this.splitContainer1.TabIndex = 7;
             // 
             // splitContainer2
@@ -380,8 +380,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.treeView1);
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2MinSize = 275;
-            this.splitContainer2.Size = new System.Drawing.Size(1014, 439);
-            this.splitContainer2.SplitterDistance = 730;
+            this.splitContainer2.Size = new System.Drawing.Size(1014, 451);
+            this.splitContainer2.SplitterDistance = 733;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.TabStop = false;
@@ -398,9 +398,9 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(699, 39);
+            this.button2.Location = new System.Drawing.Point(706, 39);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(25, 21);
+            this.button2.Size = new System.Drawing.Size(22, 21);
             this.button2.TabIndex = 12;
             this.button2.TabStop = false;
             this.button2.UseVisualStyleBackColor = false;
@@ -428,7 +428,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Size = new System.Drawing.Size(730, 439);
+            this.splitContainer3.Size = new System.Drawing.Size(733, 451);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -447,7 +447,7 @@
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(651, 0);
+            this.button1.Location = new System.Drawing.Point(654, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 2;
@@ -478,7 +478,7 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(199, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(448, 26);
+            this.textBox1.Size = new System.Drawing.Size(451, 26);
             this.textBox1.TabIndex = 1;
             // 
             // treeView1
@@ -489,7 +489,7 @@
             this.treeView1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView1.Location = new System.Drawing.Point(0, 26);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(299, 411);
+            this.treeView1.Size = new System.Drawing.Size(299, 423);
             this.treeView1.TabIndex = 5;
             // 
             // label3
@@ -524,7 +524,7 @@
             this.add.Dock = System.Windows.Forms.DockStyle.Fill;
             this.add.Location = new System.Drawing.Point(0, 24);
             this.add.Name = "add";
-            this.add.Size = new System.Drawing.Size(1014, 588);
+            this.add.Size = new System.Drawing.Size(1014, 600);
             this.add.TabIndex = 4;
             this.add.Visible = false;
             // 
@@ -554,8 +554,8 @@
             this.splitContainer4.Panel2.Controls.Add(this.textBox8);
             this.splitContainer4.Panel2.Controls.Add(this.label2);
             this.splitContainer4.Panel2.Controls.Add(this.label10);
-            this.splitContainer4.Size = new System.Drawing.Size(1014, 588);
-            this.splitContainer4.SplitterDistance = 402;
+            this.splitContainer4.Size = new System.Drawing.Size(1014, 600);
+            this.splitContainer4.SplitterDistance = 414;
             this.splitContainer4.TabIndex = 1;
             // 
             // splitContainer5
@@ -595,7 +595,7 @@
             this.splitContainer5.Panel2.Controls.Add(this.textBox3);
             this.splitContainer5.Panel2.Controls.Add(this.label15);
             this.splitContainer5.Panel2.Controls.Add(this.label9);
-            this.splitContainer5.Size = new System.Drawing.Size(1014, 402);
+            this.splitContainer5.Size = new System.Drawing.Size(1014, 414);
             this.splitContainer5.SplitterDistance = 735;
             this.splitContainer5.TabIndex = 2;
             // 
@@ -625,7 +625,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(322, 210);
+            this.label14.Location = new System.Drawing.Point(322, 216);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 3;
@@ -641,7 +641,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(34, 87);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(663, 261);
+            this.pictureBox1.Size = new System.Drawing.Size(663, 273);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -713,7 +713,7 @@
             this.button3.AutoSize = true;
             this.button3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(0, 369);
+            this.button3.Location = new System.Drawing.Point(0, 381);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(731, 29);
             this.button3.TabIndex = 9;
@@ -736,7 +736,7 @@
             this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(8, 322);
+            this.textBox6.Location = new System.Drawing.Point(8, 334);
             this.textBox6.MaxLength = 12;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(256, 26);
@@ -751,7 +751,7 @@
             this.textBox4.MaxLength = 240;
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(256, 84);
+            this.textBox4.Size = new System.Drawing.Size(256, 96);
             this.textBox4.TabIndex = 13;
             // 
             // label18
@@ -759,7 +759,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(5, 295);
+            this.label18.Location = new System.Drawing.Point(5, 307);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(155, 19);
             this.label18.TabIndex = 14;
@@ -800,7 +800,7 @@
             this.button4.AutoSize = true;
             this.button4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.button4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(0, 369);
+            this.button4.Location = new System.Drawing.Point(0, 381);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(271, 29);
             this.button4.TabIndex = 10;
@@ -943,7 +943,7 @@
             this.main_panel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.main_panel.Location = new System.Drawing.Point(0, 24);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(1014, 588);
+            this.main_panel.Size = new System.Drawing.Size(1014, 600);
             this.main_panel.TabIndex = 1;
             // 
             // error
@@ -953,7 +953,7 @@
             this.error.Dock = System.Windows.Forms.DockStyle.Fill;
             this.error.Location = new System.Drawing.Point(0, 24);
             this.error.Name = "error";
-            this.error.Size = new System.Drawing.Size(1014, 588);
+            this.error.Size = new System.Drawing.Size(1014, 600);
             this.error.TabIndex = 1;
             this.error.Visible = false;
             // 
@@ -967,14 +967,14 @@
             this.breachesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.breachesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.breachesDataGridView.Name = "breachesDataGridView";
-            this.breachesDataGridView.Size = new System.Drawing.Size(1014, 559);
+            this.breachesDataGridView.Size = new System.Drawing.Size(1014, 571);
             this.breachesDataGridView.TabIndex = 9;
             // 
             // button5
             // 
             this.button5.AutoSize = true;
             this.button5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button5.Location = new System.Drawing.Point(0, 559);
+            this.button5.Location = new System.Drawing.Point(0, 571);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(1014, 29);
             this.button5.TabIndex = 9;
@@ -988,7 +988,7 @@
             this.camera.Dock = System.Windows.Forms.DockStyle.Fill;
             this.camera.Location = new System.Drawing.Point(0, 24);
             this.camera.Name = "camera";
-            this.camera.Size = new System.Drawing.Size(1014, 588);
+            this.camera.Size = new System.Drawing.Size(1014, 600);
             this.camera.TabIndex = 11;
             this.camera.Visible = false;
             // 
@@ -1012,7 +1012,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1014, 588);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1014, 600);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox8
@@ -1021,7 +1021,7 @@
             this.pictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox8.Location = new System.Drawing.Point(5, 5);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(326, 285);
+            this.pictureBox8.Size = new System.Drawing.Size(326, 291);
             this.pictureBox8.TabIndex = 0;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click);
@@ -1035,7 +1035,7 @@
             this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(339, 5);
             this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
             this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(331, 285);
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(331, 291);
             this.axWindowsMediaPlayer1.TabIndex = 13;
             // 
             // axWindowsMediaPlayer2
@@ -1047,7 +1047,7 @@
             this.axWindowsMediaPlayer2.Location = new System.Drawing.Point(678, 5);
             this.axWindowsMediaPlayer2.Name = "axWindowsMediaPlayer2";
             this.axWindowsMediaPlayer2.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer2.OcxState")));
-            this.axWindowsMediaPlayer2.Size = new System.Drawing.Size(331, 285);
+            this.axWindowsMediaPlayer2.Size = new System.Drawing.Size(331, 291);
             this.axWindowsMediaPlayer2.TabIndex = 13;
             // 
             // axWindowsMediaPlayer3
@@ -1056,10 +1056,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer3.Enabled = true;
-            this.axWindowsMediaPlayer3.Location = new System.Drawing.Point(5, 298);
+            this.axWindowsMediaPlayer3.Location = new System.Drawing.Point(5, 304);
             this.axWindowsMediaPlayer3.Name = "axWindowsMediaPlayer3";
             this.axWindowsMediaPlayer3.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer3.OcxState")));
-            this.axWindowsMediaPlayer3.Size = new System.Drawing.Size(326, 285);
+            this.axWindowsMediaPlayer3.Size = new System.Drawing.Size(326, 291);
             this.axWindowsMediaPlayer3.TabIndex = 13;
             // 
             // axWindowsMediaPlayer4
@@ -1068,10 +1068,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.axWindowsMediaPlayer4.Enabled = true;
-            this.axWindowsMediaPlayer4.Location = new System.Drawing.Point(339, 298);
+            this.axWindowsMediaPlayer4.Location = new System.Drawing.Point(339, 304);
             this.axWindowsMediaPlayer4.Name = "axWindowsMediaPlayer4";
             this.axWindowsMediaPlayer4.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer4.OcxState")));
-            this.axWindowsMediaPlayer4.Size = new System.Drawing.Size(331, 285);
+            this.axWindowsMediaPlayer4.Size = new System.Drawing.Size(331, 291);
             this.axWindowsMediaPlayer4.TabIndex = 13;
             // 
             // breachesBindingSource1
@@ -1082,9 +1082,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1014, 612);
-            this.Controls.Add(this.add);
+            this.ClientSize = new System.Drawing.Size(1014, 624);
             this.Controls.Add(this.main_panel);
+            this.Controls.Add(this.add);
             this.Controls.Add(this.camera);
             this.Controls.Add(this.error);
             this.Controls.Add(this.menuStrip1);
