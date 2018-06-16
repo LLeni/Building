@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace Building
 {
@@ -15,21 +16,27 @@ namespace Building
     {
         String data;
         String idCompany;
+        ObservableCollection<String> collectionForRefresh;
+
+        Database database;
+        DataTable dataTableFloors;
         public Form4()
         {
             InitializeComponent();
         }
 
-        public Form4(String data)
+        public Form4(String data, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors)
         {
             InitializeComponent();
             this.data = data;
+            this.collectionForRefresh = collectionForRefresh;
+            this.dataTableFloors = dataTableFloors;
         }
-        Database database;
         private void Form4_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter1.Fill(this.buldingDataSet2.Floors);
+            database = new Database();
+
+            comboBox1.DataSource = dataTableFloors;
 
             label1.Text = data + " информации об офисе";
             if (data == "Добавление")
@@ -44,9 +51,10 @@ namespace Building
                 button1.Text = "Изменить";
                 comboBox2.Visible = true;
                 textBox3.Visible = false;
-            }
 
-            database = new Database();
+                loadInfo(Convert.ToString(dataTableFloors.Rows[0][0]));
+
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,16 +164,11 @@ namespace Building
             database.CloseConnection();
         }
 
-        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        private void loadInfo(String IDFloor)
         {
-            comboBox2.Items.Clear();
-            textBox4.Text = "";
-            textBox5.Text = "";
-            textBox6.Text = "";
-
             database.OpenConnection();
 
-            string queryDataFloor = "SELECT ID_OFFICE FROM Offices WHERE ID_FLOOR = " + comboBox1.Text;
+            string queryDataFloor = "SELECT ID_OFFICE FROM Offices WHERE ID_FLOOR = " + IDFloor;
             SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
             myCommandDataFloor.CommandText = queryDataFloor;
             myCommandDataFloor.CommandType = CommandType.Text;
@@ -176,6 +179,19 @@ namespace Building
             }
 
             database.CloseConnection();
+        }
+
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (data == "Редактирование")
+            {
+                comboBox2.Items.Clear();
+                textBox4.Text = "";
+                textBox5.Text = "";
+                textBox6.Text = "";
+
+                loadInfo(comboBox1.Text);
+            }
         }
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)

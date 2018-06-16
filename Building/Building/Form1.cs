@@ -13,21 +13,18 @@ using System.Data.Common;
 using System.Data.SQLite;
 using AForge.Video;
 using AForge.Video.DirectShow;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Building
 {
     //TODO: При нажатии правой кнопкой мыши на picturebox этажа, то на передний план переходит панель с большим одним picturebox, на котором и будет соотвествующий план этажа
-    //TODO: При добавлении/изменении чего-либо в БД на отдельных формах, надо  чтобы информация на главной форме обновлялась
-    //TODO: Сделать так, чтобы у источника данных был относительный путь к БД
     //TODO: При одинаковых путях до плана этажей не то показывает при нажатии на pictureBox на главной панели
-    //TODO: Если есть крыша, то вторую добавить нельзя
     //TODO: На главной панели стали странно размещаться компоненты
     //TODO: Спустя 60 дней данные о нарушении должны удаляться 
-    //TODO: При удалении этажа/офиса/камеры должна пропадать возможность их выбрать повторно в списке
-    //TODO: При открытии формы Добавления этажа, чтобы сразу же была информация о первом этаже
+    //TODO: При открытии формы Редактирование этажа чтобы сразу же была информация о первом этаже
     //TODO: В модуле добавления при вводе номера этажа минус можно ставить тольком первым знаком
-    //TODO: Проверить везде порядок табуляции
-    //TODO: При добавлении офиса при выборе этажа, чтобы ничего не очищалось
+    //TODO: Добавить офис. Табуляция сбилась
     //TODO: Пускай уж будет возможность добавить и редактировать камеру
     //пишет Захар, поэтому без ТЮДЮ.  Дбавить синхронизацию скролинга и колёсика мыши.
 
@@ -63,14 +60,40 @@ namespace Building
         List<PictureBox> setShowPictureBox;
         List<String> setIDFloors;
         List<List<TreeNode>> setTreeNodes; // Необходимо для отображений офисов при выборе конкретного этажа на главной вкладке 
+        ObservableCollection<String> collectionForRefresh = new ObservableCollection<String>
+        {
+            "А"
+        };
 
         BindingSource bindingSourceForBreaches = new BindingSource();
         DataTable dataTableBreaches = new DataTable();
+        DataTable dataTableFloors = new DataTable();
+        DataTable dataTableOffices = new DataTable();
+        DataTable dataTableCameras = new DataTable();
         DataSet ds = new DataSet();
         Database database;
 
+        
+
         public FilterInfoCollection videoDevices;
         public VideoCaptureDevice videoSource;
+        
+
+        private void collectionForRefreshChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Replace:
+                    treeView1.Nodes.Clear();
+                    treeView1.Nodes.Add("Офисы");
+                    treeView1.Nodes.Add("Камеры");
+                    refresh();
+                    break;
+                case NotifyCollectionChangedAction.Add:
+                    refresh();
+                    break;
+            }
+        }
 
 
         public Form1()
@@ -270,7 +293,8 @@ namespace Building
             string path = (System.IO.Path.GetDirectoryName(executable));
             AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
-
+            treeView1.Nodes.Add("Офисы");
+            treeView1.Nodes.Add("Камеры");
 
             //Убираем панели контроля видеоряда 
             axWindowsMediaPlayer1.uiMode = "none";
@@ -301,6 +325,8 @@ namespace Building
             this.splitContainer3.Panel2.HorizontalScroll.Maximum = 0;
             this.splitContainer3.Panel2.AutoScroll = true;
 
+            collectionForRefresh.CollectionChanged += collectionForRefreshChanged;
+
 
             database = new Database();
             database.OpenConnection();
@@ -308,7 +334,6 @@ namespace Building
             //Таблица "Нарушения"
             database.OpenConnection();
             string query = "Select * From Breaches";
-            //SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
             try
             {
 
@@ -321,6 +346,52 @@ namespace Building
             }
             catch
             {
+
+            }
+
+            query = "Select * From Floors";
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableFloors);
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            query = "Select * From Offices";
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableOffices);
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            query = "Select * From Cameras";
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableCameras);
+                }
+
+            }
+            catch
+            {
+
             }
 
             //Настройка столбцов таблицы "Нарушения
@@ -331,8 +402,6 @@ namespace Building
             breachesDataGridView.Columns[4].HeaderText = "Описание";
             breachesDataGridView.Columns[5].HeaderText = "Дата";
             breachesDataGridView.Columns[6].HeaderText = "Исправлено";
-
-
 
             breachesDataGridView.Columns[0].ReadOnly = true;
             breachesDataGridView.Columns[1].ReadOnly = true;
@@ -354,7 +423,6 @@ namespace Building
             wightPanel = this.splitContainer3.Panel2.Width;
             heightPanel = this.splitContainer3.Panel2.Height;
 
-
             string queryDataFloor = "SELECT * FROM Floors";
             SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
             myCommandDataFloor.CommandText = queryDataFloor;
@@ -370,7 +438,7 @@ namespace Building
                 labelFloor.Font = new Font("Arial", 12);
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Tag = Convert.ToString(reader["PATH"]);
-                pictureBox.Click += new EventHandler(PictureBoxClick);
+                pictureBox.MouseClick += new MouseEventHandler(PictureBoxClick);
 
                 pictureBox.Width = WIDTH_PICTURE_BOX;
                 pictureBox.Height = HEIGHT_PICTURE_BOX;
@@ -428,104 +496,112 @@ namespace Building
         }
 
 
-        private void PictureBoxClick(object sender, System.EventArgs e)
+        private void PictureBoxClick(object sender, MouseEventArgs e)
         {
-
-            treeView1.Nodes.Clear();
-            string idFloor = null;
-
-            database.OpenConnection();
-
-            string queryIDFloor = "SELECT ID_FLOOR FROM Floors WHERE PATH = '" + (sender as PictureBox).Tag + "'";
-            SQLiteCommand myCommandIDFloor = database.myConnection.CreateCommand();
-            myCommandIDFloor.CommandText = queryIDFloor;
-            myCommandIDFloor.CommandType = CommandType.Text;
-            SQLiteDataReader readerIDFloor = myCommandIDFloor.ExecuteReader();
-            while (readerIDFloor.Read())
+            if (e.Button == MouseButtons.Right)
             {
-                idFloor = Convert.ToString(readerIDFloor["ID_FLOOR"]);
+                ContextMenu contextMenu = new ContextMenu();
+                contextMenu.MenuItems.Add("Увеличить размер плана");
+                contextMenu.Show(this, new Point(e.X + ((Control)sender).Left, e.Y + ((Control)sender).Top + 35));
             }
-
-            string queryDataOffices = "SELECT * FROM Offices WHERE ID_FLOOR = " + idFloor;
-            SQLiteCommand myCommandDataOffices = database.myConnection.CreateCommand();
-            myCommandDataOffices.CommandText = queryDataOffices;
-            myCommandDataOffices.CommandType = CommandType.Text;
-            SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
-
-            TreeNode treeNodeTitleNameCompany;
-            TreeNode treeNodeTitleDescription;
-            TreeNode treeNodeTitlePhoneCompany;
-
-            TreeNode treeNodeOffice;
-            TreeNode treeNodeNameCompany;
-            TreeNode treeNodeDescription;
-            TreeNode treeNodePhone;
-
-            TreeNode treeNodeTitleOffices;
-            treeNodeTitleOffices = new TreeNode("Офисы");
-            treeView1.Nodes.Add(treeNodeTitleOffices);
-
-            List<TreeNode> setIDOffices = new List<TreeNode>();
-            string idCompany = null;
-            int numberOffice = 0;
-            while (readerDataOffices.Read())
+            else
             {
-                treeNodeTitleNameCompany = new TreeNode("Название организации");
-                treeNodeTitleDescription = new TreeNode("Описание деятельности");
-                treeNodeTitlePhoneCompany = new TreeNode("Контактный телефон");
-                treeNodeOffice = new TreeNode("Офис " + Convert.ToString(readerDataOffices["ID_OFFICE"]));
-                setIDOffices.Add(treeNodeOffice);
-                //treeView1.Nodes.Add(treeNodeOffice);
+                treeView1.Nodes.Clear();
+                string idFloor = null;
 
-                idCompany = Convert.ToString(readerDataOffices["ID_COMPANY"]);
+                database.OpenConnection();
 
-                // Извлекаем данные о компании
-                string queryDataCompany = "SELECT * FROM Companies WHERE ID_COMPANY = " + idCompany;
-                SQLiteCommand myCommandDataCompany = database.myConnection.CreateCommand();
-                myCommandDataCompany.CommandText = queryDataCompany;
-                myCommandDataCompany.CommandType = CommandType.Text;
-                SQLiteDataReader readerCompany = myCommandDataCompany.ExecuteReader();
-                treeView1.Nodes[0].Nodes.Add(treeNodeOffice);
-                while (readerCompany.Read())
+                string queryIDFloor = "SELECT ID_FLOOR FROM Floors WHERE PATH = '" + (sender as PictureBox).Tag + "'";
+                SQLiteCommand myCommandIDFloor = database.myConnection.CreateCommand();
+                myCommandIDFloor.CommandText = queryIDFloor;
+                myCommandIDFloor.CommandType = CommandType.Text;
+                SQLiteDataReader readerIDFloor = myCommandIDFloor.ExecuteReader();
+                while (readerIDFloor.Read())
                 {
-                    treeNodeNameCompany = new TreeNode(Convert.ToString(readerCompany["NAME_COMPANY"]));
-                    treeNodeDescription = new TreeNode(Convert.ToString(readerCompany["DESCRIPTION"]));
-                    treeNodePhone = new TreeNode(Convert.ToString(readerCompany["PHONE_COMPANY"]));
-
-                    treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitleNameCompany);
-                    treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitleDescription);
-                    treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitlePhoneCompany);
-
-                    treeView1.Nodes[0].Nodes[numberOffice].Nodes[0].Nodes.Add(treeNodeNameCompany);
-                    treeView1.Nodes[0].Nodes[numberOffice].Nodes[1].Nodes.Add(treeNodeDescription);
-                    treeView1.Nodes[0].Nodes[numberOffice].Nodes[2].Nodes.Add(treeNodePhone);
-                    numberOffice++;
+                    idFloor = Convert.ToString(readerIDFloor["ID_FLOOR"]);
                 }
+
+                string queryDataOffices = "SELECT * FROM Offices WHERE ID_FLOOR = " + idFloor;
+                SQLiteCommand myCommandDataOffices = database.myConnection.CreateCommand();
+                myCommandDataOffices.CommandText = queryDataOffices;
+                myCommandDataOffices.CommandType = CommandType.Text;
+                SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
+
+                TreeNode treeNodeTitleNameCompany;
+                TreeNode treeNodeTitleDescription;
+                TreeNode treeNodeTitlePhoneCompany;
+
+                TreeNode treeNodeOffice;
+                TreeNode treeNodeNameCompany;
+                TreeNode treeNodeDescription;
+                TreeNode treeNodePhone;
+
+                TreeNode treeNodeTitleOffices;
+                treeNodeTitleOffices = new TreeNode("Офисы");
+                treeView1.Nodes.Add(treeNodeTitleOffices);
+
+                List<TreeNode> setIDOffices = new List<TreeNode>();
+                string idCompany = null;
+                int numberOffice = 0;
+                while (readerDataOffices.Read())
+                {
+                    treeNodeTitleNameCompany = new TreeNode("Название организации");
+                    treeNodeTitleDescription = new TreeNode("Описание деятельности");
+                    treeNodeTitlePhoneCompany = new TreeNode("Контактный телефон");
+                    treeNodeOffice = new TreeNode("Офис " + Convert.ToString(readerDataOffices["ID_OFFICE"]));
+                    setIDOffices.Add(treeNodeOffice);
+                    //treeView1.Nodes.Add(treeNodeOffice);
+
+                    idCompany = Convert.ToString(readerDataOffices["ID_COMPANY"]);
+
+                    // Извлекаем данные о компании
+                    string queryDataCompany = "SELECT * FROM Companies WHERE ID_COMPANY = " + idCompany;
+                    SQLiteCommand myCommandDataCompany = database.myConnection.CreateCommand();
+                    myCommandDataCompany.CommandText = queryDataCompany;
+                    myCommandDataCompany.CommandType = CommandType.Text;
+                    SQLiteDataReader readerCompany = myCommandDataCompany.ExecuteReader();
+                    treeView1.Nodes[0].Nodes.Add(treeNodeOffice);
+                    while (readerCompany.Read())
+                    {
+                        treeNodeNameCompany = new TreeNode(Convert.ToString(readerCompany["NAME_COMPANY"]));
+                        treeNodeDescription = new TreeNode(Convert.ToString(readerCompany["DESCRIPTION"]));
+                        treeNodePhone = new TreeNode(Convert.ToString(readerCompany["PHONE_COMPANY"]));
+
+                        treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitleNameCompany);
+                        treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitleDescription);
+                        treeView1.Nodes[0].Nodes[numberOffice].Nodes.Add(treeNodeTitlePhoneCompany);
+
+                        treeView1.Nodes[0].Nodes[numberOffice].Nodes[0].Nodes.Add(treeNodeNameCompany);
+                        treeView1.Nodes[0].Nodes[numberOffice].Nodes[1].Nodes.Add(treeNodeDescription);
+                        treeView1.Nodes[0].Nodes[numberOffice].Nodes[2].Nodes.Add(treeNodePhone);
+                        numberOffice++;
+                    }
+                }
+
+                string queryDataCameras = "SELECT * FROM Cameras WHERE ID_FLOOR = " + idFloor;
+                SQLiteCommand myCommandDataCameras = database.myConnection.CreateCommand();
+                myCommandDataCameras.CommandText = queryDataCameras;
+                myCommandDataCameras.CommandType = CommandType.Text;
+                SQLiteDataReader readerDataCameras = myCommandDataCameras.ExecuteReader();
+
+                TreeNode treeNodeCamera;
+                TreeNode treeNodesDescription;
+                TreeNode treeNodeTitleCameras;
+                treeNodeTitleCameras = new TreeNode("Камеры");
+                treeView1.Nodes.Add(treeNodeTitleCameras);
+                int numberCamera = 0;
+                while (readerDataCameras.Read())
+                {
+                    treeNodeCamera = new TreeNode(Convert.ToString(readerDataCameras["IP_CAMERA"]));
+                    treeNodeDescription = new TreeNode(Convert.ToString(readerDataCameras["DESCRIPTION"]));
+                    treeView1.Nodes[1].Nodes.Add(treeNodeCamera);
+                    treeView1.Nodes[1].Nodes[numberCamera].Nodes.Add(treeNodeDescription);
+                    numberCamera++;
+                }
+
+
+                database.CloseConnection();
             }
-
-            string queryDataCameras = "SELECT * FROM Cameras WHERE ID_FLOOR = " + idFloor;
-            SQLiteCommand myCommandDataCameras = database.myConnection.CreateCommand();
-            myCommandDataCameras.CommandText = queryDataCameras;
-            myCommandDataCameras.CommandType = CommandType.Text;
-            SQLiteDataReader readerDataCameras = myCommandDataCameras.ExecuteReader();
-
-            TreeNode treeNodeCamera;
-            TreeNode treeNodesDescription;
-            TreeNode treeNodeTitleCameras;
-            treeNodeTitleCameras = new TreeNode("Камеры");
-            treeView1.Nodes.Add(treeNodeTitleCameras);
-            int numberCamera = 0;
-            while (readerDataCameras.Read())
-            {
-                treeNodeCamera = new TreeNode(Convert.ToString(readerDataCameras["IP_CAMERA"]));
-                treeNodeDescription = new TreeNode(Convert.ToString(readerDataCameras["DESCRIPTION"]));
-                treeView1.Nodes[1].Nodes.Add(treeNodeCamera);
-                treeView1.Nodes[1].Nodes[numberCamera].Nodes.Add(treeNodeDescription);
-                numberCamera++;
-            }
-
-
-            database.CloseConnection();
         }
 
         private void this_MouseWheel(object sender, MouseEventArgs e)
@@ -563,7 +639,7 @@ namespace Building
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Form2 secondForm = new Form2(dataTableBreaches);
+            Form2 secondForm = new Form2(dataTableBreaches, dataTableFloors);
             secondForm.ShowInTaskbar = false;                           //скрыть вторую форму из панели задач   
             secondForm.ShowDialog();
         }
@@ -574,7 +650,6 @@ namespace Building
             {
                 if (setWebCameras.Count != 0)
                 {
-                    MessageBox.Show(videoDevices[1].MonikerString);
                     videoSource = new VideoCaptureDevice(videoDevices[1].MonikerString);
                     videoSource.NewFrame += new NewFrameEventHandler(video_NewFrame);
                    // MessageBox.Show(videoSource);
@@ -617,7 +692,7 @@ namespace Building
 
         private void камерыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form6 sixForm = new Form6(" ");
+            Form6 sixForm = new Form6("Редактирование", collectionForRefresh, dataTableFloors);
             sixForm.Text = "Редактирование информации о камере";
             sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Редактирование информации о камере"   
             sixForm.ShowDialog();
@@ -685,6 +760,13 @@ namespace Building
                         database.CloseConnection();
                         currentFloor = textBox2.Text;
                         MessageBox.Show("Сведения об этаже были успешно добавлены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                        DataRow row = dataTableFloors.NewRow();
+                        row[0] = textBox2.Text;
+                        row[1] = comboBox2.Text;
+                        row[2] = pictureBox1.Tag;
+                        dataTableFloors.Rows.Add(row);
                     }
                 }
             }
@@ -728,7 +810,7 @@ namespace Building
 
         private void этажToolStripMenuItem_Click(object sender, EventArgs e)        //Вызов формы "Редактировать этаж"   
         {
-            Form3 thirdForm = new Form3("Редактирование", Directory.GetCurrentDirectory());
+            Form3 thirdForm = new Form3("Редактирование", Directory.GetCurrentDirectory(), collectionForRefresh, dataTableFloors);
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.ShowDialog();
             thirdForm.Text = "Редактирование информации об этаже";
@@ -736,7 +818,7 @@ namespace Building
 
         private void офисыToolStripMenuItem_Click(object sender, EventArgs e)       //Вызов формы "Редактировать офис"
         {
-            Form4 fourForm = new Form4("Редактирование");
+            Form4 fourForm = new Form4("Редактирование", collectionForRefresh, dataTableFloors);
             fourForm.Text = "Редактирование информации об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Редактирование информации об офисах"   
             fourForm.ShowDialog();
@@ -883,7 +965,7 @@ namespace Building
 
         private void добавитьИнформациюОбОфисеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form4 fourForm = new Form4("Добавление");
+            Form4 fourForm = new Form4("Добавление", collectionForRefresh, dataTableFloors);
             fourForm.Text = "Добавление информацию об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Добавление информации об офисах"   
             fourForm.ShowDialog();
@@ -891,7 +973,7 @@ namespace Building
 
         private void этажToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form5 fiveForm = new Form5("Этаж");
+            Form5 fiveForm = new Form5("Этаж", collectionForRefresh, dataTableFloors);
             fiveForm.Text = "Удаление информации об этаже";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление этажа"   
             fiveForm.ShowDialog();
@@ -899,7 +981,7 @@ namespace Building
 
         private void офисToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form5 fiveForm = new Form5("Офис");
+            Form5 fiveForm = new Form5("Офис", collectionForRefresh, dataTableOffices);
             fiveForm.Text = "Удаление информации об офисе";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление офиса"   
             fiveForm.ShowDialog();
@@ -907,7 +989,7 @@ namespace Building
 
         private void камераToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form5 fiveForm = new Form5("Камера");
+            Form5 fiveForm = new Form5("Камера", collectionForRefresh, dataTableCameras);
             fiveForm.Text = "Удаление информации о камере";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление камеры"   
             fiveForm.ShowDialog();
@@ -915,7 +997,7 @@ namespace Building
 
         private void гToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form4 fourForm = new Form4("Добавление");
+            Form4 fourForm = new Form4("Добавление", collectionForRefresh,dataTableFloors);
             fourForm.Text = "Добавление информации об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Добавление информации об офисах"   
             fourForm.ShowDialog();
@@ -923,7 +1005,7 @@ namespace Building
 
         private void информацияОКамереToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form6 sixForm = new Form6("Добавление");
+            Form6 sixForm = new Form6("Добавление", collectionForRefresh, dataTableFloors);
             sixForm.Text = "Добавление информации о камере";
             sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Добавление информации о камере"   
             sixForm.ShowDialog();
@@ -931,7 +1013,7 @@ namespace Building
 
         private void информацияОбЭтажеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form3 thirdForm = new Form3("Добавление");
+            Form3 thirdForm = new Form3("Добавление", collectionForRefresh, dataTableFloors);
             thirdForm.Text = "Добавление информации об этаже";
             thirdForm.ShowInTaskbar = false;                                        //скрыть вторую форму из панели задач
             thirdForm.ShowDialog();
@@ -1006,7 +1088,7 @@ namespace Building
                         SQLiteDataReader readerDataOffices = myCommandDataOffices.ExecuteReader();
                         if(readerDataOffices.StepCount == 0)
                         {
-                            MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Ничего не было найдено", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         } else
                         {
                             setShowLabel.Clear();
@@ -1027,7 +1109,7 @@ namespace Building
                         SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
                         if (reader.StepCount == 0)
                         {
-                            MessageBox.Show("Ничего не было найдено", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Ничего не было найдено", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
                         {
@@ -1069,104 +1151,15 @@ namespace Building
 
         private void обновитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            setShowLabel.Clear();
-            setShowPictureBox.Clear();
-
-            database.OpenConnection();
-
-            string queryDataFloor = "SELECT * FROM Floors";
-            SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
-            myCommandDataFloor.CommandText = queryDataFloor;
-            myCommandDataFloor.CommandType = CommandType.Text;
-            SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
-
-
-            int XLocationCurrentComponent = 0;
-            int YLocationCurrentComponent = 0;
-            String errorMessageDownloadImagesStr = null;
-
-            setIDFloors.Clear();
-
-            foreach(var pictureBox in setPictureBox)
+            if (collectionForRefresh != null)
             {
-                pictureBox.Dispose();
+                MessageBox.Show(Convert.ToString(collectionForRefresh.Count));
             }
-            setPictureBox.Clear();
-
-            foreach(var label in setLabel)
+            else
             {
-                label.Dispose();
+
+              
             }
-            setLabel.Clear();
-
-            while (reader.Read())
-            {
-                //if()
-                //Если не содержит
-               // if (!setIDFloors.Contains(Convert.ToString(reader["ID_FLOOR"]))){
-                    setIDFloors.Add(Convert.ToString(reader["ID_FLOOR"]));
-
-                    Label labelFloor = new Label();
-                    labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
-                    labelFloor.Font = new Font("Arial", 12);
-                    PictureBox pictureBox = new PictureBox();
-                    pictureBox.Tag = Convert.ToString(reader["PATH"]);
-                    pictureBox.Click += new EventHandler(PictureBoxClick);
-
-                    pictureBox.Width = WIDTH_PICTURE_BOX;
-                    pictureBox.Height = HEIGHT_PICTURE_BOX;
-
-                    try
-                    {
-                        //Если абсолютный путь
-                        pictureBox.Load(Convert.ToString(reader["PATH"]));
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            //Если относительный путь 
-                            pictureBox.Load(Directory.GetCurrentDirectory() + Convert.ToString(reader["PATH"]));
-                        }
-                        catch
-                        {
-                            errorMessageDownloadImagesStr += "\n" + labelFloor.Text;
-                            //TODO: pictureBox.Load(); Загрузка изображения "Ошибка при загрузке плана"
-                        }
-
-                    }
-                    pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
-                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-
-
-
-
-                    if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
-                    {
-                        XLocationCurrentComponent = 0;
-                        YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
-                    }
-
-                    pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
-                    labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
-
-
-                    XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
-
-                    setLabel.Add(labelFloor);
-                    setShowLabel.Add(labelFloor);
-                    setPictureBox.Add(pictureBox);
-                    setShowPictureBox.Add(pictureBox);
-                    //Добавляем элементы на форму
-                    this.splitContainer3.Panel2.Controls.Add(setPictureBox.Last());
-                    this.splitContainer3.Panel2.Controls.Add(setLabel.Last());
-                }
-
-            //}
-
-
-
-            database.CloseConnection();
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1246,6 +1239,109 @@ namespace Building
         {
             //          (@".\Manual.pdf");                               //попробовать сокрощение пути
             System.Diagnostics.Process.Start("C:/Users/Ironik/Desktop/w.pdf");               //Открвает конкретный файл
+
+        }
+
+        private void refresh()
+        {
+            setShowLabel.Clear();
+            setShowPictureBox.Clear();
+
+            database.OpenConnection();
+
+            string queryDataFloor = "SELECT * FROM Floors";
+            SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
+            myCommandDataFloor.CommandText = queryDataFloor;
+            myCommandDataFloor.CommandType = CommandType.Text;
+            SQLiteDataReader reader = myCommandDataFloor.ExecuteReader();
+
+
+            int XLocationCurrentComponent = 0;
+            int YLocationCurrentComponent = 0;
+            String errorMessageDownloadImagesStr = null;
+
+            setIDFloors.Clear();
+
+            foreach (var pictureBox in setPictureBox)
+            {
+                pictureBox.Dispose();
+            }
+            setPictureBox.Clear();
+
+            foreach (var label in setLabel)
+            {
+                label.Dispose();
+            }
+            setLabel.Clear();
+
+            while (reader.Read())
+            {
+                //if()
+                //Если не содержит
+                // if (!setIDFloors.Contains(Convert.ToString(reader["ID_FLOOR"]))){
+                setIDFloors.Add(Convert.ToString(reader["ID_FLOOR"]));
+
+                Label labelFloor = new Label();
+                labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
+                labelFloor.Font = new Font("Arial", 12);
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Tag = Convert.ToString(reader["PATH"]);
+                pictureBox.MouseClick += new MouseEventHandler(PictureBoxClick);
+
+                pictureBox.Width = WIDTH_PICTURE_BOX;
+                pictureBox.Height = HEIGHT_PICTURE_BOX;
+
+                try
+                {
+                    //Если абсолютный путь
+                    pictureBox.Load(Convert.ToString(reader["PATH"]));
+                }
+                catch
+                {
+                    try
+                    {
+                        //Если относительный путь 
+                        pictureBox.Load(Directory.GetCurrentDirectory() + Convert.ToString(reader["PATH"]));
+                    }
+                    catch
+                    {
+                        errorMessageDownloadImagesStr += "\n" + labelFloor.Text;
+                        //TODO: pictureBox.Load(); Загрузка изображения "Ошибка при загрузке плана"
+                    }
+
+                }
+                pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
+
+
+                if (XLocationCurrentComponent + WIDTH_PICTURE_BOX > wightPanel)
+                {
+                    XLocationCurrentComponent = 0;
+                    YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
+                }
+
+                pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
+                labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+
+
+                XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
+
+                setLabel.Add(labelFloor);
+                setShowLabel.Add(labelFloor);
+                setPictureBox.Add(pictureBox);
+                setShowPictureBox.Add(pictureBox);
+                //Добавляем элементы на форму
+                this.splitContainer3.Panel2.Controls.Add(setPictureBox.Last());
+                this.splitContainer3.Panel2.Controls.Add(setLabel.Last());
+            }
+
+            //}
+
+
+
+            database.CloseConnection();
 
         }
     }

@@ -43,15 +43,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
-            this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             iD_FLOORLabel = new System.Windows.Forms.Label();
             lOCATION_BREACHLabel = new System.Windows.Forms.Label();
             tOPIC_BREACHLabel = new System.Windows.Forms.Label();
             dESCRIPTION_BREACHLabel = new System.Windows.Forms.Label();
             dATE_BREACHLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             this.SuspendLayout();
             // 
             // iD_FLOORLabel
@@ -187,20 +184,6 @@
             this.comboBox1.Size = new System.Drawing.Size(251, 28);
             this.comboBox1.TabIndex = 13;
             // 
-            // floorsBindingSource
-            // 
-            this.floorsBindingSource.DataMember = "Floors";
-            this.floorsBindingSource.DataSource = this.buldingDataSet2;
-            // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // floorsTableAdapter
-            // 
-            this.floorsTableAdapter.ClearBeforeFill = true;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,7 +211,6 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Shown += new System.EventHandler(this.Form2_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,8 +227,6 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private BuldingDataSet2 buldingDataSet2;
         private System.Windows.Forms.BindingSource floorsBindingSource;
-        private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter;
     }
 }

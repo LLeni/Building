@@ -36,18 +36,15 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.floorsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.buldingDataSet2 = new Building.BuldingDataSet2();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.camerasBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.camerasTableAdapter = new Building.BuldingDataSet2TableAdapters.CamerasTableAdapter();
-            this.floorsTableAdapter = new Building.BuldingDataSet2TableAdapters.FloorsTableAdapter();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.camerasBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -115,16 +112,8 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(265, 27);
             this.comboBox1.TabIndex = 0;
-            // 
-            // floorsBindingSource
-            // 
-            this.floorsBindingSource.DataMember = "Floors";
-            this.floorsBindingSource.DataSource = this.buldingDataSet2;
-            // 
-            // buldingDataSet2
-            // 
-            this.buldingDataSet2.DataSetName = "BuldingDataSet2";
-            this.buldingDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label2
             // 
@@ -166,23 +155,8 @@
             this.label5.TabIndex = 34;
             this.label5.Text = "Описание видимости камеры:";
             // 
-            // camerasBindingSource
-            // 
-            this.camerasBindingSource.DataMember = "Cameras";
-            this.camerasBindingSource.DataSource = this.buldingDataSet2;
-            // 
-            // camerasTableAdapter
-            // 
-            this.camerasTableAdapter.ClearBeforeFill = true;
-            // 
-            // floorsTableAdapter
-            // 
-            this.floorsTableAdapter.ClearBeforeFill = true;
-            // 
             // comboBox2
             // 
-            this.comboBox2.DataSource = this.camerasBindingSource1;
-            this.comboBox2.DisplayMember = "IP_CAMERA";
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
@@ -190,11 +164,16 @@
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(265, 27);
             this.comboBox2.TabIndex = 1;
+            this.comboBox2.SelectionChangeCommitted += new System.EventHandler(this.comboBox2_SelectionChangeCommitted);
             // 
-            // camerasBindingSource1
+            // textBox1
             // 
-            this.camerasBindingSource1.DataMember = "Cameras";
-            this.camerasBindingSource1.DataSource = this.buldingDataSet2;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox1.Location = new System.Drawing.Point(84, 135);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(264, 26);
+            this.textBox1.TabIndex = 2;
             // 
             // Form6
             // 
@@ -208,6 +187,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -220,7 +200,6 @@
             this.Text = "Form6";
             this.Load += new System.EventHandler(this.Form6_Load);
             ((System.ComponentModel.ISupportInitialize)(this.floorsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buldingDataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.camerasBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -240,12 +219,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private BuldingDataSet2 buldingDataSet2;
         private System.Windows.Forms.BindingSource camerasBindingSource;
-        private BuldingDataSet2TableAdapters.CamerasTableAdapter camerasTableAdapter;
         private System.Windows.Forms.BindingSource floorsBindingSource;
-        private BuldingDataSet2TableAdapters.FloorsTableAdapter floorsTableAdapter;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.BindingSource camerasBindingSource1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -8,21 +8,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace Building
 {
     public partial class Form5 : Form
     {
         String nameForm;
+        ObservableCollection<String> collectionForRefresh;
+        DataTable dataTableFloors;
+        DataTable dataTableOffices;
+        DataTable dataTableCameras;
+
         public Form5()
         {
             InitializeComponent();
         }
 
-        public Form5(String nameForm)
+        public Form5(String nameForm, ObservableCollection<String> collectionForRefresh, DataTable dataTable)
         {
             InitializeComponent();
             this.nameForm = nameForm;
+            this.collectionForRefresh = collectionForRefresh;
             switch (nameForm)
             {
                 case "Этаж":
@@ -31,6 +38,8 @@ namespace Building
                     comboBox1.Visible = true;
                     comboBox2.Visible = false;
                     comboBox3.Visible = false;
+                    this.dataTableFloors = dataTable;
+                    comboBox1.DataSource = dataTable;
                 break;
                 case "Офис":
                     label1.Text = "Выберите офис:";
@@ -38,6 +47,8 @@ namespace Building
                     comboBox1.Visible = false;
                     comboBox2.Visible = true;
                     comboBox3.Visible = false;
+                    this.dataTableOffices = dataTable;
+                    comboBox2.DataSource = dataTable;
                     break;
                 case "Камера":
                     label1.Text = "Выберите камеру:";
@@ -46,6 +57,8 @@ namespace Building
                     comboBox1.Visible = false;
                     comboBox2.Visible = false;
                     comboBox3.Visible = true;
+                    this.dataTableCameras = dataTable;
+                    comboBox3.DataSource = dataTable;
                     break;
             }
         }
@@ -54,13 +67,6 @@ namespace Building
         private void Form5_Load(object sender, EventArgs e)
         {
             database = new Database();
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter1.Fill(this.buldingDataSet2.Floors);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.officesTableAdapter1.Fill(this.buldingDataSet2.Offices);
-
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.camerasTableAdapter1.Fill(this.buldingDataSet2.Cameras);
 
         }
 
@@ -143,6 +149,15 @@ namespace Building
                         myCommandDelete.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
                         myCommandDelete.ExecuteNonQuery();
 
+                        for (var i = 0; i < dataTableFloors.Rows.Count; i++)
+                        {
+                            if (Convert.ToString(dataTableFloors.Rows[i][0]) == comboBox1.Text)
+                            {
+                                dataTableFloors.Rows[i].Delete();
+                            }
+                        }
+
+                        collectionForRefresh[0] = "А";
                         break;
                     case "Офис":
                         //TODO: Должна удаляться вся информация об офисе (в том числе и компания)
@@ -166,13 +181,32 @@ namespace Building
                         myCommandDelete.CommandText = queryDelete;
                         myCommandDelete.Parameters.AddWithValue("@ID_OFFICE", comboBox2.Text);
                         myCommandDelete.ExecuteNonQuery();
-
+                        
+                        for(var i = 0; i < dataTableOffices.Rows.Count; i++)
+                        {
+                            if (Convert.ToString(dataTableOffices.Rows[i][0]) == comboBox2.Text)
+                            {
+                                dataTableOffices.Rows[i].Delete();
+                            }
+                        }
+                        collectionForRefresh[0] = "А";
                         break;
                     case "Камера":
                         queryDelete = "DELETE FROM Cameras WHERE ID_CAMERA = @ID_CAMERA";
                         myCommandDelete.CommandText = queryDelete;
                         myCommandDelete.Parameters.AddWithValue("@ID_CAMERA", comboBox3.Text);
                         myCommandDelete.ExecuteNonQuery();
+
+
+                        for (var i = 0; i < dataTableCameras.Rows.Count; i++)
+                        {
+                            if (Convert.ToString(dataTableCameras.Rows[i][0]) == comboBox3.Text)
+                            {
+                                dataTableCameras.Rows[i].Delete();
+                            }
+                        }
+
+                        collectionForRefresh[0] = "А";
                         break;
                 }
 

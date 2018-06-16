@@ -14,14 +14,16 @@ namespace Building
     public partial class Form2 : Form
     {
         int a = 5;
+        DataTable dataTableFloors;
         public Form2()
         {
             InitializeComponent();
         }
 
-        public Form2(DataTable dataTableBreaches)
+        public Form2(DataTable dataTableBreaches, DataTable dataTableFloors)
         {
             this.dataTableBreaches = dataTableBreaches;
+            this.dataTableFloors = dataTableFloors;
             InitializeComponent();
         }
 
@@ -40,8 +42,9 @@ namespace Building
         private void Form2_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
+            // this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
 
+            comboBox1.DataSource = dataTableFloors;
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SQLite;
@@ -14,26 +15,30 @@ namespace Building
     public partial class Form3 : Form
     {
         Database database;
+        DataTable dataTableFloors;
         String data;
         String pathWorkDirectory;
-
+        ObservableCollection<String> collectionForRefresh;
         public Form3()
         {
             InitializeComponent();
         }
 
-        public Form3(String data)
+        public Form3(String data,  ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors)
         {
             InitializeComponent();
             this.data = data;
+            this.collectionForRefresh = collectionForRefresh;
+            this.dataTableFloors = dataTableFloors;
         }
 
 
-        public Form3(String data, String pathWorkDirectory)
+        public Form3(String data, String pathWorkDirectory, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors)
         {
             InitializeComponent();
             this.data = data;
             this.pathWorkDirectory = pathWorkDirectory;
+            this.dataTableFloors = dataTableFloors;
         }
 
 
@@ -70,19 +75,26 @@ namespace Building
                     }
                     else
                     {
-                        //Проверка на наличие крыши
-                        string queryRoofExist = "SELECT CATEGORY_FLOOR FROM Floors WHERE CATEGORY_FLOOR =  '" + comboBox2.Text + "'";
-                        SQLiteCommand myCommandRoofExist = database.myConnection.CreateCommand();
-                        myCommandRoofExist.CommandText = queryRoofExist;
-                        myCommandRoofExist.CommandType = CommandType.Text;
-                        SQLiteDataReader readerRoof = myCommandRoofExist.ExecuteReader();
-                        isExist = false;
-                        while (readerRoof.Read())
-                        {
-                            isExist = true;
-                        }
 
-                        if (isExist)
+                        Boolean isRoof = true;
+                        //Проверка на наличие крыши
+                        if (comboBox2.Text == "Крыша")
+                        {
+                            string queryRoofExist = "SELECT CATEGORY_FLOOR FROM Floors WHERE CATEGORY_FLOOR =  '" + comboBox2.Text + "'";
+                            SQLiteCommand myCommandRoofExist = database.myConnection.CreateCommand();
+                            myCommandRoofExist.CommandText = queryRoofExist;
+                            myCommandRoofExist.CommandType = CommandType.Text;
+                            SQLiteDataReader readerRoof = myCommandRoofExist.ExecuteReader();
+                            isExist = false;
+                            while (readerRoof.Read())
+                            {
+                                isExist = true;
+                            }
+                         } else
+                        {
+                            isRoof = false;
+                        }
+                        if (isExist || isRoof)
                         {
                             MessageBox.Show("Информация о крыше уже есть. Невозможно добавить вторую", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
@@ -100,6 +112,14 @@ namespace Building
                             database.CloseConnection();
 
                             MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            DataRow row = dataTableFloors.NewRow();
+                            row[0] = textBox1.Text; //TODO: !!!
+                            row[1] = comboBox2.Text;
+                            row[2] = pictureBox1.Tag;
+                            dataTableFloors.Rows.Add(row);
+
+                            collectionForRefresh[0] = "А";
                         }
                     }
                 }
@@ -146,23 +166,25 @@ namespace Building
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "buldingDataSet2.Floors". При необходимости она может быть перемещена или удалена.
-            this.floorsTableAdapter.Fill(this.buldingDataSet2.Floors);
+            database = new Database();
             label4.Text = data + " информации об этаже";
             if (data == "Добавление")
             {
                 button1.Text = "Добавить";
                 textBox1.Visible = true;
                 comboBox1.Visible = false;
-               // label4.Location = new Point(label1.Location.X + 20, label1.Location.Y);
             }
             else
             {
                 button1.Text = "Изменить";
                 textBox1.Visible = false;
                 comboBox1.Visible = true;
+
+                comboBox1.DataSource = dataTableFloors;
+                loadInfo(Convert.ToString(dataTableFloors.Rows[0][0]));
+
             }
-            database = new Database();
+ 
             comboBox1.DisplayMember = "ID_FLOOR";
             comboBox1.ValueMember = "ID_FLOOR";
         }
@@ -200,14 +222,11 @@ namespace Building
             openDialog();
         }
 
-        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        private void loadInfo(String IDFloor)
         {
-            pictureBox1.Tag = "";
-
             database.OpenConnection();
 
-            //Получение наибольшего значения идентификатора в таблице "Компании"
-            string queryDataFloor = "SELECT * FROM Floors WHERE ID_FLOOR = " + comboBox1.Text;
+            string queryDataFloor = "SELECT * FROM Floors WHERE ID_FLOOR = " + IDFloor;
             SQLiteCommand myCommandDataFloor = database.myConnection.CreateCommand();
             myCommandDataFloor.CommandText = queryDataFloor;
             myCommandDataFloor.CommandType = CommandType.Text;
@@ -219,7 +238,7 @@ namespace Building
             }
             try
             {
-                label14.Visible = false; ;
+                label14.Visible = false;
                 button7.Visible = true;
                 image = Image.FromFile(Convert.ToString(pictureBox1.Tag));
 
@@ -243,7 +262,11 @@ namespace Building
             pictureBox1.Image = (Image)image;
 
             database.CloseConnection();
+        }
 
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            loadInfo(comboBox1.Text);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
