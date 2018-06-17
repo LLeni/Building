@@ -23,8 +23,6 @@ namespace Building
 
     //TODO: Подправить скроллинг на главной вкладке. Именно скролл колесиком мыши
 
-    //TODO: При изменении последнего столбца, чтобы изменения сохранялись в БД
-
     //Захар
     //TODO: Чтобы каждый pictureBox, кроме на главной форме подстраивался правильно под изображения (т.е 16:10, 16:9, 4:3)
     //TODO: Выход с титульника поправить
@@ -37,7 +35,7 @@ namespace Building
     //TODO: На форме добавления офиса у номера офиса не то оформление
     //TODO: Проверь у себя вебкамеру
     //TODO: у TreeView'ере, который находится справа на главной вкладке сбился размер.
-    //TODO: Немного увеличь форму по ширине, а т.е задай другой минимум
+    //TODO: Немного увеличь форму по ширине, а т.е задай другой минимум (не красиво выглядит, как планы этажей залазят на скролл)
     //TODO: Пускай нормально открывается главная форма, а т.е постоянно отодвигать панели не очень. Решил на тебя это возложить
 
 
@@ -86,6 +84,12 @@ namespace Building
 
         public FilterInfoCollection videoDevices;
         public VideoCaptureDevice videoSource;
+
+        private void dataGridViewSites_CellValueChanged(object sender,
+    DataGridViewCellEventArgs e)
+        {
+            
+        }
 
         private void deleteBreaches()
         {
@@ -1499,6 +1503,59 @@ namespace Building
         private void splitContainer3_Panel2_Scroll(object sender, ScrollEventArgs e)
         {
             height_scroll_change = this.splitContainer3.Panel2.VerticalScroll.Value;
+        }
+
+        private void breachesDataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            //for(var i = 0; i<= breachesDataGridView.RowCount; i++)
+            // {
+            //     if(breachesDataGridView)
+            //  }
+            if (setPictureBox != null)
+            {
+
+            }
+
+        }
+
+        private void breachesDataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (breachesDataGridView.CurrentCell.ColumnIndex == breachesDataGridView.Columns.Count - 1)
+            {
+                int index = breachesDataGridView.CurrentRow.Index;
+                string value;
+
+                DataGridViewCheckBoxCell chkchecking = breachesDataGridView.CurrentRow.Cells[breachesDataGridView.ColumnCount - 1] as DataGridViewCheckBoxCell;
+                if ((bool)chkchecking.Value == true)
+                {
+                    value = "0";
+                    chkchecking.Value = false;
+                }
+               else
+                {
+                   value = "1";
+                    chkchecking.Value = true;
+                }
+
+                dataTableBreaches.Rows[breachesDataGridView.CurrentRow.Index][breachesDataGridView.ColumnCount-1] = (bool)chkchecking.Value;
+
+
+                if (Convert.ToString(dataTableBreaches.Rows[index][dataTableBreaches.Columns.Count - 1]) == Convert.ToString(breachesDataGridView.CurrentRow.Cells[breachesDataGridView.ColumnCount - 1].Value))
+                {
+                    database.OpenConnection();
+
+                    string queryUpdateBreach = "UPDATE Breaches SET CONDITION_BREACH = @CONDITION_BREACH WHERE ID_BREACH = '" + Convert.ToString(breachesDataGridView.CurrentRow.Cells[0].Value)+ "'";
+                    SQLiteCommand myCommandUpdateBreach = database.myConnection.CreateCommand();
+                    myCommandUpdateBreach.CommandText = queryUpdateBreach;
+                    myCommandUpdateBreach.Parameters.AddWithValue("@CONDITION_BREACH", value);
+                    myCommandUpdateBreach.ExecuteNonQuery();
+
+                    MessageBox.Show("Состояние нарушения сохранено", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                    database.CloseConnection();
+                }
+            }
         }
     }
 

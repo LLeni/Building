@@ -380,7 +380,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2MinSize = 275;
             this.splitContainer2.Size = new System.Drawing.Size(1014, 451);
-            this.splitContainer2.SplitterDistance = 284;
+            this.splitContainer2.SplitterDistance = 287;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.TabStop = false;
@@ -408,7 +408,7 @@
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.splitContainer3.Panel2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.splitContainer3_Panel2_Scroll);
-            this.splitContainer3.Size = new System.Drawing.Size(284, 451);
+            this.splitContainer3.Size = new System.Drawing.Size(287, 451);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -427,7 +427,7 @@
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(205, 0);
+            this.button1.Location = new System.Drawing.Point(208, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 2;
@@ -458,7 +458,7 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(199, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(3, 26);
+            this.textBox1.Size = new System.Drawing.Size(6, 26);
             this.textBox1.TabIndex = 1;
             // 
             // button2
@@ -473,7 +473,7 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(269, 39);
+            this.button2.Location = new System.Drawing.Point(276, 39);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(22, 21);
             this.button2.TabIndex = 12;
@@ -992,6 +992,8 @@
             this.breachesDataGridView.Name = "breachesDataGridView";
             this.breachesDataGridView.Size = new System.Drawing.Size(1014, 571);
             this.breachesDataGridView.TabIndex = 9;
+            this.breachesDataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.breachesDataGridView_CellContentClick);
+            this.breachesDataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.breachesDataGridView_CellValueChanged);
             // 
             // button5
             // 
