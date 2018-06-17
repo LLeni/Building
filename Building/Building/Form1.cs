@@ -20,15 +20,9 @@ namespace Building
 {
     //Евгений
     //TODO: При выборе пункта в контекстом меню, которое вызывается нажатием ПКМ по плану этажа, открывается план этажа в другой панели
-    //TODO: Спустя 60 дней данные о нарушении должны удаляться 
 
-    //TODO: Подправить скроллинг на главной вкладке
-    //TODO: На главной панели стали странно размещаться компоненты. Сейчас это связано с баганутым скроллингом
-    //TODO: Добавить у первого этажа камеру, которая будет выводиться на панели камер
-    //TODO: Добавить еще одно видео
-    //TODO: Добавить оступ слева на главной панели 
+    //TODO: Подправить скроллинг на главной вкладке. Именно скролл колесиком мыши
 
-    //TODO: Последний столбец у нарушений чтобы был checkBox
     //TODO: При изменении последнего столбца, чтобы изменения сохранялись в БД
 
     //Захар
@@ -53,7 +47,7 @@ namespace Building
 
     public partial class Form1 : Form
     {
-        const int INDENT_LEFT = 2;
+        const int INDENT_LEFT = 10;
         const int INDENT_TOP = 25;
         const int INDENT_BETWEEN_PICTURE_BOXES = 10;
         const int INDENT_BETWEEN_LINE_PICTURE_BOXES = 30;
@@ -62,6 +56,7 @@ namespace Building
         const int WIDTH_PICTURE_BOX = 230;
         const int HEIGHT_PICTURE_BOX = 140;
 
+        int height_scroll_change = 0;
 
         int wightPanel;
         int heightPanel;
@@ -91,6 +86,64 @@ namespace Building
 
         public FilterInfoCollection videoDevices;
         public VideoCaptureDevice videoSource;
+
+        private void deleteBreaches()
+        {
+            database.OpenConnection();
+
+            string queryDataBreaches = "SELECT * FROM Breaches";
+            SQLiteCommand myCommandDataBreaches = database.myConnection.CreateCommand();
+            myCommandDataBreaches.CommandText = queryDataBreaches;
+            myCommandDataBreaches.CommandType = CommandType.Text;
+            SQLiteDataReader reader = myCommandDataBreaches.ExecuteReader();
+
+            string[] words;
+            int currentMonth  = DateTime.Today.Month;
+            int currentDay = DateTime.Today.Day;
+            int currentYear = DateTime.Today.Year;
+            int differenceYears;
+            int differenceMonths;
+            int differenceDays;
+            int year;
+            int month;
+            int day;
+            bool isNeedDelete;
+            while (reader.Read())
+            {
+                isNeedDelete = false;
+                words = Convert.ToString(reader["DATE_BREACH"]).Split('.');
+                year = Convert.ToInt32(words[2]);
+                month = Convert.ToInt16(words[1]);
+                day = Convert.ToInt16(words[0]);
+                differenceYears = currentYear - year;
+                differenceMonths = currentMonth - month;
+                differenceDays = currentDay - day;
+
+                if (differenceYears >= 1 && Convert.ToString(reader["CONDITION_BREACH"]) == "1")
+                {
+                    isNeedDelete = true;
+                } else {
+                    if (differenceMonths >= 6 && differenceDays >= day && Convert.ToString(reader["CONDITION_BREACH"]) == "1")
+                    {
+                        isNeedDelete = true;
+                    }
+                }
+
+                if (isNeedDelete)
+                {
+                    string queryDelete = "DELETE FROM Breaches WHERE ID_BREACH = @ID_BREACH";
+                    SQLiteCommand myCommandDelete = database.myConnection.CreateCommand();
+                    myCommandDelete.CommandType = CommandType.Text;
+                    myCommandDelete.CommandText = queryDelete;
+                    myCommandDelete.Parameters.AddWithValue("@ID_BREACH", Convert.ToString(reader["ID_BREACH"]));
+                    myCommandDelete.ExecuteNonQuery();
+
+                    MessageBox.Show("Было удалено!");
+                }
+            }
+
+                database.CloseConnection();
+        }
         
 
         private void collectionForRefreshChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -175,6 +228,22 @@ namespace Building
 
         }
 
+        private void chkItems_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in breachesDataGridView.Rows)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)row.Cells[1];
+                if (chk.Value == chk.TrueValue)
+                {
+                    chk.Value = chk.FalseValue;
+                }
+                else
+                {
+                    chk.Value = chk.TrueValue;
+                }
+            }
+        }
+
         private void toolStripMenuItem2_Click(object sender, EventArgs e)           //Отображение панели нарушений
         {
             main_panel.Visible = false;                             //Скрывается главная вкладка
@@ -225,7 +294,7 @@ namespace Building
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
-                currentPictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
+                currentPictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent - height_scroll_change);
                 //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
 
                 currentPictureBox.Visible = true;
@@ -244,7 +313,7 @@ namespace Building
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
-                currentLabel.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+                currentLabel.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent - height_scroll_change);
 
                 //labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
 
@@ -402,12 +471,15 @@ namespace Building
 
 
             database = new Database();
+
+            deleteBreaches();
+
             database.OpenConnection();
 
+  
             dowloandDateInDateTable();
 
             //Таблица "Нарушения"
-            database.OpenConnection();
             string query = "Select * From Breaches";
             try
             {
@@ -416,6 +488,7 @@ namespace Building
                 {
                     da.Fill(dataTableBreaches);
                     breachesDataGridView.DataSource = dataTableBreaches;
+
                 }
 
             }
@@ -424,7 +497,28 @@ namespace Building
 
             }
 
-            
+            dataTableBreaches.Columns.Add("IsMarried", typeof(bool));
+
+
+            for (int i = 0; i< dataTableBreaches.Rows.Count - 1; i++)
+            {
+                DataRow drOld = dataTableBreaches.Rows[i];
+                DataRow drNew = dataTableBreaches.Rows[i];
+                bool condition;
+                if(Convert.ToString(drOld[dataTableBreaches.Columns.Count - 2]) == "1")
+                {
+                    condition = true;
+                } else
+                {
+                    condition = false;
+                }
+
+                drNew[dataTableBreaches.Columns.Count - 1] = condition;
+            }
+
+            dataTableBreaches.Columns.RemoveAt(dataTableBreaches.Columns.Count-2);
+
+
             //Настройка столбцов таблицы "Нарушения
             breachesDataGridView.Columns[0].HeaderText = "Номер нарушения";
             breachesDataGridView.Columns[1].HeaderText = "Номер этажа";
@@ -503,8 +597,8 @@ namespace Building
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
-                pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
-                labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+                pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent - height_scroll_change);
+                labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent - height_scroll_change);
 
 
                 XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
@@ -645,7 +739,7 @@ namespace Building
         {
             if (main_panel.Visible)
             {
-
+                height_scroll_change = this.splitContainer3.Panel2.VerticalScroll.Value;
                 if (e.Delta > 0)
                 {
                     if (this.splitContainer3.Panel2.VerticalScroll.Value - 10  >= this.splitContainer3.Panel2.VerticalScroll.Minimum)
@@ -1366,8 +1460,8 @@ namespace Building
                     YLocationCurrentComponent += INDENT_TOP + INDENT_HEIGHT_LABEL + INDENT_BETWEEN_LINE_PICTURE_BOXES;
                 }
 
-                pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent);
-                labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent);
+                pictureBox.Location = new Point(INDENT_LEFT + XLocationCurrentComponent, INDENT_TOP + YLocationCurrentComponent - height_scroll_change);
+                labelFloor.Location = new Point(INDENT_LEFT + INDENT_WIDTH_LABEL + XLocationCurrentComponent, INDENT_TOP + INDENT_HEIGHT_LABEL + YLocationCurrentComponent - height_scroll_change);
 
 
                 XLocationCurrentComponent += WIDTH_PICTURE_BOX + INDENT_BETWEEN_PICTURE_BOXES;
@@ -1400,6 +1494,11 @@ namespace Building
             {
                 alignComponentsFloors();
             }
+        }
+
+        private void splitContainer3_Panel2_Scroll(object sender, ScrollEventArgs e)
+        {
+            height_scroll_change = this.splitContainer3.Panel2.VerticalScroll.Value;
         }
     }
 
