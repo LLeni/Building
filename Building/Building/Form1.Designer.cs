@@ -52,7 +52,6 @@
             this.главнаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.камерыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.спарвкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.обновитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.button2 = new System.Windows.Forms.Button();
@@ -303,13 +302,13 @@
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.камерыToolStripMenuItem,
-            this.спарвкаToolStripMenuItem,
-            this.обновитьToolStripMenuItem});
+            this.спарвкаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1014, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // главнаяToolStripMenuItem
             // 
@@ -332,13 +331,6 @@
             this.спарвкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.спарвкаToolStripMenuItem.Text = "Справка";
             this.спарвкаToolStripMenuItem.Click += new System.EventHandler(this.спарвкаToolStripMenuItem_Click);
-            // 
-            // обновитьToolStripMenuItem
-            // 
-            this.обновитьToolStripMenuItem.Name = "обновитьToolStripMenuItem";
-            this.обновитьToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
-            this.обновитьToolStripMenuItem.Text = "Обновить";
-            this.обновитьToolStripMenuItem.Click += new System.EventHandler(this.обновитьToolStripMenuItem_Click);
             // 
             // splitContainer1
             // 
@@ -371,8 +363,8 @@
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.button2);
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer3);
+            this.splitContainer2.Panel1.Controls.Add(this.button2);
             this.splitContainer2.Panel1MinSize = 255;
             // 
             // splitContainer2.Panel2
@@ -381,10 +373,11 @@
             this.splitContainer2.Panel2.Controls.Add(this.label3);
             this.splitContainer2.Panel2MinSize = 275;
             this.splitContainer2.Size = new System.Drawing.Size(1014, 451);
-            this.splitContainer2.SplitterDistance = 733;
+            this.splitContainer2.SplitterDistance = 736;
             this.splitContainer2.SplitterWidth = 1;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.TabStop = false;
+            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // button2
             // 
@@ -398,7 +391,7 @@
             this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(706, 39);
+            this.button2.Location = new System.Drawing.Point(713, 39);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(22, 21);
             this.button2.TabIndex = 12;
@@ -428,7 +421,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.splitContainer3.Size = new System.Drawing.Size(733, 451);
+            this.splitContainer3.Size = new System.Drawing.Size(736, 451);
             this.splitContainer3.SplitterDistance = 32;
             this.splitContainer3.SplitterWidth = 1;
             this.splitContainer3.TabIndex = 4;
@@ -447,7 +440,7 @@
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(654, 0);
+            this.button1.Location = new System.Drawing.Point(657, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 28);
             this.button1.TabIndex = 2;
@@ -478,7 +471,7 @@
             this.textBox1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBox1.Location = new System.Drawing.Point(199, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(451, 26);
+            this.textBox1.Size = new System.Drawing.Size(454, 26);
             this.textBox1.TabIndex = 1;
             // 
             // treeView1
@@ -489,7 +482,7 @@
             this.treeView1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView1.Location = new System.Drawing.Point(0, 26);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(299, 423);
+            this.treeView1.Size = new System.Drawing.Size(299, 399);
             this.treeView1.TabIndex = 5;
             // 
             // label3
@@ -625,7 +618,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label14.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(322, 216);
+            this.label14.Location = new System.Drawing.Point(322, 204);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 19);
             this.label14.TabIndex = 3;
@@ -641,7 +634,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(34, 87);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(663, 273);
+            this.pictureBox1.Size = new System.Drawing.Size(663, 249);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -736,7 +729,7 @@
             this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(8, 334);
+            this.textBox6.Location = new System.Drawing.Point(8, 310);
             this.textBox6.MaxLength = 12;
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(256, 26);
@@ -751,7 +744,7 @@
             this.textBox4.MaxLength = 240;
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(256, 96);
+            this.textBox4.Size = new System.Drawing.Size(256, 72);
             this.textBox4.TabIndex = 13;
             // 
             // label18
@@ -759,7 +752,7 @@
             this.label18.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(5, 307);
+            this.label18.Location = new System.Drawing.Point(5, 283);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(155, 19);
             this.label18.TabIndex = 14;
@@ -1214,7 +1207,6 @@
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer2;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer3;
         private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer4;
-        private System.Windows.Forms.ToolStripMenuItem обновитьToolStripMenuItem;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;

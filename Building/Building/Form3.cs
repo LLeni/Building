@@ -273,5 +273,18 @@ namespace Building
         {
 
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar <= 47 || e.KeyChar >= 59) && e.KeyChar != 8 && e.KeyChar != 16)
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == 45 && textBox1.Text == "")
+            {
+                e.Handled = false;
+            }
+        }
     }
 }

@@ -225,5 +225,10 @@ namespace Building
 
             database.CloseConnection();
         }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
     }
 }

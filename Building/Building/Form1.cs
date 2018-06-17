@@ -18,24 +18,30 @@ using System.Collections.Specialized;
 
 namespace Building
 {
-    //TODO: При нажатии правой кнопкой мыши на picturebox этажа, то на передний план переходит панель с большим одним picturebox, на котором и будет соотвествующий план этажа
-    //TODO: При одинаковых путях до плана этажей не то показывает при нажатии на pictureBox на главной панели
-    //TODO: На главной панели стали странно размещаться компоненты
+    //Евгений
+    //TODO: При выборе пункта в контекстом меню, которое вызывается нажатием ПКМ по плану этажа, открывается план этажа в другой панели
+    //TODO: На главной панели стали странно размещаться компоненты. Сейчас это связано с баганутым скроллингом
     //TODO: Спустя 60 дней данные о нарушении должны удаляться 
-    //TODO: При открытии формы Редактирование этажа чтобы сразу же была информация о первом этаже
-    //TODO: В модуле добавления при вводе номера этажа минус можно ставить тольком первым знаком
-    //TODO: Добавить офис. Табуляция сбилась
-    //TODO: Пускай уж будет возможность добавить и редактировать камеру
-    //пишет Захар, поэтому без ТЮДЮ.  Дбавить синхронизацию скролинга и колёсика мыши.
+    //TODO: Подправить скроллинг на главной вкладке
+    //TODO: Добавить у первого этажа камеру, которая будет выводиться на панели камер
+    //TODO: Добавить еще одно видео
+    //TODO: Добавить оступ слева на главной панели 
+    //TODO: Последний столбец у нарушений чтобы был checkBox
+    //TODO: При изменении последнего столбца, чтобы изменения сохранялись в БД
 
-    //TODO: Формы О программе и Помощь
+    //MUST HAVE!!
+    //TODO: Баг с DataTable'ами. Исправить знаю как (стыдно говорить как)
 
-    //TODO: Документ Схема алгоритма
-    //TODO: Документ ER-Диаграмма. Просто разместить каждую таблицу на отдельный лист
-
-    //Больше относиться к Захару
+    //Захар
     //TODO: Чтобы каждый pictureBox, кроме на главной форме подстраивался правильно под изображения (т.е 16:10, 16:9, 4:3)
     //TODO: Выход с титульника поправить
+
+    //ЗАХАР. ВОт ТуТ прям мастхев
+    //TODO: Добавить панель на главной вкладке для увеличенного плана этажа и сверху-справка кнопку для обратного перехода на основную панель
+    //TODO: Добавить офис. Табуляция сбилась. Через код поправь 
+    //TODO: Справка
+    //TODO: Все же сделай так, чтобы два минимально в строку влезало два плана. Просто сверху в поиске происходит что-то не понятное
+
 
     public partial class Form1 : Form
     {
@@ -437,7 +443,7 @@ namespace Building
                 labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
                 labelFloor.Font = new Font("Arial", 12);
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Tag = Convert.ToString(reader["PATH"]);
+                pictureBox.Tag = Convert.ToString(reader["PATH"]) + "?" + Convert.ToString(reader["ID_FLOOR"]);
                 pictureBox.MouseClick += new MouseEventHandler(PictureBoxClick);
 
                 pictureBox.Width = WIDTH_PICTURE_BOX;
@@ -506,21 +512,17 @@ namespace Building
             }
             else
             {
+                foreach(var pictureBox in setPictureBox)
+                {
+                    pictureBox.BorderStyle = BorderStyle.None;
+                }
                 treeView1.Nodes.Clear();
-                string idFloor = null;
+                (sender as PictureBox).BorderStyle = BorderStyle.FixedSingle;
 
                 database.OpenConnection();
 
-                string queryIDFloor = "SELECT ID_FLOOR FROM Floors WHERE PATH = '" + (sender as PictureBox).Tag + "'";
-                SQLiteCommand myCommandIDFloor = database.myConnection.CreateCommand();
-                myCommandIDFloor.CommandText = queryIDFloor;
-                myCommandIDFloor.CommandType = CommandType.Text;
-                SQLiteDataReader readerIDFloor = myCommandIDFloor.ExecuteReader();
-                while (readerIDFloor.Read())
-                {
-                    idFloor = Convert.ToString(readerIDFloor["ID_FLOOR"]);
-                }
-
+                string[] words = Convert.ToString((sender as PictureBox).Tag).Split('?');
+                string idFloor = words[1];
                 string queryDataOffices = "SELECT * FROM Offices WHERE ID_FLOOR = " + idFloor;
                 SQLiteCommand myCommandDataOffices = database.myConnection.CreateCommand();
                 myCommandDataOffices.CommandText = queryDataOffices;
@@ -895,8 +897,16 @@ namespace Building
 
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if ((e.KeyChar <= 48 || e.KeyChar >= 59) && e.KeyChar != 8 && e.KeyChar != 16 && e.KeyChar != 45 )
+
+            if ((e.KeyChar <= 47 || e.KeyChar >= 59) && e.KeyChar != 8 && e.KeyChar != 16)
+            {
                 e.Handled = true;
+            }
+
+            if (e.KeyChar == 45 && textBox2.Text == "")
+            {
+                e.Handled = false;
+            }
         }
 
 
@@ -1285,7 +1295,7 @@ namespace Building
                 labelFloor.Text = Convert.ToString(reader["CATEGORY_FLOOR"]) + " " + Convert.ToString(reader["ID_FLOOR"]);
                 labelFloor.Font = new Font("Arial", 12);
                 PictureBox pictureBox = new PictureBox();
-                pictureBox.Tag = Convert.ToString(reader["PATH"]);
+                pictureBox.Tag = Convert.ToString(reader["PATH"]) + "?" + Convert.ToString(reader["ID_FLOOR"]);
                 pictureBox.MouseClick += new MouseEventHandler(PictureBoxClick);
 
                 pictureBox.Width = WIDTH_PICTURE_BOX;
@@ -1343,6 +1353,19 @@ namespace Building
 
             database.CloseConnection();
 
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            if (setPictureBox != null)
+            {
+                alignComponentsFloors();
+            }
         }
     }
 
