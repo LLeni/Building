@@ -132,12 +132,13 @@
             // 
             // textBox3
             // 
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox3.Location = new System.Drawing.Point(101, 136);
             this.textBox3.MaxLength = 4;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(256, 26);
-            this.textBox3.TabIndex = 16;
+            this.textBox3.TabIndex = 1;
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
             // 
             // label15
@@ -192,7 +193,7 @@
             this.comboBox2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(101, 135);
+            this.comboBox2.Location = new System.Drawing.Point(101, 136);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(256, 27);
             this.comboBox2.TabIndex = 1;

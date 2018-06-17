@@ -124,3 +124,8 @@ C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\AxInterop.WMPLi
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Interop.WMPLib.dll
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.csproj.ResolveComReference.cache
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Interop.AcroPDFLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Interop.AcroPDFLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\AxInterop.AcroPDFLib.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form8.resources
