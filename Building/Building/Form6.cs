@@ -17,18 +17,20 @@ namespace Building
         String data;
         ObservableCollection<String> collectionForRefresh;
         DataTable dataTableFloors;
+        DataTable dataTableCameras;
         Database database;
         public Form6()
         {
             InitializeComponent();
         }
 
-        public Form6(String data, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors)
+        public Form6(String data, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors, DataTable dataTableCameras)
         {
             InitializeComponent();
             this.data = data;
             this.collectionForRefresh = collectionForRefresh;
             this.dataTableFloors = dataTableFloors;
+            this.dataTableCameras = dataTableCameras;
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -50,7 +52,7 @@ namespace Building
                     database.OpenConnection();
 
                     //Проверка на наличие камеры
-                    string queryCheckExist = "SELECT IP_CAMERA FROM Cameras WHERE IP_CAMERA =  " + textBox1.Text;
+                    string queryCheckExist = "SELECT IP_CAMERA FROM Cameras WHERE IP_CAMERA =  '" + textBox1.Text + "'";
                     SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
                     myCommandCheckExist.CommandText = queryCheckExist;
                     myCommandCheckExist.CommandType = CommandType.Text;
@@ -67,7 +69,7 @@ namespace Building
                     }
 
                     //Получение наибольшего значения идентификатора в таблице "Камеры"
-                    string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_COMPANY DESC LIMIT 1";
+                    string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_CAMERA DESC LIMIT 1";
                     SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
                     myCommandIDCompany.CommandText = queryIDCompany;
                     myCommandIDCompany.CommandType = CommandType.Text;
@@ -78,9 +80,10 @@ namespace Building
                         IDCamera = Convert.ToInt16(Convert.ToString(reader["ID_CAMERA"])) + 1;
                     }
 
-                    string query = "INSERT INTO Cameras ('ID_CAMERA','IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
+                    string query = "INSERT INTO Cameras ('ID_CAMERA', 'ID_FLOOR', 'IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @ID_FLOOR, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
                     SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
                     myCommand.Parameters.AddWithValue("@ID_CAMERA", IDCamera);
+                    myCommand.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
                     myCommand.Parameters.AddWithValue("@IP_CAMERA", textBox1.Text);
                     myCommand.Parameters.AddWithValue("@MAC_CAMERA", textBox2.Text);
                     myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox3.Text);
@@ -88,6 +91,14 @@ namespace Building
 
                     MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    DataRow row = dataTableCameras.NewRow();
+                    row[0] = IDCamera;
+                    row[1] = comboBox1.Text;
+                    row[2] = textBox1.Text;
+                    row[3] = textBox2.Text;
+                    row[4] = textBox3.Text;
+                    dataTableCameras.Rows.Add(row);
+                    dataTableCameras.DefaultView.Sort = "ID_CAMERA ASC";
                     collectionForRefresh[0] = "А";
                 }
             }

@@ -20,17 +20,16 @@ namespace Building
 {
     //Евгений
     //TODO: При выборе пункта в контекстом меню, которое вызывается нажатием ПКМ по плану этажа, открывается план этажа в другой панели
-    //TODO: На главной панели стали странно размещаться компоненты. Сейчас это связано с баганутым скроллингом
     //TODO: Спустя 60 дней данные о нарушении должны удаляться 
+
     //TODO: Подправить скроллинг на главной вкладке
+    //TODO: На главной панели стали странно размещаться компоненты. Сейчас это связано с баганутым скроллингом
     //TODO: Добавить у первого этажа камеру, которая будет выводиться на панели камер
     //TODO: Добавить еще одно видео
     //TODO: Добавить оступ слева на главной панели 
+
     //TODO: Последний столбец у нарушений чтобы был checkBox
     //TODO: При изменении последнего столбца, чтобы изменения сохранялись в БД
-
-    //MUST HAVE!!
-    //TODO: Баг с DataTable'ами. Исправить знаю как (стыдно говорить как)
 
     //Захар
     //TODO: Чтобы каждый pictureBox, кроме на главной форме подстраивался правильно под изображения (т.е 16:10, 16:9, 4:3)
@@ -38,10 +37,19 @@ namespace Building
 
     //ЗАХАР. ВОт ТуТ прям мастхев
     //TODO: Добавить панель на главной вкладке для увеличенного плана этажа и сверху-справка кнопку для обратного перехода на основную панель
-    //TODO: Добавить офис. Табуляция сбилась. Через код поправь 
+    //TODO: На форме 'Добавить офис' сбилась табуляция. Через код поправь 
     //TODO: Справка
-    //TODO: Все же сделай так, чтобы два минимально в строку влезало два плана. Просто сверху в поиске происходит что-то не понятное
+    //TODO: Все же сделай так, чтобы в строку влезало минимум два плана на главной вкладке. Просто сверху в поиске происходит что-то не понятное
+    //TODO: На форме добавления офиса у номера офиса не то оформление
+    //TODO: Проверь у себя вебкамеру
+    //TODO: у TreeView'ере, который находится справа на главной вкладке сбился размер.
+    //TODO: Немного увеличь форму по ширине, а т.е задай другой минимум
+    //TODO: Пускай нормально открывается главная форма, а т.е постоянно отодвигать панели не очень. Решил на тебя это возложить
 
+
+    //ЗАХАР! Как думаешь надо ли:
+    //TODO: Поменять надписи 'Номер офиса' на 'Офис', т.к у нас еще могут быть буквы (Ц101 хочу писать, типо цокольный этаж)
+    //TODO: Поменять с тип этажа 'Подвал' на 'Цокольный этаж'
 
     public partial class Form1 : Form
     {
@@ -99,6 +107,59 @@ namespace Building
                     refresh();
                     break;
             }
+        }
+
+        public void dowloandDateInDateTable()
+        {
+            dataTableFloors.Clear();
+            dataTableOffices.Clear();
+            dataTableCameras.Clear();
+
+            string query = "Select * From Floors";
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableFloors);
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            query = "Select * From Offices";
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableOffices);
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            query = "Select * From Cameras";
+            try
+            {
+
+                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
+                {
+                    da.Fill(dataTableCameras);
+                }
+
+            }
+            catch
+            {
+
+            }
+
         }
 
 
@@ -199,9 +260,6 @@ namespace Building
             Form1 firstForm = new Form1();
             comboBox1.SelectedIndex = 0;
             comboBox2.SelectedIndex = 0;
-
-
-
 
         }
 
@@ -307,22 +365,31 @@ namespace Building
             axWindowsMediaPlayer2.uiMode = "none";
             axWindowsMediaPlayer3.uiMode = "none";
             axWindowsMediaPlayer4.uiMode = "none";
+            axWindowsMediaPlayer5.uiMode = "none";
+            axWindowsMediaPlayer6.uiMode = "none";
 
             axWindowsMediaPlayer1.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera1.mp4";
             axWindowsMediaPlayer2.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera2.mp4";
             axWindowsMediaPlayer3.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera3.mp4";
             axWindowsMediaPlayer4.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera4.mp4";
+            axWindowsMediaPlayer5.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera5.mp4";
+            axWindowsMediaPlayer6.URL = Directory.GetCurrentDirectory() + "/Resources/video/camera5.mp4";
 
             axWindowsMediaPlayer1.settings.mute = true;
             axWindowsMediaPlayer2.settings.mute = true;
             axWindowsMediaPlayer3.settings.mute = true;
             axWindowsMediaPlayer4.settings.mute = true;
-
+            axWindowsMediaPlayer5.settings.mute = true;
+            axWindowsMediaPlayer6.settings.mute = true;
 
             axWindowsMediaPlayer1.settings.playCount = 1000;
             axWindowsMediaPlayer2.settings.playCount = 1000;
             axWindowsMediaPlayer3.settings.playCount = 1000;
             axWindowsMediaPlayer4.settings.playCount = 1000;
+            axWindowsMediaPlayer5.settings.playCount = 1000;
+            axWindowsMediaPlayer6.settings.playCount = 1000;
+
+            axWindowsMediaPlayer6.stretchToFit = false;
 
 
 
@@ -336,6 +403,8 @@ namespace Building
 
             database = new Database();
             database.OpenConnection();
+
+            dowloandDateInDateTable();
 
             //Таблица "Нарушения"
             database.OpenConnection();
@@ -355,51 +424,7 @@ namespace Building
 
             }
 
-            query = "Select * From Floors";
-            try
-            {
-
-                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
-                {
-                    da.Fill(dataTableFloors);
-                }
-
-            }
-            catch
-            {
-
-            }
-
-            query = "Select * From Offices";
-            try
-            {
-
-                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
-                {
-                    da.Fill(dataTableOffices);
-                }
-
-            }
-            catch
-            {
-
-            }
-
-            query = "Select * From Cameras";
-            try
-            {
-
-                using (SQLiteDataAdapter da = new SQLiteDataAdapter(query, database.myConnection))
-                {
-                    da.Fill(dataTableCameras);
-                }
-
-            }
-            catch
-            {
-
-            }
-
+            
             //Настройка столбцов таблицы "Нарушения
             breachesDataGridView.Columns[0].HeaderText = "Номер нарушения";
             breachesDataGridView.Columns[1].HeaderText = "Номер этажа";
@@ -603,6 +628,16 @@ namespace Building
 
 
                 database.CloseConnection();
+
+                if (idFloor == "1")
+                {
+                    axWindowsMediaPlayer6.Visible = true;
+                    label12.Visible = true;
+                } else
+                {
+                    axWindowsMediaPlayer6.Visible = false;
+                    label12.Visible = false;
+                }
             }
         }
 
@@ -694,7 +729,7 @@ namespace Building
 
         private void камерыToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form6 sixForm = new Form6("Редактирование", collectionForRefresh, dataTableFloors);
+            Form6 sixForm = new Form6("Редактирование", collectionForRefresh, dataTableFloors, dataTableCameras);
             sixForm.Text = "Редактирование информации о камере";
             sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Редактирование информации о камере"   
             sixForm.ShowDialog();
@@ -820,7 +855,7 @@ namespace Building
 
         private void офисыToolStripMenuItem_Click(object sender, EventArgs e)       //Вызов формы "Редактировать офис"
         {
-            Form4 fourForm = new Form4("Редактирование", collectionForRefresh, dataTableFloors);
+            Form4 fourForm = new Form4("Редактирование", collectionForRefresh, dataTableFloors, dataTableOffices);
             fourForm.Text = "Редактирование информации об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Редактирование информации об офисах"   
             fourForm.ShowDialog();
@@ -920,7 +955,6 @@ namespace Building
         private void button_start_web_Click(object sender, EventArgs e)
         {
 
-            //ОПАСНО написать строку проверки. Если ListBox1 пустой, то вписать текст о несущесвтующих подключениях.
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -975,7 +1009,7 @@ namespace Building
 
         private void добавитьИнформациюОбОфисеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form4 fourForm = new Form4("Добавление", collectionForRefresh, dataTableFloors);
+            Form4 fourForm = new Form4("Добавление", collectionForRefresh, dataTableFloors, dataTableOffices);
             fourForm.Text = "Добавление информацию об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Добавление информации об офисах"   
             fourForm.ShowDialog();
@@ -983,7 +1017,7 @@ namespace Building
 
         private void этажToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form5 fiveForm = new Form5("Этаж", collectionForRefresh, dataTableFloors);
+            Form5 fiveForm = new Form5("Этаж", collectionForRefresh, dataTableFloors, dataTableOffices, dataTableCameras);
             fiveForm.Text = "Удаление информации об этаже";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление этажа"   
             fiveForm.ShowDialog();
@@ -991,7 +1025,7 @@ namespace Building
 
         private void офисToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form5 fiveForm = new Form5("Офис", collectionForRefresh, dataTableOffices);
+            Form5 fiveForm = new Form5("Офис", collectionForRefresh, null, dataTableOffices, null);
             fiveForm.Text = "Удаление информации об офисе";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление офиса"   
             fiveForm.ShowDialog();
@@ -999,7 +1033,7 @@ namespace Building
 
         private void камераToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form5 fiveForm = new Form5("Камера", collectionForRefresh, dataTableCameras);
+            Form5 fiveForm = new Form5("Камера", collectionForRefresh, null, null, dataTableCameras);
             fiveForm.Text = "Удаление информации о камере";
             fiveForm.ShowInTaskbar = false;                           //Открытие 5-ой формы "Удаление камеры"   
             fiveForm.ShowDialog();
@@ -1007,7 +1041,7 @@ namespace Building
 
         private void гToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form4 fourForm = new Form4("Добавление", collectionForRefresh,dataTableFloors);
+            Form4 fourForm = new Form4("Добавление", collectionForRefresh,dataTableFloors, dataTableOffices);
             fourForm.Text = "Добавление информации об офисе";
             fourForm.ShowInTaskbar = false;                           //Открытие 4-ой формы "Добавление информации об офисах"   
             fourForm.ShowDialog();
@@ -1015,7 +1049,7 @@ namespace Building
 
         private void информацияОКамереToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form6 sixForm = new Form6("Добавление", collectionForRefresh, dataTableFloors);
+            Form6 sixForm = new Form6("Добавление", collectionForRefresh, dataTableFloors, dataTableCameras);
             sixForm.Text = "Добавление информации о камере";
             sixForm.ShowInTaskbar = false;                           //Открытие 6-ой формы "Добавление информации о камере"   
             sixForm.ShowDialog();

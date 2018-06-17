@@ -25,7 +25,7 @@ namespace Building
             InitializeComponent();
         }
 
-        public Form5(String nameForm, ObservableCollection<String> collectionForRefresh, DataTable dataTable)
+        public Form5(String nameForm, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors, DataTable dataTableOffices, DataTable dataTableCameras)
         {
             InitializeComponent();
             this.nameForm = nameForm;
@@ -38,8 +38,10 @@ namespace Building
                     comboBox1.Visible = true;
                     comboBox2.Visible = false;
                     comboBox3.Visible = false;
-                    this.dataTableFloors = dataTable;
-                    comboBox1.DataSource = dataTable;
+                    this.dataTableFloors = dataTableFloors;
+                    this.dataTableOffices = dataTableOffices;
+                    this.dataTableCameras = dataTableCameras;
+                    comboBox1.DataSource = dataTableFloors;
                 break;
                 case "Офис":
                     label1.Text = "Выберите офис:";
@@ -47,8 +49,8 @@ namespace Building
                     comboBox1.Visible = false;
                     comboBox2.Visible = true;
                     comboBox3.Visible = false;
-                    this.dataTableOffices = dataTable;
-                    comboBox2.DataSource = dataTable;
+                    this.dataTableOffices = dataTableOffices;
+                    comboBox2.DataSource = dataTableOffices;
                     break;
                 case "Камера":
                     label1.Text = "Выберите камеру:";
@@ -57,8 +59,8 @@ namespace Building
                     comboBox1.Visible = false;
                     comboBox2.Visible = false;
                     comboBox3.Visible = true;
-                    this.dataTableCameras = dataTable;
-                    comboBox3.DataSource = dataTable;
+                    this.dataTableCameras = dataTableCameras;
+                    comboBox3.DataSource = dataTableCameras;
                     break;
             }
         }
@@ -149,11 +151,46 @@ namespace Building
                         myCommandDelete.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
                         myCommandDelete.ExecuteNonQuery();
 
-                        for (var i = 0; i < dataTableFloors.Rows.Count; i++)
+                        //  for (var i = 0; i < dataTableFloors.Rows.Count; i++)
+                        // {
+                        //  if (Convert.ToString(dataTableFloors.Rows[i][0]) == comboBox1.Text)
+                        //  {
+                        // dataTableFloors.Rows[i].Delete();
+
+                        //Смещение строк
+                        // for(var j = i; j < dataTableFloors.Rows.Count - 1; j++)
+                        // {
+                        // dataTableFloors.Rows.InsertAt(;
+                        //  }
+                        // break;
+                        // }
+                        // }
+
+                        for (int i = dataTableOffices.Rows.Count - 1; i >= 0; i--)
                         {
-                            if (Convert.ToString(dataTableFloors.Rows[i][0]) == comboBox1.Text)
+                            DataRow dr = dataTableOffices.Rows[i];
+                            if (Convert.ToString(dr[1]) == comboBox1.Text)
                             {
-                                dataTableFloors.Rows[i].Delete();
+                                dr.Delete();
+                            }
+                        }
+
+                        for (int i = dataTableCameras.Rows.Count - 1; i >= 0; i--)
+                        {
+                            DataRow dr = dataTableCameras.Rows[i];
+                            if (Convert.ToString(dr[1]) == comboBox1.Text)
+                            {
+                                dr.Delete();
+                            }
+                        }
+
+                        for (int i = dataTableFloors.Rows.Count - 1; i >= 0; i--)
+                        {
+                            DataRow dr = dataTableFloors.Rows[i];
+                            if (Convert.ToString(dr[0]) == comboBox1.Text)
+                            {
+                                dr.Delete();
+                                break;
                             }
                         }
 
@@ -181,12 +218,14 @@ namespace Building
                         myCommandDelete.CommandText = queryDelete;
                         myCommandDelete.Parameters.AddWithValue("@ID_OFFICE", comboBox2.Text);
                         myCommandDelete.ExecuteNonQuery();
-                        
-                        for(var i = 0; i < dataTableOffices.Rows.Count; i++)
+
+                        for (int i = dataTableOffices.Rows.Count - 1; i >= 0; i--)
                         {
-                            if (Convert.ToString(dataTableOffices.Rows[i][0]) == comboBox2.Text)
+                            DataRow dr = dataTableOffices.Rows[i];
+                            if (Convert.ToString(dr[0]) == comboBox2.Text)
                             {
-                                dataTableOffices.Rows[i].Delete();
+                                dr.Delete();
+                                break;
                             }
                         }
                         collectionForRefresh[0] = "А";
@@ -198,11 +237,13 @@ namespace Building
                         myCommandDelete.ExecuteNonQuery();
 
 
-                        for (var i = 0; i < dataTableCameras.Rows.Count; i++)
+                        for (int i = dataTableCameras.Rows.Count - 1; i >= 0; i--)
                         {
-                            if (Convert.ToString(dataTableCameras.Rows[i][0]) == comboBox3.Text)
+                            DataRow dr = dataTableCameras.Rows[i];
+                            if (Convert.ToString(dr[0]) == comboBox3.Text)
                             {
-                                dataTableCameras.Rows[i].Delete();
+                                dr.Delete();
+                                break;
                             }
                         }
 

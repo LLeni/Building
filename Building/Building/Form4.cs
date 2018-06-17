@@ -20,17 +20,19 @@ namespace Building
 
         Database database;
         DataTable dataTableFloors;
+        DataTable dataTableOffices;
         public Form4()
         {
             InitializeComponent();
         }
 
-        public Form4(String data, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors)
+        public Form4(String data, ObservableCollection<String> collectionForRefresh, DataTable dataTableFloors, DataTable dataTableOffices)
         {
             InitializeComponent();
             this.data = data;
             this.collectionForRefresh = collectionForRefresh;
             this.dataTableFloors = dataTableFloors;
+            this.dataTableOffices = dataTableOffices;
         }
         private void Form4_Load(object sender, EventArgs e)
         {
@@ -90,7 +92,7 @@ namespace Building
                 else
                 {
                     //Проверка на наличие офиса
-                    string queryCheckExist = "SELECT ID_OFFICE FROM Offices WHERE ID_OFFICE =  " + textBox3.Text;
+                    string queryCheckExist = "SELECT ID_OFFICE FROM Offices WHERE ID_OFFICE =  '" + textBox3.Text + "'";
                     SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
                     myCommandCheckExist.CommandText = queryCheckExist;
                     myCommandCheckExist.CommandType = CommandType.Text;
@@ -139,6 +141,12 @@ namespace Building
                         MessageBox.Show("Сведения об офисе были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
+                        DataRow row = dataTableOffices.NewRow();
+                        row[0] = textBox3.Text;
+                        row[1] = comboBox1.Text;
+                        row[2] = IDCompany;
+                        dataTableOffices.Rows.Add(row);
+                        dataTableOffices.DefaultView.Sort = "ID_OFFICE ASC";
                     }
                 }
             }

@@ -114,10 +114,11 @@ namespace Building
                             MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             DataRow row = dataTableFloors.NewRow();
-                            row[0] = textBox1.Text; //TODO: !!!
+                            row[0] = textBox1.Text;
                             row[1] = comboBox2.Text;
                             row[2] = pictureBox1.Tag;
                             dataTableFloors.Rows.Add(row);
+                            dataTableFloors.DefaultView.Sort = "ID_FLOOR ASC";
 
                             collectionForRefresh[0] = "А";
                         }
