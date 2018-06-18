@@ -192,7 +192,12 @@ namespace Building
                                 dr.Delete();
                                 break;
                             }
+
                         }
+                        dataTableFloors.DefaultView.Sort = "ID_FLOOR ASC";
+                        dataTableOffices.DefaultView.Sort = "ID_OFFICE ASC";
+                        dataTableCameras.DefaultView.Sort = "ID_CAMERA ASC";
+
 
                         collectionForRefresh[0] = "А";
                         break;
@@ -228,6 +233,7 @@ namespace Building
                                 break;
                             }
                         }
+                        dataTableOffices.DefaultView.Sort = "ID_OFFICE ASC";
                         collectionForRefresh[0] = "А";
                         break;
                     case "Камера":
@@ -246,7 +252,7 @@ namespace Building
                                 break;
                             }
                         }
-
+                        dataTableCameras.DefaultView.Sort = "ID_CAMERA ASC";
                         collectionForRefresh[0] = "А";
                         break;
                 }

@@ -71,7 +71,7 @@ namespace Building
 
                     if (isExist)
                     {
-                        MessageBox.Show("Данный этаж существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Этаж под таким номером существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
@@ -146,6 +146,8 @@ namespace Building
                     database.CloseConnection();
 
                     MessageBox.Show("Информация была изменена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    collectionForRefresh[0] = "А";
                 }
             }
         }

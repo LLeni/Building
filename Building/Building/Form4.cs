@@ -147,6 +147,8 @@ namespace Building
                         row[2] = IDCompany;
                         dataTableOffices.Rows.Add(row);
                         dataTableOffices.DefaultView.Sort = "ID_OFFICE ASC";
+
+                        collectionForRefresh[0] = "А";
                     }
                 }
             }
@@ -156,17 +158,21 @@ namespace Building
                 {
                     MessageBox.Show("Вы не все ввели!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                string queryUpdateCompany = "UPDATE Companies SET NAME_COMPANY = @NAME_COMPANY, DESCRIPTION = @DESCRIPTION, PHONE_COMPANY = @PHONE_COMPANY WHERE ID_COMPANY = @ID_COMPANY";
-                SQLiteCommand myCommandUpdateCompany = database.myConnection.CreateCommand();
-                myCommandUpdateCompany.CommandText = queryUpdateCompany;
-                myCommandUpdateCompany.Parameters.AddWithValue("@ID_COMPANY", idCompany);
-                myCommandUpdateCompany.Parameters.AddWithValue("@NAME_COMPANY", textBox5.Text);
-                myCommandUpdateCompany.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
-                myCommandUpdateCompany.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
-                myCommandUpdateCompany.ExecuteNonQuery();
+                else
+                {
+                    string queryUpdateCompany = "UPDATE Companies SET NAME_COMPANY = @NAME_COMPANY, DESCRIPTION = @DESCRIPTION, PHONE_COMPANY = @PHONE_COMPANY WHERE ID_COMPANY = @ID_COMPANY";
+                    SQLiteCommand myCommandUpdateCompany = database.myConnection.CreateCommand();
+                    myCommandUpdateCompany.CommandText = queryUpdateCompany;
+                    myCommandUpdateCompany.Parameters.AddWithValue("@ID_COMPANY", idCompany);
+                    myCommandUpdateCompany.Parameters.AddWithValue("@NAME_COMPANY", textBox5.Text);
+                    myCommandUpdateCompany.Parameters.AddWithValue("@DESCRIPTION", textBox4.Text);
+                    myCommandUpdateCompany.Parameters.AddWithValue("@PHONE_COMPANY", textBox6.Text);
+                    myCommandUpdateCompany.ExecuteNonQuery();
 
-                MessageBox.Show("Сведения об офисе были изменены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Сведения об офисе были изменены", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    collectionForRefresh[0] = "А";
+                }
             }
 
             database.CloseConnection();
@@ -207,7 +213,7 @@ namespace Building
             database.OpenConnection();
 
             // Вытаскиваем идентификатор компании
-            string queryDataOffice = "SELECT ID_COMPANY FROM Offices WHERE ID_OFFICE =" + comboBox2.Text;
+            string queryDataOffice = "SELECT ID_COMPANY FROM Offices WHERE ID_OFFICE = '" + comboBox2.Text + "'";
             SQLiteCommand myCommandDataOffice = database.myConnection.CreateCommand();
             myCommandDataOffice.CommandText = queryDataOffice;
             myCommandDataOffice.CommandType = CommandType.Text;

@@ -620,13 +620,20 @@ namespace Building
                 //Добавляем элементы на форму
                 this.splitContainer3.Panel2.Controls.Add(setPictureBox.Last());
                 this.splitContainer3.Panel2.Controls.Add(setLabel.Last());
+
+
+               
             }
 
             database.CloseConnection();
+
+
             if (errorMessageDownloadImagesStr != null)
             {
                 MessageBox.Show("Проблемы с путем имеют следующие этажи:" + errorMessageDownloadImagesStr, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            button2.Location = new Point(this.splitContainer3.Panel2.Width - 30);
         }
 
 
@@ -869,19 +876,26 @@ namespace Building
                 }
                 else
                 {
+                    Boolean isRoof = true;
                     //Проверка на наличие крыши
-                    string queryRoofExist = "SELECT CATEGORY_FLOOR FROM Floors WHERE CATEGORY_FLOOR =  '" + comboBox2.Text + "'";
-                    SQLiteCommand myCommandRoofExist = database.myConnection.CreateCommand();
-                    myCommandRoofExist.CommandText = queryRoofExist;
-                    myCommandRoofExist.CommandType = CommandType.Text;
-                    SQLiteDataReader readerRoof = myCommandRoofExist.ExecuteReader();
-                    isExist = false;
-                    while (readerRoof.Read())
+                    if (comboBox2.Text == "Крыша")
                     {
-                        isExist = true;
+                        string queryRoofExist = "SELECT CATEGORY_FLOOR FROM Floors WHERE CATEGORY_FLOOR =  '" + comboBox2.Text + "'";
+                        SQLiteCommand myCommandRoofExist = database.myConnection.CreateCommand();
+                        myCommandRoofExist.CommandText = queryRoofExist;
+                        myCommandRoofExist.CommandType = CommandType.Text;
+                        SQLiteDataReader readerRoof = myCommandRoofExist.ExecuteReader();
+                        isExist = false;
+                        while (readerRoof.Read())
+                        {
+                            isExist = true;
+                        }
                     }
-
-                    if (isExist)
+                    else
+                    {
+                        isRoof = false;
+                    }
+                    if (isExist || isRoof)
                     {
                         MessageBox.Show("Информация о крыше уже есть. Невозможно добавить вторую", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -907,6 +921,9 @@ namespace Building
                         row[1] = comboBox2.Text;
                         row[2] = pictureBox1.Tag;
                         dataTableFloors.Rows.Add(row);
+                        dataTableFloors.DefaultView.Sort = "ID_FLOOR ASC";
+
+                        collectionForRefresh[0] = "А";
                     }
                 }
             }
@@ -981,7 +998,7 @@ namespace Building
                     database.OpenConnection();
 
                     //Проверка на наличие офиса
-                    string queryCheckExist = "SELECT ID_OFFICE FROM Offices WHERE ID_OFFICE =  " + textBox3.Text;
+                    string queryCheckExist = "SELECT ID_OFFICE FROM Offices WHERE ID_OFFICE =  '" + textBox3.Text + "'" ;
                     SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
                     myCommandCheckExist.CommandText = queryCheckExist;
                     myCommandCheckExist.CommandType = CommandType.Text;
@@ -1028,6 +1045,15 @@ namespace Building
                         myCommand2.ExecuteNonQuery();
                         database.CloseConnection();
                         MessageBox.Show("Сведения об офисе были успешно добавлены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                        DataRow row = dataTableOffices.NewRow();
+                        row[0] = textBox3.Text;
+                        row[1] = currentFloor;
+                        row[2] = IDCompany;
+                        dataTableOffices.Rows.Add(row);
+                        dataTableOffices.DefaultView.Sort = "ID_OFFICE ASC";
+                        collectionForRefresh[0] = "А";
                     }
                 }
             }
@@ -1169,7 +1195,8 @@ namespace Building
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            alignComponentsFloors();
+
+
             if (splitContainer3.Panel2.VerticalScroll.Visible)
             {
                 if (isVerticalScrollBeEarly == false)
@@ -1178,6 +1205,7 @@ namespace Building
                     //button2.Location = new Point(splitContainer3.Panel2.Width - 20, button2.Location.Y);
                     isVerticalScrollBeEarly = true;
                 }
+                height_scroll_change = 0;
             } else
             {
                 if (isVerticalScrollBeEarly == true)
@@ -1185,8 +1213,11 @@ namespace Building
                     button2.Location = new Point(button2.Location.X + 15, button2.Location.Y);
                     //button2.Location = new Point(splitContainer3.Panel2.Width - 5, button2.Location.Y);
                     isVerticalScrollBeEarly = false;
+                   
                 }
+                height_scroll_change = 0;
             }
+            alignComponentsFloors();
         }
 
         private void редактироватьЭтажToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1336,7 +1367,7 @@ namespace Building
                     database.OpenConnection();
 
                     //Проверка на наличие камеры
-                    string queryCheckExist = "SELECT IP_CAMERA FROM Cameras WHERE IP_CAMERA =  " + textBox8.Text;
+                    string queryCheckExist = "SELECT IP_CAMERA FROM Cameras WHERE IP_CAMERA =  '" + textBox8.Text + "'";
                     SQLiteCommand myCommandCheckExist = database.myConnection.CreateCommand();
                     myCommandCheckExist.CommandText = queryCheckExist;
                     myCommandCheckExist.CommandType = CommandType.Text;
@@ -1355,7 +1386,7 @@ namespace Building
                     {
 
                         //Получение наибольшего значения идентификатора в таблице "Камеры"
-                        string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_COMPANY DESC LIMIT 1";
+                        string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_CAMERA DESC LIMIT 1";
                         SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
                         myCommandIDCompany.CommandText = queryIDCompany;
                         myCommandIDCompany.CommandType = CommandType.Text;
@@ -1367,14 +1398,27 @@ namespace Building
                         }
 
                         // Таблица "Камеры"
-                        string query = "INSERT INTO Cameras ('ID_CAMERA','IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
+                        string query = "INSERT INTO Cameras ('ID_CAMERA', 'ID_FLOOR', 'IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @ID_FLOOR, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
                         SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
                         myCommand.Parameters.AddWithValue("@ID_CAMERA", IDCamera);
+                        myCommand.Parameters.AddWithValue("@ID_FLOOR", currentFloor);
                         myCommand.Parameters.AddWithValue("@IP_CAMERA", textBox8.Text);
                         myCommand.Parameters.AddWithValue("@MAC_CAMERA", textBox7.Text);
                         myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox9.Text);
                         myCommand.ExecuteNonQuery();
 
+                        MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        DataRow row = dataTableCameras.NewRow();
+                        row[0] = IDCamera;
+                        row[1] = currentFloor;
+                        row[2] = textBox8.Text;
+                        row[3] = textBox7.Text;
+                        row[4] = textBox9.Text;
+                        dataTableCameras.Rows.Add(row);
+                        dataTableCameras.DefaultView.Sort = "ID_CAMERA ASC";
+
+                        collectionForRefresh[0] = "А";
                     }
 
                     database.CloseConnection();

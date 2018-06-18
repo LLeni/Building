@@ -129,3 +129,4 @@ C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\AxInterop.AcroP
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Interop.AcroPDFLib.dll
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form8.resources
+C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form8.resources

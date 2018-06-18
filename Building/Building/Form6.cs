@@ -67,39 +67,42 @@ namespace Building
                     {
                         MessageBox.Show("Данная камера с таким IP-адресом уже существует, добавление невозможно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    //Получение наибольшего значения идентификатора в таблице "Камеры"
-                    string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_CAMERA DESC LIMIT 1";
-                    SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
-                    myCommandIDCompany.CommandText = queryIDCompany;
-                    myCommandIDCompany.CommandType = CommandType.Text;
-                    SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
-                    int IDCamera = 0;
-                    while (reader.Read())
+                    else
                     {
-                        IDCamera = Convert.ToInt16(Convert.ToString(reader["ID_CAMERA"])) + 1;
+                        //Получение наибольшего значения идентификатора в таблице "Камеры"
+                        string queryIDCompany = "SELECT ID_CAMERA FROM Cameras ORDER BY ID_CAMERA DESC LIMIT 1";
+                        SQLiteCommand myCommandIDCompany = database.myConnection.CreateCommand();
+                        myCommandIDCompany.CommandText = queryIDCompany;
+                        myCommandIDCompany.CommandType = CommandType.Text;
+                        SQLiteDataReader reader = myCommandIDCompany.ExecuteReader();
+                        int IDCamera = 0;
+                        while (reader.Read())
+                        {
+                            IDCamera = Convert.ToInt16(Convert.ToString(reader["ID_CAMERA"])) + 1;
+                        }
+
+                        string query = "INSERT INTO Cameras ('ID_CAMERA', 'ID_FLOOR', 'IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @ID_FLOOR, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
+                        SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
+                        myCommand.Parameters.AddWithValue("@ID_CAMERA", IDCamera);
+                        myCommand.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
+                        myCommand.Parameters.AddWithValue("@IP_CAMERA", textBox1.Text);
+                        myCommand.Parameters.AddWithValue("@MAC_CAMERA", textBox2.Text);
+                        myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox3.Text);
+                        myCommand.ExecuteNonQuery();
+
+                        MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        DataRow row = dataTableCameras.NewRow();
+                        row[0] = IDCamera;
+                        row[1] = comboBox1.Text;
+                        row[2] = textBox1.Text;
+                        row[3] = textBox2.Text;
+                        row[4] = textBox3.Text;
+                        dataTableCameras.Rows.Add(row);
+                        dataTableCameras.DefaultView.Sort = "ID_CAMERA ASC";
+
+                        collectionForRefresh[0] = "А";
                     }
-
-                    string query = "INSERT INTO Cameras ('ID_CAMERA', 'ID_FLOOR', 'IP_CAMERA', 'MAC_CAMERA', 'DESCRIPTION') VALUES (@ID_CAMERA, @ID_FLOOR, @IP_CAMERA, @MAC_CAMERA, @DESCRIPTION) ";
-                    SQLiteCommand myCommand = new SQLiteCommand(query, database.myConnection);
-                    myCommand.Parameters.AddWithValue("@ID_CAMERA", IDCamera);
-                    myCommand.Parameters.AddWithValue("@ID_FLOOR", comboBox1.Text);
-                    myCommand.Parameters.AddWithValue("@IP_CAMERA", textBox1.Text);
-                    myCommand.Parameters.AddWithValue("@MAC_CAMERA", textBox2.Text);
-                    myCommand.Parameters.AddWithValue("@DESCRIPTION", textBox3.Text);
-                    myCommand.ExecuteNonQuery();
-
-                    MessageBox.Show("Информация была добавлена", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    DataRow row = dataTableCameras.NewRow();
-                    row[0] = IDCamera;
-                    row[1] = comboBox1.Text;
-                    row[2] = textBox1.Text;
-                    row[3] = textBox2.Text;
-                    row[4] = textBox3.Text;
-                    dataTableCameras.Rows.Add(row);
-                    dataTableCameras.DefaultView.Sort = "ID_CAMERA ASC";
-                    collectionForRefresh[0] = "А";
                 }
             }
             else

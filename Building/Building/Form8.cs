@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,13 +30,13 @@ namespace Building
 
         private void Form8_Load(object sender, EventArgs e)
         {
-            string kniga1 = "C:/Users/Ironik/Desktop/w.pdf";
-            axAcroPDF1.LoadFile(kniga1);
-            axAcroPDF1.src = kniga1;
-            axAcroPDF1.setShowToolbar(false);
-            axAcroPDF1.setView("FitH");
-            axAcroPDF1.setLayoutMode("auto");
-            axAcroPDF1.Show();
+            string kniga1 = Directory.GetCurrentDirectory() + @"\Resources\w.pdf";
+          //  axAcroPDF1.LoadFile(kniga1);
+          //  axAcroPDF1.src = kniga1;
+         //   axAcroPDF1.setShowToolbar(false);
+         //   axAcroPDF1.setView("FitH");
+          ///  axAcroPDF1.setLayoutMode("auto");
+          //  axAcroPDF1.Show();
         }
     }
 }
