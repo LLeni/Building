@@ -130,3 +130,13 @@ C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Interop.AcroPDF
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\AxInterop.AcroPDFLib.dll
 C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.Form8.resources
 C:\Users\LLeni\Documents\Projects\Diplom\Building\Building\obj\Debug\Building.Form8.resources
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Patagames.Pdf.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Patagames.Pdf.WinForms.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Patagames.Pdf.Wpf.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Patagames.Pdf.xml
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Patagames.Pdf.WinForms.xml
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\Patagames.Pdf.Wpf.xml
+C:\Users\Ironik\Desktop\Диплом\Building\Building\obj\Debug\Building.exe.licenses
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\icudt.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\x64\pdfium.dll
+C:\Users\Ironik\Desktop\Диплом\Building\Building\bin\Debug\x86\pdfium.dll
